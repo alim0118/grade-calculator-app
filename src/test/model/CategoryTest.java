@@ -10,14 +10,15 @@ public class CategoryTest {
 
     @BeforeEach
     void runBefore() {
-        testCategory = new Category("Lecture Ticket", 5, 87.2);
+        testCategory = new Category("Homework", 5, 87.2, true);
     }
 
     @Test
     void testConstructor() {
-        assertEquals("Lecture Ticket", testCategory.getName());
+        assertEquals("Homework", testCategory.getName());
         assertEquals(5, testCategory.getWeight());
         assertEquals(87.2, testCategory.getMark());
         assertEquals(5 * 87.2, testCategory.getWeightedMark());
+        assertEquals(true, testCategory.getCategoryStatus());
     }
 }
