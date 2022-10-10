@@ -15,7 +15,7 @@ public class Transcript {
     private String letterGrade;
 
     public Transcript(int id) {
-
+        this.id = id;
     }
 
     public void addCourses(Course course) {
@@ -63,8 +63,11 @@ public class Transcript {
 
     }
 
-    public void calculateTotalCredits() {
+    public int calculateTotalCredits() {
+        for (int i = 0; i <= courseList.size() - 1; i++) {
 
+        }
+        return 0;
     }
 
     public void calculateTotalWeightedGrades() {

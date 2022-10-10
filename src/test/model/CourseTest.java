@@ -23,14 +23,15 @@ public class CourseTest {
         testCategory3 = new Category("Final Exam", 55, 0, false);
         testCategory4 = new Category("Final Exam", 55, 0, true);
 
-        testCourse = new Course("CPSC 210", 89.5, testCategoryList);
+        testCourse = new Course("CPSC 210", 4, 89.5, testCategoryList);
     }
 
     @Test
     void testConstructor() {
         assertEquals("CPSC 210", testCourse.getCourseName());
+        assertEquals(4, testCourse.getCredits());
         assertEquals(89.5, testCourse.getDesiredFinalGrade());
-        // add test for category list
+        assertEquals(testCategoryList, testCourse.getCategoryList());
     }
 
     @Test

@@ -3,12 +3,13 @@ package model;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-// Represents a course having a list of categories, name, final weight (in percent),
+// Represents a course having a list of categories, name, credits, final weight (in percent),
 // current grade (in percent), actual final grade (in percent), desired final grade of course (in percent),
 // minimum final score needed to get desired grade (in percent), and status of being completed or not
 public class Course {
     private ArrayList<Category> categoryList; // list of categories that make up the course
     private String name; // name of the course
+    private int credits; // number of credits of the course
     private double finalWeight; // weight of final of the course
     private double currentGrade; // current grade in the course, without completion of final exam
     private double actualFinalGrade; // actual final grade of the course, once completed
@@ -22,8 +23,9 @@ public class Course {
      *          categoryList is the list of categories in the course;
      *          numCategory is a positive integer set to the size of categories
      */
-    public Course(String courseName, double desiredGrade, ArrayList<Category> categories) {
+    public Course(String courseName, int courseCredits, double desiredGrade, ArrayList<Category> categories) {
         name = courseName;
+        credits = courseCredits;
         desiredFinalGrade = desiredGrade;
         categoryList = categories;
     }
@@ -132,5 +134,13 @@ public class Course {
 
     public boolean getIsCompleted() {
         return isCompleted;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public ArrayList<Category> getCategoryList() {
+        return categoryList;
     }
 }
