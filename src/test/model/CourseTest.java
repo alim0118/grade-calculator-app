@@ -158,4 +158,19 @@ public class CourseTest {
         testCourse.calculateMinFinalScore();
         assertEquals(testScore, testCourse.getMinFinalScore());
     }
+
+    @Test
+    void testCalculateChangedMinFinalScore() {
+        testCourse.addCategory(testCategory1);
+        testCourse.addCategory(testCategory2);
+        testCourse.addCategory(testCategory3);
+
+        double desired = testCourse.setDesiredFinalGrade(72);
+        double current = testCourse.getCurrentGrade();
+        double weight = testCourse.getFinalWeight();
+        double testScore = (desired - current * (100 - weight)) / weight;
+
+        testCourse.calculateMinFinalScore();
+        assertEquals(testScore, testCourse.getMinFinalScore());
+    }
 }

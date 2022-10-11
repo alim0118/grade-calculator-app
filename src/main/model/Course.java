@@ -21,7 +21,6 @@ public class Course {
      * REQUIRES: courseName is a non-zero length, desiredGrade >= 0
      * EFFECTS: name of course is set to courseName; desiredFinalGrade of course is set to desiredGrade;
      *          categoryList is the list of categories in the course;
-     *          numCategory is a positive integer set to the size of categories
      */
     public Course(String courseName, int courseCredits, double desiredGrade, ArrayList<Category> categories) {
         name = courseName;
@@ -142,5 +141,9 @@ public class Course {
 
     public ArrayList<Category> getCategoryList() {
         return categoryList;
+    }
+
+    public double setDesiredFinalGrade(double newDesiredGrade) {
+        return desiredFinalGrade = newDesiredGrade;
     }
 }

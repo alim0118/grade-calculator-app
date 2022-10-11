@@ -1,31 +1,70 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-// Represents a transcript having an id, and courses (list of courses enrolled)
+// Represents a transcript having an id, courses (list of courses enrolled), total weights, total credits, average,
+// and letter grade
 public class Transcript {
-    private int id;
-    private ArrayList<Course> courseList;
-    private HashMap<Integer, ArrayList<Course>> idToCourse;
+    private int id; // id of user
+    private ArrayList<Course> courseList; // list of all courses enrolled
+    private double totalWeighted; // total weighted grades from each course
+    private int totalCredits; // total number of credits enrolled
+    private double average; // average from all courses
+    private String letterGrade; // average converted to letter grade
 
-    private double totalWeighted;
-    private int totalCredits;
-    private double average;
-    private String letterGrade;
-
-    public Transcript(int id) {
-        this.id = id;
+    /*
+     * REQUIRES: id > 0
+     * EFFECTS: id of transcript is set to userId; courseList is the list of courses in the transcript
+     */
+    public Transcript(int userId, ArrayList<Course> courses) {
+        id = userId;
+        courseList = courses;
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: adds course to course list (with no duplicated)
+     */
     public void addCourses(Course course) {
-        courseList.add(course);
+        if (!courseList.contains(course)) {
+            courseList.add(course);
+        }
     }
 
-    public void addCoursesToId() {
-        idToCourse.put(id, courseList);
+    /*
+     * MODIFIES: this
+     * EFFECTS: adds each number of credits of courses to total credits
+     */
+    public int calculateTotalCredits() {
+        for (int i = 0; i <= courseList.size() - 1; i++) {
+            totalCredits += courseList.get(i).getCredits();
+        }
+        return totalCredits;
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: adds each weighted grade of courses to total weighted
+     */
+    public double calculateTotalWeightedGrades() {
+        for (int i = 0; i <= courseList.size() - 1; i++) {
+            totalWeighted += courseList.get(i).getActualFinalGrade();
+        }
+        return totalWeighted;
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: divides total weighted grades of all courses by total number of total credits
+     */
+    public double calculateAverage() {
+        return average = totalWeighted / (double)totalCredits;
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: determines letter grade given average
+     */
     public void letterGrade() {
         if (average >= 90 && average <= 100) {
             letterGrade = "A+";
@@ -63,28 +102,29 @@ public class Transcript {
 
     }
 
-    public int calculateTotalCredits() {
-        for (int i = 0; i <= courseList.size() - 1; i++) {
-
-        }
-        return 0;
-    }
-
-    public void calculateTotalWeightedGrades() {
-
-    }
-
-    public void calculateAverage() {
-
-    }
-
+    //getters
     public int getId() {
         return id;
+    }
+
+    public ArrayList<Course> getCourseList() {
+        return courseList;
+    }
+
+    public double getTotalWeighted() {
+        return totalWeighted;
+    }
+
+    public int getTotalCredits() {
+        return totalCredits;
+    }
+
+    public double getAverage() {
+        return average;
     }
 
     public String getLetterGrade() {
         return letterGrade;
     }
-
 
 }
