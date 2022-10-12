@@ -33,20 +33,28 @@ class TranscriptTest {
         testCategory1 = new Category("Homework", 10, 100, true);
         testCategory2 = new Category("Midterm", 40, 75, true);
         testCategory3 = new Category("Final Exam", 50, 56,true);
-        //testCategoryList1.addCategory(testCategory1);
-        //testCategoryList1.addCategory(testCategory2);
-        //testCategoryList1.addCategory(testCategory3);
+
         testCourse1 = new Course("CPSC 210", 4, 89.5, testCategoryList1);
+        testCourse1.addCategory(testCategory1);
+        testCourse1.addCategory(testCategory2);
+        testCourse1.addCategory(testCategory3);
+        testCourse1.isCompleted();
+        testCourse1.findFinalWeight();
+        testCourse1.getFinalWeight();
 
         testCategory4 = new Category("Midterm", 30, 100, true);
         testCategory5 = new Category("Final Exam", 60, 75, true);
-        testCategoryList2.add(testCategory4);
-        testCategoryList2.add(testCategory5);
+
         testCourse2 = new Course("MATH 200", 3, 77, testCategoryList2);
+        testCourse2.addCategory(testCategory4);
+        testCourse2.addCategory(testCategory5);
+        testCourse2.isCompleted();
+        testCourse2.findFinalWeight();
+        testCourse2.getFinalWeight();
 
-
+        //testCourseList.add(testCourse1);
+        //testCourseList.add(testCourse2);
         testTranscript = new Transcript(1, testCourseList);
-
     }
 
     @Test
@@ -58,6 +66,7 @@ class TranscriptTest {
     @Test
     void testAddCourses() {
         assertEquals(0, testCourseList.size());
+        testCourseList.add(testCourse1);
         testTranscript.addCourses(testCourse1);
         assertEquals(1, testCourseList.size());
         assertTrue(testCourseList.contains(testCourse1));
@@ -66,10 +75,12 @@ class TranscriptTest {
     @Test
     void testAddMultipleCourses() {
         assertEquals(0, testCourseList.size());
+        testCourseList.add(testCourse1);
         testTranscript.addCourses(testCourse1);
         assertEquals(1, testCourseList.size());
         assertTrue(testCourseList.contains(testCourse1));
 
+        testCourseList.add(testCourse2);
         testTranscript.addCourses(testCourse2);
         assertEquals(2, testCourseList.size());
         assertTrue(testCourseList.contains(testCourse2));
@@ -79,6 +90,7 @@ class TranscriptTest {
     @Test
     void testAddDuplicateCourses() {
         assertEquals(0, testCourseList.size());
+        testCourseList.add(testCourse1);
         testTranscript.addCourses(testCourse1);
         assertEquals(1, testCourseList.size());
         assertTrue(testCourseList.contains(testCourse1));
@@ -91,6 +103,7 @@ class TranscriptTest {
 
     @Test
     void testCalculateTotalCredits() {
+        testCourseList.add(testCourse1);
         testTranscript.addCourses(testCourse1);
         testTranscript.calculateTotalCredits();
         assertEquals(4, testTranscript.getTotalCredits());
@@ -98,6 +111,8 @@ class TranscriptTest {
 
     @Test
     void testMultipleCalculateTotalCredits() {
+        testCourseList.add(testCourse1);
+        testCourseList.add(testCourse2);
         testTranscript.addCourses(testCourse1);
         testTranscript.addCourses(testCourse2);
         testTranscript.calculateTotalCredits();
@@ -106,6 +121,7 @@ class TranscriptTest {
 
     @Test
     void testDuplicateCalculateTotalCredits() {
+        testCourseList.add(testCourse1);
         testTranscript.addCourses(testCourse1);
         testTranscript.addCourses(testCourse1);
         testTranscript.calculateTotalCredits();
@@ -115,31 +131,35 @@ class TranscriptTest {
     @Test
     void testCalculateTotalWeightedGrades() {
         double testWeight = 0.0;
-        testTranscript.addCourses(testCourse1);
-        //testWeight += testCourse1.getActualFinalGrade();
-        testTranscript.addCourses(testCourse2);
-        //testWeight += testCourse2.getActualFinalGrade();
-        testTranscript.calculateTotalWeightedGrades();
-        testWeight = 143;
+        testCourseList.add(testCourse1);
+        testCourseList.add(testCourse2);
+
+        testCourse1.calculateActualGrade();
+        testWeight += testCourse1.getActualFinalGrade();
+        testCourse2.calculateActualGrade();
+        testWeight += testCourse2.getActualFinalGrade();
 
         testTranscript.calculateTotalWeightedGrades();
         assertEquals(testWeight, testTranscript.getTotalWeighted());
-
     }
 
     @Test
     void testCalculateAverage() {
-        testTranscript.addCourses(testCourse1);
-        testTranscript.addCourses(testCourse2);
-        //double testWeight = testTranscript.calculateTotalWeightedGrades();
-        double testWeight = 143;
-        //int testCredits = testTranscript.getTotalCredits();
-        int testCredits = 3;
+        double testWeights = 0.0;
+        int testCredits = 0;
+        testCourseList.add(testCourse1);
+        testCourseList.add(testCourse2);
+
+        testCourse1.calculateActualGrade();
+        testCourse2.calculateActualGrade();
+        testWeights += testCourse1.getActualFinalGrade();
+        testWeights += testCourse2.getActualFinalGrade();
+
+        testCredits += testCourse1.getCredits();
+        testCredits += testCourse2.getCredits();
 
         testTranscript.calculateAverage();
-        assertEquals((testWeight / testCredits), testTranscript.getAverage());
+        assertEquals((double) Math.round((testWeights / (double)testCredits) * 100) / 100,
+                testTranscript.getAverage());
     }
-
-
-
 }

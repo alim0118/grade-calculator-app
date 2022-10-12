@@ -35,30 +35,30 @@ public class Transcript {
      * MODIFIES: this
      * EFFECTS: adds each number of credits of courses to total credits
      */
-    public int calculateTotalCredits() {
+    public void calculateTotalCredits() {
         for (int i = 0; i <= courseList.size() - 1; i++) {
             totalCredits += courseList.get(i).getCredits();
         }
-        return totalCredits;
     }
 
     /*
      * MODIFIES: this
      * EFFECTS: adds each weighted grade of courses to total weighted
      */
-    public double calculateTotalWeightedGrades() {
+    public void calculateTotalWeightedGrades() {
         for (int i = 0; i <= courseList.size() - 1; i++) {
             totalWeighted += courseList.get(i).getActualFinalGrade();
         }
-        return totalWeighted;
     }
 
     /*
      * MODIFIES: this
      * EFFECTS: divides total weighted grades of all courses by total number of total credits
      */
-    public double calculateAverage() {
-        return average = totalWeighted / (double)totalCredits;
+    public void calculateAverage() {
+        calculateTotalWeightedGrades();
+        calculateTotalCredits();
+        average = (double) Math.round((totalWeighted / (double)totalCredits) * 100) / 100;
     }
 
     /*

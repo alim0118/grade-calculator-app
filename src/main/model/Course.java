@@ -56,13 +56,25 @@ public class Course {
 
     /*
      * MODIFIES: this
-     * EFFECTS: if category status is false (it is the final exam category), set final weight to that category's weight
+     * EFFECTS: if category status is false (it is the final exam category), set final weight to that category's weight,
+     *          otherwise category with the greatest weight is set to final weight
      */
     public void findFinalWeight() {
+        double prev = 0.0;
+        double cur = 0.0;
         if (isCompleted == false) {
             for (int i = 0; i <= categoryList.size() - 1; i++) {
                 if (categoryList.get(i).getCategoryStatus() == false) {
                     finalWeight = categoryList.get(i).getWeight();
+                }
+            }
+        } else {
+            for (int i = 0; i <= categoryList.size() - 2; i++) {
+                prev = categoryList.get(i).getWeight();
+                cur = categoryList.get(i + 1).getWeight();
+                if (prev > cur) {
+                    finalWeight = prev;
+                    finalWeight = cur;
                 }
             }
         }
@@ -71,9 +83,8 @@ public class Course {
     /*
      * MODIFIES: this
      * EFFECTS: if the course is incomplete, then the weighted mark of each category is added to current grade
-     *          and is returned
      */
-    public double calculateCurrentGrade() {
+    public void calculateCurrentGrade() {
         if (isCompleted == false) {
             for (int i = 0; i <= categoryList.size() - 1; i++) {
                 if (categoryList.get(i).getCategoryStatus() == true) {
@@ -81,21 +92,18 @@ public class Course {
                 }
             }
         }
-        return currentGrade;
     }
 
     /*
      * MODIFIES: this
      * EFFECTS: if the course is complete, then the weighted mark of each category is added to actual final grade
-     *          and is returned
      */
-    public double calculateActualGrade() {
+    public void calculateActualGrade() {
         if (isCompleted == true) {
             for (int i = 0; i <= categoryList.size() - 1; i++) {
                 actualFinalGrade += categoryList.get(i).getWeightedMark();
             }
         }
-        return actualFinalGrade;
     }
 
     /*

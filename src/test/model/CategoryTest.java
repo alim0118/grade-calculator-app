@@ -18,7 +18,7 @@ public class CategoryTest {
         assertEquals("Homework", testCategory.getName());
         assertEquals(5, testCategory.getWeight());
         assertEquals(87.2, testCategory.getMark());
-        assertEquals(5 * 87.2, testCategory.getWeightedMark());
+        assertEquals((5 * 87.2) / 100, testCategory.getWeightedMark());
         assertEquals(true, testCategory.getCategoryStatus());
     }
 }

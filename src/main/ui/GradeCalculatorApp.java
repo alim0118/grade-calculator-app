@@ -173,7 +173,13 @@ public class GradeCalculatorApp {
 
     private void userCommandNew(String command) {
         if (command.equals("1.")) {
-            doCreateCategories();
+            System.out.println("How many categories does this course have?");
+            int categoryNum = scan.nextInt();
+            scan.nextLine();
+            while (categoryNum >= 0) {
+                doCreateCategories();
+                categoryNum--;
+            }
             doCreateCourse();
 
         } else {
@@ -187,10 +193,13 @@ public class GradeCalculatorApp {
         String name = scan.nextLine();
         System.out.println("\nEnter the weight of " + name);
         double weight = scan.nextDouble();
+        scan.nextLine();
         System.out.println("\nEnter the mark of " + name);
         double mark = scan.nextDouble();
-        System.out.println("\nEnter the status of " + name);
+        scan.nextLine();
+        System.out.println("\nEnter the status of " + name + ". True for completed, False for incomplete");
         boolean status = scan.nextBoolean();
+        scan.nextLine();
 
         //Category newCat = new Category(name, weight, mark, status);
         //curCourse.addCategory(newCat);
