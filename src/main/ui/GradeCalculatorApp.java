@@ -27,11 +27,13 @@ public class GradeCalculatorApp {
     // EFFECTS: processes user input
     private void runGradeCalculator() {
         boolean cont = true;
+        String cmd = null;
         String userType = init();
+
         if (userType.equals("1.")) {
             System.out.println("Hello, " + id);
             while (cont) {
-                String cmd = displayReturn();
+                cmd = displayReturn();
                 if (cmd.equals("0.")) {
                     cont = false;
                 } else {
@@ -39,14 +41,23 @@ public class GradeCalculatorApp {
                 }
             }
         } else {
-            System.out.println("Hello, your user will be " + id++);
-            while (cont) {
-                String cmd = displayNew();
-                if (cmd.equals("0.")) {
-                    cont = false;
-                } else {
-                    userCommandNew(cmd);
-                }
+            runNewGradeCalculator(cont, cmd);
+        }
+        System.out.println("Goodbye, thank you for using the grade calculator!");
+    }
+
+    // for new users
+    private void runNewGradeCalculator(boolean continuing, String command) {
+        boolean cont = continuing;
+        String cmd = command;
+
+        System.out.println("Hello, your user will be " + id++);
+        while (cont) {
+            cmd = displayNew();
+            if (cmd.equals("0.")) {
+                cont = false;
+            } else {
+                userCommandNew(cmd);
             }
         }
     }
@@ -77,15 +88,15 @@ public class GradeCalculatorApp {
         return newCategory;
     }
 
-    private Course createCourse(String name, int credits, double desired) {
-        ArrayList<Category> addedCategories = new ArrayList<>();
-        curCourse = new Course(name, credits, desired, addedCategories);
+    private Course createCourse(String name, int credits, double desired, ArrayList<Category> categories) {
+        //ArrayList<Category> addedCategories = new ArrayList<>();
+        curCourse = new Course(name, credits, desired, categories);
         return curCourse;
     }
 
-    private Transcript createTranscript(int id) {
-        ArrayList<Course> addedCourses = new ArrayList<>();
-        curTranscript = new Transcript(id, addedCourses);
+    private Transcript createTranscript(int id, ArrayList<Course> courses) {
+        //ArrayList<Course> addedCourses = new ArrayList<>();
+        curTranscript = new Transcript(id, courses);
         return curTranscript;
     }
 
@@ -134,7 +145,7 @@ public class GradeCalculatorApp {
             doViewCourse(choice);
 
         } else {
-            System.out.println("Invalid selection. Please select again");
+            System.out.println("Invalid selection. Please select again1");
         }
 
     }
@@ -176,31 +187,38 @@ public class GradeCalculatorApp {
             System.out.println("How many categories does this course have?");
             int categoryNum = scan.nextInt();
             scan.nextLine();
-            while (categoryNum >= 0) {
-                doCreateCategories();
+            while (categoryNum >= 1) {
+                doCreateCategory();
                 categoryNum--;
             }
             doCreateCourse();
+            createTranscript(id, allCourses);
+            System.out.println(curCourse.getCourseName() + " has been created and added to" + id + "'s transcript.");
 
         } else {
-            System.out.println("Invalid selection. Please select again");
+            System.out.println("Invalid selection. Please select again2");
         }
+
 
     }
 
-    private void doCreateCategories() {
+    private void doCreateCategory() {
         System.out.println("\nEnter the category name:");
         String name = scan.nextLine();
         System.out.println("\nEnter the weight of " + name);
         double weight = scan.nextDouble();
         scan.nextLine();
-        System.out.println("\nEnter the mark of " + name);
-        double mark = scan.nextDouble();
-        scan.nextLine();
+        // if course is completed then ask for mark otherwise ?
         System.out.println("\nEnter the status of " + name + ". True for completed, False for incomplete");
         boolean status = scan.nextBoolean();
         scan.nextLine();
-
+        double mark = 0.0;
+        if (status) {
+            System.out.println("\nEnter the mark of " + name);
+            mark = scan.nextDouble();
+            scan.nextLine();
+        }
+        mark = 0;
         //Category newCat = new Category(name, weight, mark, status);
         //curCourse.addCategory(newCat);
         allCategories.add(createCategories(name, weight, mark, status));
@@ -211,10 +229,12 @@ public class GradeCalculatorApp {
         String name = scan.nextLine();
         System.out.println("\nEnter the number of credits for " + name);
         int credits = scan.nextInt();
+        scan.nextLine();
         System.out.println("\nEnter the desired grade for the course " + name);
         double desired = scan.nextDouble();
+        scan.nextLine();
 
-        allCourses.add(createCourse(name, credits, desired));
+        allCourses.add(createCourse(name, credits, desired, allCategories));
     }
 
     private void printAllCourses() {
