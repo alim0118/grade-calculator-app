@@ -54,7 +54,7 @@ public class GradeCalculatorApp {
         boolean cont = continuing;
         String cmd;
 
-        System.out.println("Hello, your user will be " + id++);
+        System.out.println("Hello, your user will be " + id);
         while (cont) {
             cmd = displayNew();
             if (cmd.equals("0.")) {
@@ -121,14 +121,19 @@ public class GradeCalculatorApp {
         System.out.println("\t2. -> get overall average as a letter grade");
         System.out.println("\t3. -> calculate what i need on the final exam");
         System.out.println("\t4. -> view all courses");
-        System.out.println("\t5. -> view categories and weight of a course");
+        System.out.println("\t5. -> view course outline & rubric view all courses");
         System.out.println("\t0. -> quit");
     }
 
     // EFFECTS: displays menu of options for new user
+    // change commands
     private void displayMenuNew() {
         System.out.println("\nSelect from: ");
         System.out.println("\t1. -> add course");
+        System.out.println("\t2. -> edit course information");
+        System.out.println("\t3. -> view course outline & rubric");
+        System.out.println("\t4. -> calculate what i need on the final exam");
+        System.out.println("\t5. -> view all courses");
         System.out.println("\t0. -> quit");
     }
 
@@ -168,14 +173,23 @@ public class GradeCalculatorApp {
             System.out.println("How many categories does this course have?");
             int categoryNum = scan.nextInt();
             scan.nextLine();
-            while (categoryNum >= 1) {
-                doCreateCategory();
-                categoryNum--;
-            }
-            doCreateCourse();
-            createTranscript(id, allCourses);
-            System.out.println(curCourse.getCourseName() + " has been created and added to " + id + "'s transcript.");
-
+            doCreateCategory(categoryNum);
+        } else if (command.equals("2.")) {
+            System.out.println("\nWhich course would you like to edit?");
+            String choice = scan.nextLine();
+            doEditCourse(choice);
+        } else if (command.equals("3.")) {
+            System.out.println("\nWhich course would you like to view?");
+            String choice = scan.nextLine();
+            doViewCourse(choice);
+        } else if (command.equals("4.")) {
+            System.out.println("\nWhich course would you like to check for?");
+            String choice = scan.nextLine();
+            System.out.println("\nWhat is your desired final grade for " + choice + " ?");
+            double desired = scan.nextDouble();
+            doCalculateMinFinalScore(choice, desired);
+        } else if (command.equals("5.")) {
+            doViewAllCourses();
         } else {
             System.out.println("Invalid selection. Please select again2");
         }
@@ -211,7 +225,7 @@ public class GradeCalculatorApp {
         printAllCourses();
     }
 
-    // REQUIRES: courseChoice to be non-zero length and included in allCourses
+    // REQUIRES: courseChoice to be non-zero length and included in course list
     // EFFECTS: prints chosen course information
     private void doViewCourse(String courseChoice) {
         for (int i = 0; i < allCourses.size() - 1; i++) {
@@ -223,25 +237,31 @@ public class GradeCalculatorApp {
 
     // MODIFIES: this
     // EFFECTS: conducts creating a category
-    private void doCreateCategory() {
-        System.out.println("\nEnter the category name:");
-        String name = scan.nextLine();
-        System.out.println("\nEnter the weight of " + name);
-        double weight = scan.nextDouble();
-        scan.nextLine();
-        System.out.println("\nEnter the status of " + name + ". True for completed, False for incomplete");
-        boolean status = scan.nextBoolean();
-        scan.nextLine();
-        double mark;
-
-        if (status) {
-            System.out.println("\nEnter the mark of " + name);
-            mark = scan.nextDouble();
+    private void doCreateCategory(int catNum) {
+        while (catNum >= 1) {
+            System.out.println("\nEnter the category name:");
+            String name = scan.nextLine();
+            System.out.println("\nEnter the weight of " + name);
+            double weight = scan.nextDouble();
             scan.nextLine();
-        } else {
-            mark = 0;
+            System.out.println("\nEnter the status of " + name + ". True for completed, False for incomplete");
+            boolean status = scan.nextBoolean();
+            scan.nextLine();
+            double mark;
+
+            if (status) {
+                System.out.println("\nEnter the mark of " + name);
+                mark = scan.nextDouble();
+                scan.nextLine();
+            } else {
+                mark = 0;
+            }
+            allCategories.add(createCategory(name, weight, mark, status));
+            catNum--;
         }
-        allCategories.add(createCategory(name, weight, mark, status));
+        doCreateCourse();
+        createTranscript(id, allCourses);
+        System.out.println(curCourse.getCourseName() + " has been created and added to " + id + "'s transcript.");
     }
 
     // MODIFIES: this
@@ -257,6 +277,12 @@ public class GradeCalculatorApp {
         scan.nextLine();
 
         allCourses.add(createCourse(name, credits, desired, allCategories));
+    }
+
+    // REQUIRES: name to be non-zero length and exist in course list
+    // EFFECTS: conducts editing a course
+    private void doEditCourse(String name) {
+
     }
 
     // EFFECTS: prints all courses
