@@ -22,6 +22,22 @@ public class Category {
         marked = categoryStatus;
     }
 
+    // REQUIRES: 0 <= newMark <= 100
+    // MODIFIES: this
+    // EFFECTS: sets category to new mark and changes weighted mark
+    public double setMark(double newMark) {
+        mark = newMark;
+        setWeightedMark(newMark);
+        return mark;
+    }
+
+    // REQUIRES: 0 <= newMark <= 100
+    // MODIFIES: this
+    // EFFECTS: set weighted mark with new mark
+    public double setWeightedMark(double newMark) {
+        return weightedMark = (weight * newMark) / 100;
+    }
+
     public String getName() {
         return name;
     }

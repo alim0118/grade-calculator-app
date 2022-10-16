@@ -30,7 +30,6 @@ public class GradeCalculatorApp {
         String userType = init();
 
         if (userType.equals("1.")) {
-            // TODO: create if statement that matches input id to existing id to get transcript
             System.out.println("Hello, " + id);
             while (cont) {
                 cmd = displayReturn();
@@ -157,9 +156,7 @@ public class GradeCalculatorApp {
             doViewAllCourses();
 
         } else if (command.equals("5.")) {
-            System.out.println("\nWhich course would you like to view?");
-            String choice = scan.nextLine();
-            doViewCourse(choice);
+            doViewCourse();
 
         } else {
             System.out.println("Invalid selection. Please select again1");
@@ -174,22 +171,23 @@ public class GradeCalculatorApp {
             int categoryNum = scan.nextInt();
             scan.nextLine();
             doCreateCategory(categoryNum);
+
         } else if (command.equals("2.")) {
-            System.out.println("\nWhich course would you like to edit?");
-            String choice = scan.nextLine();
-            doEditCourse(choice);
+            doEditCourse();
+
         } else if (command.equals("3.")) {
-            System.out.println("\nWhich course would you like to view?");
-            String choice = scan.nextLine();
-            doViewCourse(choice);
+            doViewCourse();
+
         } else if (command.equals("4.")) {
             System.out.println("\nWhich course would you like to check for?");
             String choice = scan.nextLine();
             System.out.println("\nWhat is your desired final grade for " + choice + " ?");
             double desired = scan.nextDouble();
             doCalculateMinFinalScore(choice, desired);
+
         } else if (command.equals("5.")) {
             doViewAllCourses();
+
         } else {
             System.out.println("Invalid selection. Please select again2");
         }
@@ -210,7 +208,7 @@ public class GradeCalculatorApp {
     // EFFECTS: calculates minimum score needed on final to get desired grade for course
     private void doCalculateMinFinalScore(String courseChoice, double desiredGrade) {
         double min;
-        for (int i = 0; i < allCourses.size() - 1; i++) {
+        for (int i = 0; i <= allCourses.size() - 1; i++) {
             if (allCourses.get(i).getCourseName().equals(courseChoice)) {
                 allCourses.get(i).setDesiredFinalGrade(desiredGrade);
                 min = allCourses.get(i).getMinFinalScore();
@@ -225,11 +223,14 @@ public class GradeCalculatorApp {
         printAllCourses();
     }
 
-    // REQUIRES: courseChoice to be non-zero length and included in course list
+
+    // MODIFIES: this
     // EFFECTS: prints chosen course information
-    private void doViewCourse(String courseChoice) {
-        for (int i = 0; i < allCourses.size() - 1; i++) {
-            if (allCourses.get(i).getCourseName().equals(courseChoice)) {
+    private void doViewCourse() {
+        System.out.println("\nWhich course would you like to view?");
+        String choice = scan.nextLine();
+        for (int i = 0; i <= allCourses.size() - 1; i++) {
+            if (allCourses.get(i).getCourseName().equals(choice)) {
                 printCourseOutline(allCourses.get(i));
             }
         }
@@ -253,9 +254,11 @@ public class GradeCalculatorApp {
                 System.out.println("\nEnter the mark of " + name);
                 mark = scan.nextDouble();
                 scan.nextLine();
+
             } else {
                 mark = 0;
             }
+
             allCategories.add(createCategory(name, weight, mark, status));
             catNum--;
         }
@@ -279,19 +282,38 @@ public class GradeCalculatorApp {
         allCourses.add(createCourse(name, credits, desired, allCategories));
     }
 
-    // REQUIRES: name to be non-zero length and exist in course list
-    // EFFECTS: conducts editing a course
-    private void doEditCourse(String name) {
-
+    // MODIFIES: this
+    // EFFECTS: conducts editing a category mark of a course
+    private void doEditCourse() {
+        Course editCourse;
+        String catChoice;
+        ArrayList<Category> edit = new ArrayList<>();
+        System.out.println("\nWhich course would you like to edit?");
+        String choice = scan.nextLine();
+        for (int i = 0; i <= allCourses.size() - 1; i++) {
+            if (allCourses.get(i).getCourseName().equals(choice)) {
+                editCourse = allCourses.get(i);
+                System.out.println("\nWhich category mark would you like to edit?");
+                catChoice = scan.nextLine();
+                for (int k = 0; k <= editCourse.getCategoryList().size() - 1; k++) {
+                    if (editCourse.getCategoryList().get(k).getName().equals(catChoice)) {
+                        System.out.println("\nEdit mark of " + catChoice + " to:");
+                        double editMark = scan.nextDouble();
+                        scan.nextLine();
+                        editCourse.getCategoryList().get(k).setMark(editMark);
+                        System.out.println("The " + catChoice + " category of " + choice + " was successfully edited.");
+                    }
+                }
+            }
+        }
     }
 
-    // EFFECTS: prints all courses
+    // EFFECTS: prints all courses by name and credits
     private void printAllCourses() {
-        for (int i = 0; i < allCourses.size() - 1; i++) {
+        for (int i = 0; i <= allCourses.size() - 1; i++) {
             System.out.println("\nCourse Name: " + allCourses.get(i).getCourseName());
             System.out.println("\tCredits: " + allCourses.get(i).getCredits());
         }
-
     }
 
     // REQUIRES: c to not be null
@@ -300,7 +322,7 @@ public class GradeCalculatorApp {
         System.out.println("\nCourse Name: " + c.getCourseName());
         System.out.println("\nCredits: " + c.getCredits());
         System.out.println("\nCategories & Weights:");
-        for (int i = 0; i < c.getCategoryList().size() - 1; i++) {
+        for (int i = 0; i <= c.getCategoryList().size() - 1; i++) {
             System.out.println("\tName: " + c.getCategoryList().get(i).getName());
             System.out.println("\tWeight: " + c.getCategoryList().get(i).getWeight());
         }

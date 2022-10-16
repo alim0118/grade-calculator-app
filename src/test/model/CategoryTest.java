@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CategoryTest {
     private Category testCategory;
@@ -19,6 +20,15 @@ public class CategoryTest {
         assertEquals(5, testCategory.getWeight());
         assertEquals(87.2, testCategory.getMark());
         assertEquals((5 * 87.2) / 100, testCategory.getWeightedMark());
-        assertEquals(true, testCategory.getCategoryStatus());
+        assertTrue(testCategory.getCategoryStatus());
+    }
+
+    @Test
+    void testSetMark() {
+        double changedMark = 55.6;
+        testCategory.setMark(changedMark);
+        assertEquals(changedMark, testCategory.getMark());
+        testCategory.setWeightedMark(changedMark);
+        assertEquals((5 * changedMark) / 100, testCategory.getWeightedMark());
     }
 }
