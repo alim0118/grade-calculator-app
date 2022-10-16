@@ -89,7 +89,6 @@ public class CourseTest {
 
         testCourse.isCompleted();
         assertFalse(testCourse.getIsCompleted());
-
     }
 
     @Test
@@ -105,7 +104,6 @@ public class CourseTest {
         assertEquals(55, testCourse.getFinalWeight());
     }
 
-    // delete before submitting: current grade use category3
     @Test
     void testCalculateCurrentGrade() {
         double sumGrade = 0.0;
@@ -126,7 +124,6 @@ public class CourseTest {
         assertEquals(sumGrade, testCourse.getCurrentGrade());
     }
 
-    // delete before submitting: actual grade use category4 and NOT category3
     @Test
     void testCalculateActualGrade() {
         double sumGrade = 0.0;

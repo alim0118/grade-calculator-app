@@ -18,7 +18,7 @@ public class Course {
     private boolean isCompleted; // status of course being completed or not
 
     /*
-     * REQUIRES: courseName is a non-zero length, desiredGrade >= 0
+     * REQUIRES: courseName is a non-zero length, courseCredits >= 1, desiredGrade >= 0, categories to be empty
      * EFFECTS: name of course is set to courseName; desiredFinalGrade of course is set to desiredGrade;
      *          categoryList is the list of categories in the course;
      */
@@ -45,7 +45,7 @@ public class Course {
      */
     public void isCompleted() {
         for (int i = 0; i <= categoryList.size() - 1; i++) {
-            if (categoryList.get(i).getCategoryStatus() == false) {
+            if (!categoryList.get(i).getCategoryStatus()) {
                 isCompleted = false;
 
             } else {
@@ -60,11 +60,11 @@ public class Course {
      *          otherwise category with the greatest weight is set to final weight
      */
     public void findFinalWeight() {
-        double prev = 0.0;
-        double cur = 0.0;
-        if (isCompleted == false) {
+        double prev;
+        double cur;
+        if (!isCompleted) {
             for (int i = 0; i <= categoryList.size() - 1; i++) {
-                if (categoryList.get(i).getCategoryStatus() == false) {
+                if (!categoryList.get(i).getCategoryStatus()) {
                     finalWeight = categoryList.get(i).getWeight();
                 }
             }
@@ -72,10 +72,7 @@ public class Course {
             for (int i = 0; i <= categoryList.size() - 2; i++) {
                 prev = categoryList.get(i).getWeight();
                 cur = categoryList.get(i + 1).getWeight();
-                if (prev > cur) {
-                    finalWeight = prev;
-                    finalWeight = cur;
-                }
+                finalWeight = Math.max(prev, cur);
             }
         }
     }
@@ -85,9 +82,9 @@ public class Course {
      * EFFECTS: if the course is incomplete, then the weighted mark of each category is added to current grade
      */
     public void calculateCurrentGrade() {
-        if (isCompleted == false) {
+        if (!isCompleted) {
             for (int i = 0; i <= categoryList.size() - 1; i++) {
-                if (categoryList.get(i).getCategoryStatus() == true) {
+                if (categoryList.get(i).getCategoryStatus()) {
                     currentGrade += categoryList.get(i).getWeightedMark();
                 }
             }
@@ -99,7 +96,7 @@ public class Course {
      * EFFECTS: if the course is complete, then the weighted mark of each category is added to actual final grade
      */
     public void calculateActualGrade() {
-        if (isCompleted == true) {
+        if (isCompleted) {
             for (int i = 0; i <= categoryList.size() - 1; i++) {
                 actualFinalGrade += categoryList.get(i).getWeightedMark();
             }

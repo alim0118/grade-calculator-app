@@ -58,12 +58,12 @@ public class Transcript {
     public void calculateAverage() {
         calculateTotalWeightedGrades();
         calculateTotalCredits();
-        average = (double) Math.round((totalWeighted / (double)totalCredits) * 100) / 100;
+        average = (double) Math.round((totalWeighted / (double) totalCredits) * 100) / 100;
     }
 
     /*
      * MODIFIES: this
-     * EFFECTS: determines letter grade given average
+     * EFFECTS: determines corresponding letter grade given average
      */
     public void letterGrade() {
         if (average >= 90 && average <= 100) {

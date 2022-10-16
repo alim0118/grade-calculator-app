@@ -32,7 +32,7 @@ class TranscriptTest {
 
         testCategory1 = new Category("Homework", 10, 100, true);
         testCategory2 = new Category("Midterm", 40, 75, true);
-        testCategory3 = new Category("Final Exam", 50, 56,true);
+        testCategory3 = new Category("Final Exam", 50, 56, true);
 
         testCourse1 = new Course("CPSC 210", 4, 89.5, testCategoryList1);
         testCourse1.addCategory(testCategory1);
@@ -40,7 +40,7 @@ class TranscriptTest {
         testCourse1.addCategory(testCategory3);
         testCourse1.isCompleted();
         testCourse1.findFinalWeight();
-        testCourse1.getFinalWeight();
+        //testCourse1.getFinalWeight();
 
         testCategory4 = new Category("Midterm", 30, 100, true);
         testCategory5 = new Category("Final Exam", 60, 75, true);
@@ -50,10 +50,8 @@ class TranscriptTest {
         testCourse2.addCategory(testCategory5);
         testCourse2.isCompleted();
         testCourse2.findFinalWeight();
-        testCourse2.getFinalWeight();
+        //testCourse2.getFinalWeight();
 
-        //testCourseList.add(testCourse1);
-        //testCourseList.add(testCourse2);
         testTranscript = new Transcript(1, testCourseList);
     }
 
@@ -159,7 +157,7 @@ class TranscriptTest {
         testCredits += testCourse2.getCredits();
 
         testTranscript.calculateAverage();
-        assertEquals((double) Math.round((testWeights / (double)testCredits) * 100) / 100,
+        assertEquals((double) Math.round((testWeights / (double) testCredits) * 100) / 100,
                 testTranscript.getAverage());
     }
 }
