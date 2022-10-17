@@ -194,4 +194,5 @@ public class CourseTest {
         testCourse.calculateMinFinalScore();
         assertEquals(testScore, testCourse.getMinFinalScore());
     }
+
 }
