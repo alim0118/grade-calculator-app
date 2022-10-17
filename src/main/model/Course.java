@@ -78,10 +78,15 @@ public class Course {
 
     /*
      * MODIFIES: this
-     * EFFECTS: if the course is incomplete, then the weighted mark of each category is added to current grade
+     * EFFECTS: if the course is complete, then the weighted mark of each category is added to actual final grade
+     *          otherwise, the weighted mark of each category is added to current grade
      */
-    public void calculateCurrentGrade() {
-        if (!isCompleted) {
+    public void calculateGrade() {
+        if (isCompleted) {
+            for (int i = 0; i <= categoryList.size() - 1; i++) {
+                actualFinalGrade += categoryList.get(i).getWeightedMark();
+            }
+        } else {
             for (int i = 0; i <= categoryList.size() - 1; i++) {
                 if (categoryList.get(i).getCategoryStatus()) {
                     currentGrade += categoryList.get(i).getWeightedMark();
@@ -90,17 +95,6 @@ public class Course {
         }
     }
 
-    /*
-     * MODIFIES: this
-     * EFFECTS: if the course is complete, then the weighted mark of each category is added to actual final grade
-     */
-    public void calculateActualGrade() {
-        if (isCompleted) {
-            for (int i = 0; i <= categoryList.size() - 1; i++) {
-                actualFinalGrade += categoryList.get(i).getWeightedMark();
-            }
-        }
-    }
 
     /*
      * MODIFIES: this

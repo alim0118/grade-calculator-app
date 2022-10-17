@@ -367,9 +367,9 @@ public class GradeCalculatorApp {
     public void setCourseUp(Course c) {
         c.checkIsCompleted();
         if (c.getIsCompleted()) {
-            c.calculateActualGrade();
+            c.calculateGrade();
         } else {
-            c.calculateCurrentGrade();
+            c.calculateGrade();
         }
         c.calculateMinFinalScore();
     }
