@@ -114,6 +114,7 @@ public class CourseTest {
         testCourse.addCategory(testCategory3);
         sumGrade += testCategoryList.get(2).getWeightedMark();
 
+        testCourse.checkIsCompleted();
         assertFalse(testCourse.getIsCompleted());
         assertEquals(15, testCategory1.getWeightedMark());
         assertEquals(22.5, testCategory2.getWeightedMark());
@@ -142,11 +143,27 @@ public class CourseTest {
     }
 
     @Test
+    void testCalculateNoMinFinalScore() {
+        testCourse.addCategory(testCategory1);
+        testCourse.addCategory(testCategory2);
+        testCourse.addCategory(testCategory4);
+
+        testCourse.checkIsCompleted();
+        testCourse.calculateActualGrade();
+        testCourse.findFinalWeight();
+
+        double testScore = testCourse.getActualFinalGrade();
+        testCourse.calculateMinFinalScore();
+        assertEquals(testScore, testCourse.getMinFinalScore());
+    }
+
+    @Test
     void testCalculateMinFinalScore() {
         testCourse.addCategory(testCategory1);
         testCourse.addCategory(testCategory2);
         testCourse.addCategory(testCategory3);
 
+        testCourse.checkIsCompleted();
         testCourse.calculateCurrentGrade();
         testCourse.findFinalWeight();
         double desired = testCourse.getDesiredFinalGrade();
@@ -164,6 +181,7 @@ public class CourseTest {
         testCourse.addCategory(testCategory2);
         testCourse.addCategory(testCategory3);
 
+        testCourse.checkIsCompleted();
         testCourse.calculateCurrentGrade();
         testCourse.findFinalWeight();
         double desired = testCourse.setDesiredFinalGrade(72);

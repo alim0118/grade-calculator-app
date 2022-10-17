@@ -2,19 +2,22 @@ package ui;
 
 import model.Category;
 import model.Course;
-import model.Transcript;
+//import model.Transcript;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+// NOTE: any calls related to transcript will not be used in phase 1, therefore commented out
 
 // Grade calculator application
 public class GradeCalculatorApp {
     Scanner scan; // scanner
     private static int id = 1; // id number of user
     private ArrayList<Course> allCourses = new ArrayList<>(); // all courses
-    //private ArrayList<Category> allCategories = new ArrayList<>(); // all categories
     private Course curCourse; // current course getting input on
-    private Transcript curTranscript;  // transcript of student
+
+    // NOTE: not used in phase 1 because it requires the transcript class
+    //private Transcript curTranscript;  // transcript of student
 
     // EFFECTS: runs the grade calculator application
     public GradeCalculatorApp() {
@@ -99,12 +102,16 @@ public class GradeCalculatorApp {
         return curCourse;
     }
 
+    /*
+    // NOTE: not used in phase 1 because it requires the transcript class
+
     // REQUIRES: id >= 1, courses to not be empty
     // MODIFIES: this
     // EFFECTS: creates a transcript with id and corresponding courses
     private void createTranscript(int id, ArrayList<Course> courses) {
         curTranscript = new Transcript(id, courses);
     }
+    */
 
     // EFFECTS: displays login option for user
     private void userLogin() {
@@ -140,10 +147,14 @@ public class GradeCalculatorApp {
     // EFFECTS: processes user command for returning user
     private void userCommandReturning(String command) {
         if (command.equals("1.")) {
-            doCalculateOverallAverage();
+            // NOTE: not used in phase 1 because it requires the transcript class
+
+            //doCalculateOverallAverage();
 
         } else if (command.equals("2.")) {
-            doConvertToLetterGrade();
+            // NOTE: not used in phase 1 because it requires the transcript class
+
+            //doConvertToLetterGrade();
 
         } else if (command.equals("3.")) {
             System.out.println("\nWhich course would you like to check for?");
@@ -194,15 +205,23 @@ public class GradeCalculatorApp {
         }
     }
 
+    /*
+    // NOTE: not used in phase 1 because it requires the transcript class
+
     // EFFECTS: prints overall average
     private void doCalculateOverallAverage() {
         System.out.println("Overall average: " + curTranscript.getAverage());
     }
+     */
+
+    /*
+    // NOTE: not used in phase 1 because it requires the transcript class
 
     // EFFECTS: prints overall average as letter grade
     private void doConvertToLetterGrade() {
         System.out.println("Overall average as letter grade: " + curTranscript.getLetterGrade());
     }
+     */
 
     // REQUIRES: courseChoice to be non-zero length and included in allCourses, 100 <= desiredGrade <= 0
     // MODIFIES: this
@@ -268,7 +287,7 @@ public class GradeCalculatorApp {
         }
 
         doCreateCourse(allCategories);
-        createTranscript(id, allCourses);
+        //createTranscript(id, allCourses);
     }
 
     // MODIFIES: this

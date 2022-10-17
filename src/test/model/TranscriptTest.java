@@ -1,3 +1,4 @@
+/*
 package model;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+// NOTE: this class will not be used for phase 1 as it requires referring to previous stored input data
 class TranscriptTest {
     private Transcript testTranscript;
 
@@ -150,4 +151,4 @@ class TranscriptTest {
         assertEquals((double) Math.round((testWeights / (double) testCredits) * 100) / 100,
                 testTranscript.getAverage());
     }
-}
+}*/

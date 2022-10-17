@@ -1,6 +1,8 @@
-package model;
+/*package model;
 
 import java.util.ArrayList;
+
+// NOTE: this class will not be used for phase 1 as it requires referring to previous stored input data
 
 // Represents a transcript having an id, courses (list of courses enrolled), total weights, total credits, average,
 // and letter grade
@@ -12,59 +14,59 @@ public class Transcript {
     private double average; // average from all courses
     private String letterGrade; // average converted to letter grade
 
-    /*
+    *//*
      * REQUIRES: id > 0
      * EFFECTS: id of transcript is set to userId; courseList is the list of courses in the transcript
-     */
+     *//*
     public Transcript(int userId, ArrayList<Course> courses) {
         id = userId;
         courseList = courses;
     }
 
-    /*
+    *//*
      * MODIFIES: this
      * EFFECTS: adds course to course list (with no duplicated)
-     */
+     *//*
     public void addCourses(Course course) {
         if (!courseList.contains(course)) {
             courseList.add(course);
         }
     }
 
-    /*
+    *//*
      * MODIFIES: this
      * EFFECTS: adds each number of credits of courses to total credits
-     */
+     *//*
     public void calculateTotalCredits() {
         for (int i = 0; i <= courseList.size() - 1; i++) {
             totalCredits += courseList.get(i).getCredits();
         }
     }
 
-    /*
+    *//*
      * MODIFIES: this
      * EFFECTS: adds each weighted grade of courses to total weighted
-     */
+     *//*
     public void calculateTotalWeightedGrades() {
         for (int i = 0; i <= courseList.size() - 1; i++) {
             totalWeighted += courseList.get(i).getActualFinalGrade();
         }
     }
 
-    /*
+    *//*
      * MODIFIES: this
      * EFFECTS: divides total weighted grades of all courses by total number of total credits
-     */
+     *//*
     public void calculateAverage() {
         calculateTotalWeightedGrades();
         calculateTotalCredits();
         average = (double) Math.round((totalWeighted / (double) totalCredits) * 100) / 100;
     }
 
-    /*
+    *//*
      * MODIFIES: this
      * EFFECTS: determines corresponding letter grade given average
-     */
+     *//*
     public void letterGrade() {
         if (average >= 90 && average <= 100) {
             letterGrade = "A+";
@@ -126,5 +128,5 @@ public class Transcript {
     public String getLetterGrade() {
         return letterGrade;
     }
+}*/
 
-}

@@ -110,7 +110,6 @@ public class Course {
      */
     public void calculateMinFinalScore() {
         if (isCompleted) {
-            calculateActualGrade();
             minFinalScore = actualFinalGrade;
         } else {
             findFinalWeight();
