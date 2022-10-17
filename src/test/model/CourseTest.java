@@ -77,7 +77,7 @@ public class CourseTest {
         testCourse.addCategory(testCategory2);
         testCourse.addCategory(testCategory4);
 
-        testCourse.isCompleted();
+        testCourse.checkIsCompleted();
         assertTrue(testCourse.getIsCompleted());
     }
 
@@ -87,7 +87,7 @@ public class CourseTest {
         testCourse.addCategory(testCategory2);
         testCourse.addCategory(testCategory3);
 
-        testCourse.isCompleted();
+        testCourse.checkIsCompleted();
         assertFalse(testCourse.getIsCompleted());
     }
 
@@ -97,7 +97,7 @@ public class CourseTest {
         testCourse.addCategory(testCategory2);
         testCourse.addCategory(testCategory3);
 
-        testCourse.isCompleted();
+        testCourse.checkIsCompleted();
         assertFalse(testCourse.getIsCompleted());
 
         testCourse.findFinalWeight();
@@ -134,7 +134,7 @@ public class CourseTest {
         testCourse.addCategory(testCategory4);
         sumGrade += testCategoryList.get(2).getWeightedMark();
 
-        testCourse.isCompleted();
+        testCourse.checkIsCompleted();
         assertTrue(testCourse.getIsCompleted());
 
         testCourse.calculateActualGrade();
@@ -147,10 +147,12 @@ public class CourseTest {
         testCourse.addCategory(testCategory2);
         testCourse.addCategory(testCategory3);
 
+        testCourse.calculateCurrentGrade();
+        testCourse.findFinalWeight();
         double desired = testCourse.getDesiredFinalGrade();
         double current = testCourse.getCurrentGrade();
         double weight = testCourse.getFinalWeight();
-        double testScore = (desired - current * (100 - weight)) / weight;
+        double testScore = (desired - ((1 - (weight / 100)) * current)) / (weight / 100);
 
         testCourse.calculateMinFinalScore();
         assertEquals(testScore, testCourse.getMinFinalScore());
@@ -162,10 +164,12 @@ public class CourseTest {
         testCourse.addCategory(testCategory2);
         testCourse.addCategory(testCategory3);
 
+        testCourse.calculateCurrentGrade();
+        testCourse.findFinalWeight();
         double desired = testCourse.setDesiredFinalGrade(72);
         double current = testCourse.getCurrentGrade();
         double weight = testCourse.getFinalWeight();
-        double testScore = (desired - current * (100 - weight)) / weight;
+        double testScore = (desired - ((1 - (weight / 100)) * current)) / (weight / 100);
 
         testCourse.calculateMinFinalScore();
         assertEquals(testScore, testCourse.getMinFinalScore());

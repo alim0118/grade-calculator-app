@@ -1,6 +1,5 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 // Represents a course having a list of categories, name, credits, final weight (in percent),
@@ -19,7 +18,7 @@ public class Course {
 
     /*
      * REQUIRES: courseName is a non-zero length, courseCredits >= 1, desiredGrade >= 0, categories to be empty
-     * EFFECTS: name of course is set to courseName; desiredFinalGrade of course is set to desiredGrade;
+     * EFFECTS: name of course is set to courseName; desiredFinalGrade of course is set to 0;
      *          categoryList is the list of categories in the course;
      */
     public Course(String courseName, int courseCredits, double desiredGrade, ArrayList<Category> categories) {
@@ -43,7 +42,7 @@ public class Course {
      * MODIFIES: this
      * EFFECTS: if even one category status is false then course status is set to false
      */
-    public void isCompleted() {
+    public void checkIsCompleted() {
         for (int i = 0; i <= categoryList.size() - 1; i++) {
             if (!categoryList.get(i).getCategoryStatus()) {
                 isCompleted = false;
@@ -105,11 +104,27 @@ public class Course {
 
     /*
      * MODIFIES: this
-     * EFFECTS: minimum score needed to final exam is calculated with formula:
-     *          Required = (Goal − Current × (100% − Final Weight)) / Final Weight
+     * EFFECTS: if incomplete, then minFinalScore will be actualFinalGrade
+     *          otherwise, minimum score needed to final exam is calculated with formula:
+     *          Required = (desired - ((1 - (finalWeight / 100)) * current)) / (finalWeight / 100)
      */
     public void calculateMinFinalScore() {
-        minFinalScore = (desiredFinalGrade - currentGrade * (100 - finalWeight)) / finalWeight;
+        if (isCompleted) {
+            calculateActualGrade();
+            minFinalScore = actualFinalGrade;
+        } else {
+            findFinalWeight();
+            minFinalScore = (desiredFinalGrade - ((1 - (finalWeight / 100)) * currentGrade)) / (finalWeight / 100);
+        }
+    }
+
+    /*
+     * REQUIRES: 0 <= newDesiredGrade <= 100
+     * MODIFIES: this
+     * EFFECTS: sets new desired grade
+     */
+    public double setDesiredFinalGrade(double newDesiredGrade) {
+        return desiredFinalGrade = newDesiredGrade;
     }
 
     public String getCourseName() {
@@ -148,7 +163,4 @@ public class Course {
         return categoryList;
     }
 
-    public double setDesiredFinalGrade(double newDesiredGrade) {
-        return desiredFinalGrade = newDesiredGrade;
-    }
 }

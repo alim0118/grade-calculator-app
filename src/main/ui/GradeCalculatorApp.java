@@ -12,7 +12,7 @@ public class GradeCalculatorApp {
     Scanner scan; // scanner
     private static int id = 1; // id number of user
     private ArrayList<Course> allCourses = new ArrayList<>(); // all courses
-    private ArrayList<Category> allCategories = new ArrayList<>(); // all categories
+    //private ArrayList<Category> allCategories = new ArrayList<>(); // all categories
     private Course curCourse; // current course getting input on
     private Transcript curTranscript;  // transcript of student
 
@@ -183,6 +183,7 @@ public class GradeCalculatorApp {
             String choice = scan.nextLine();
             System.out.println("\nWhat is your desired final grade for " + choice + " ?");
             double desired = scan.nextDouble();
+            scan.nextLine();
             doCalculateMinFinalScore(choice, desired);
 
         } else if (command.equals("5.")) {
@@ -211,6 +212,7 @@ public class GradeCalculatorApp {
         for (int i = 0; i <= allCourses.size() - 1; i++) {
             if (allCourses.get(i).getCourseName().equals(courseChoice)) {
                 allCourses.get(i).setDesiredFinalGrade(desiredGrade);
+                allCourses.get(i).calculateMinFinalScore();
                 min = allCourses.get(i).getMinFinalScore();
                 System.out.println("You need to score a minimum of " + min + "% on your final exam to get "
                         + desiredGrade + "% as your final grade of course " + courseChoice);
@@ -236,9 +238,11 @@ public class GradeCalculatorApp {
         }
     }
 
+    // REQUIRES: catNum >= 1
     // MODIFIES: this
     // EFFECTS: conducts creating a category
     private void doCreateCategory(int catNum) {
+        ArrayList<Category> allCategories = new ArrayList<>();
         while (catNum >= 1) {
             System.out.println("\nEnter the category name:");
             String name = scan.nextLine();
@@ -262,24 +266,35 @@ public class GradeCalculatorApp {
             allCategories.add(createCategory(name, weight, mark, status));
             catNum--;
         }
-        doCreateCourse();
+
+        doCreateCourse(allCategories);
         createTranscript(id, allCourses);
-        System.out.println(curCourse.getCourseName() + " has been created and added to " + id + "'s transcript.");
     }
 
     // MODIFIES: this
     // EFFECTS: conducts creating a course
-    private void doCreateCourse() {
+    private void doCreateCourse(ArrayList<Category> categories) {
         System.out.println("\nEnter the course name:");
         String name = scan.nextLine();
         System.out.println("\nEnter the number of credits for " + name);
         int credits = scan.nextInt();
         scan.nextLine();
-        System.out.println("\nEnter the desired grade for the course " + name);
+
+        System.out.println("\nEnter the status of " + name + ". True for completed, False for incomplete");
+        boolean status = scan.nextBoolean();
+        scan.nextLine();
+
+        System.out.println("\nEnter the desired grade for " + name);
         double desired = scan.nextDouble();
         scan.nextLine();
 
-        allCourses.add(createCourse(name, credits, desired, allCategories));
+        Course temp = createCourse(name, credits, desired, categories);
+        for (Category cat : categories) {
+            temp.addCategory(cat);
+        }
+        setCourseUp(temp);
+        allCourses.add(temp);
+        System.out.println(curCourse.getCourseName() + " has been created");
     }
 
     // MODIFIES: this
@@ -326,6 +341,18 @@ public class GradeCalculatorApp {
             System.out.println("\tName: " + c.getCategoryList().get(i).getName());
             System.out.println("\tWeight: " + c.getCategoryList().get(i).getWeight());
         }
+    }
+
+    // REQUIRES: c to not be null
+    // EFFECTS: sets fields of course not from user input
+    public void setCourseUp(Course c) {
+        c.checkIsCompleted();
+        if (c.getIsCompleted()) {
+            c.calculateActualGrade();
+        } else {
+            c.calculateCurrentGrade();
+        }
+        c.calculateMinFinalScore();
     }
 
 }

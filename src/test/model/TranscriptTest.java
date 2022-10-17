@@ -11,46 +11,36 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TranscriptTest {
     private Transcript testTranscript;
-    private ArrayList<Course> testCourseList;
 
-    private ArrayList<Category> testCategoryList1;
+    private ArrayList<Course> testCourseList = new ArrayList<>();
     private Course testCourse1;
-    private Category testCategory1;
-    private Category testCategory2;
-    private Category testCategory3;
-
-    private ArrayList<Category> testCategoryList2;
     private Course testCourse2;
-    private Category testCategory4;
-    private Category testCategory5;
 
     @BeforeEach
     void runBefore() {
-        testCourseList = new ArrayList<>(); // add all courses
-        testCategoryList1 = new ArrayList<>();
-        testCategoryList2 = new ArrayList<>();
+        ArrayList<Category> testCategoryList1 = new ArrayList<>();
+        ArrayList<Category> testCategoryList2 = new ArrayList<>();
 
-        testCategory1 = new Category("Homework", 10, 100, true);
-        testCategory2 = new Category("Midterm", 40, 75, true);
-        testCategory3 = new Category("Final Exam", 50, 56, true);
+        Category testCategory1 = new Category("Homework", 10, 100, true);
+        Category testCategory2 = new Category("Midterm", 40, 75, true);
+        Category testCategory3 = new Category("Final Exam", 50, 56, true);
 
         testCourse1 = new Course("CPSC 210", 4, 89.5, testCategoryList1);
         testCourse1.addCategory(testCategory1);
         testCourse1.addCategory(testCategory2);
         testCourse1.addCategory(testCategory3);
-        testCourse1.isCompleted();
+        testCourse1.checkIsCompleted();
         testCourse1.findFinalWeight();
         //testCourse1.getFinalWeight();
 
-        testCategory4 = new Category("Midterm", 30, 100, true);
-        testCategory5 = new Category("Final Exam", 60, 75, true);
+        Category testCategory4 = new Category("Midterm", 30, 100, true);
+        Category testCategory5 = new Category("Final Exam", 60, 75, true);
 
-        testCourse2 = new Course("MATH 200", 3, 77, testCategoryList2);
+        testCourse2 = new Course("MATH 200", 3, 76, testCategoryList2);
         testCourse2.addCategory(testCategory4);
         testCourse2.addCategory(testCategory5);
-        testCourse2.isCompleted();
+        testCourse2.checkIsCompleted();
         testCourse2.findFinalWeight();
-        //testCourse2.getFinalWeight();
 
         testTranscript = new Transcript(1, testCourseList);
     }
