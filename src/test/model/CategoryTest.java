@@ -31,4 +31,5 @@ public class CategoryTest {
         testCategory.setWeightedMark(changedMark);
         assertEquals((5 * changedMark) / 100, testCategory.getWeightedMark());
     }
+
 }

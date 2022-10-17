@@ -184,7 +184,9 @@ public class CourseTest {
         testCourse.checkIsCompleted();
         testCourse.calculateGrade();
         testCourse.findFinalWeight();
-        double desired = testCourse.setDesiredFinalGrade(72);
+        testCourse.setDesiredFinalGrade(72);
+
+        double desired = testCourse.getDesiredFinalGrade();
         double current = testCourse.getCurrentGrade();
         double weight = testCourse.getFinalWeight();
         double testScore = (desired - ((1 - (weight / 100)) * current)) / (weight / 100);

@@ -244,7 +244,6 @@ public class GradeCalculatorApp {
         printAllCourses();
     }
 
-
     // MODIFIES: this
     // EFFECTS: prints chosen course information
     private void doViewCourse() {
@@ -287,6 +286,9 @@ public class GradeCalculatorApp {
         }
 
         doCreateCourse(allCategories);
+
+        // NOTE: not used in phase 1 because it requires the transcript class
+
         //createTranscript(id, allCourses);
     }
 

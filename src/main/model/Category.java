@@ -25,17 +25,16 @@ public class Category {
     // REQUIRES: 0 <= newMark <= 100
     // MODIFIES: this
     // EFFECTS: sets category to new mark and changes weighted mark
-    public double setMark(double newMark) {
+    public void setMark(double newMark) {
         mark = newMark;
         setWeightedMark(newMark);
-        return mark;
     }
 
     // REQUIRES: 0 <= newMark <= 100
     // MODIFIES: this
     // EFFECTS: set weighted mark with new mark
-    public double setWeightedMark(double newMark) {
-        return weightedMark = (weight * newMark) / 100;
+    public void setWeightedMark(double newMark) {
+        weightedMark = (weight * newMark) / 100;
     }
 
     public String getName() {
@@ -57,4 +56,5 @@ public class Category {
     public boolean getCategoryStatus() {
         return marked;
     }
+
 }

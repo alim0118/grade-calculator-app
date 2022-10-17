@@ -95,7 +95,6 @@ public class Course {
         }
     }
 
-
     /*
      * MODIFIES: this
      * EFFECTS: if incomplete, then minFinalScore will be actualFinalGrade
@@ -116,8 +115,8 @@ public class Course {
      * MODIFIES: this
      * EFFECTS: sets new desired grade
      */
-    public double setDesiredFinalGrade(double newDesiredGrade) {
-        return desiredFinalGrade = newDesiredGrade;
+    public void setDesiredFinalGrade(double newDesiredGrade) {
+        desiredFinalGrade = newDesiredGrade;
     }
 
     public String getCourseName() {
