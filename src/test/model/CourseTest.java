@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Unit tests for Course class
 public class CourseTest {
     private Course testCourse;
     private ArrayList<Category> testCategoryList;
