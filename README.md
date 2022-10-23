@@ -18,5 +18,7 @@ As a student, I constantly check my grades and calculate what I need to score on
 - As a user, I want to be able to be able to select a course and see their categories and weights
 - As a user, I want to be able to be able to view all the courses I am enrolled in
 - As a user, I want to be able to edit the mark for a category of my course 
-- As a user, I want to be able to calculate the minimum mark I need to receive on the final to have an overall x% in my course
+- As a user, I want to be able to calculate the minimum mark I need to receive on the final to have an overall x% in my course 
 - As a user, I want to be able to be able to calculate my average
+- As a user, I want to be able to save my course list to file
+- As a user, when I start the application, I want to be given the option to reload my course list
