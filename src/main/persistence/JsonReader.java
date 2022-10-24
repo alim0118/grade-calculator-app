@@ -59,33 +59,99 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: sr
-    // EFFECTS: parses course from JSON object and adds it to student record
-    private void addCourse(StudentRecord sr, JSONObject jsonObject) {
-        String name = jsonObject.getString("course name");
-        int credits = jsonObject.getInt("credits");
-        double desiredFinalGrade = jsonObject.getDouble("desired final grade");
-        ArrayList<Category> categories = (ArrayList<Category>) jsonObject.get("categories");
+//    // MODIFIES: sr
+//    // EFFECTS: parses course from JSON object and adds it to student record
+//    private void addCourse(StudentRecord sr, JSONObject jsonObject) {
+//        JSONArray jsonArray = jsonObject.getJSONArray("categories");
+//
+//
+//
+//        String name = jsonObject.getString("course name");
+//        int credits = jsonObject.getInt("credits");
+//        double desiredFinalGrade = jsonObject.getDouble("desired final grade");
+//
+//        Course course;
+//
+//
+//
+//
+//
+//        //ArrayList<Category> categories = (ArrayList<Category>) jsonObject.get("categories");
+//
+//        //double currentGrade = jsonObject.getDouble("current grade");
+//        //double actualFinalGrade = jsonObject.getDouble("final grade");
+//        //boolean courseStatus = jsonObject.getBoolean("course status");
+//
+//        course = new Course(name, credits, desiredFinalGrade, addCategories(jsonArray, sr, jsonObject, course));
+//        sr.addCourse(course);
+//
+//
+//
+//
+//
+//
+//    }
 
-        //double currentGrade = jsonObject.getDouble("current grade");
-        //double actualFinalGrade = jsonObject.getDouble("final grade");
-        boolean courseStatus = jsonObject.getBoolean("course status");
+    private Category parseCategory(JSONObject jsonObject) {
+        String name = jsonObject.getString("category name");
+        double catWeight = jsonObject.getDouble("category weight");
+        double weightedMark = jsonObject.getDouble("weighted mark");
+        boolean catStatus = jsonObject.getBoolean("category status");
 
-        Course course = new Course(name, credits, desiredFinalGrade, categories);
-        sr.addCourse(course);
+        Category category = new Category(name, catWeight, weightedMark, catStatus);
+
+        return category;
 
     }
 
+    private Course parseCourse(JSONObject jsonObject) {
+        String name = jsonObject.getString("course name");
+        int credits = jsonObject.getInt("credits");
+        double desired = jsonObject.getDouble("desired final grade");
+        JSONArray categories = jsonObject.getJSONArray("categories");
+
+        Course course = new Course(name, credits, desired, categories);
+
+        for (Object json : categories) {
+            course.addCategory(json.toString());
+        }
+
+        return course;
+    }
+
+    private void addCategories(Course course, JSONObject jsonObject) {
+        JSONArray jsonArrayCourse = jsonObject.getJSONArray("categories");
+
+        for (Object json : jsonArrayCourse) {
+            JSONObject nextCategory = (JSONObject) json;
+            Category category = parseCategory(nextCategory);
+            course.addCategory(category);
+        }
+    }
+
+    // MODIFIES: sr
+    // EFFECTS: parses courses from JSON object and adds them to student record
+    private void addCourse(StudentRecord sr, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("courses");
+        for (Object json : jsonArray) {
+            JSONObject nextCourse = (JSONObject) json;
+            Course course = parseCourse(nextCourse);
+            sr.addCourse(course);
+
+        }
+    }
+
+
 //    // MODIFIES: sr
 //    // EFFECTS: parses category from JSON object and adds it to student record
-//    private void addCategory(StudentRecord sr, JSONObject jsonObject) {
+//    private void addCategory(StudentRecord sr, JSONObject jsonObject, Course course) {
 //        String name = jsonObject.getString("category name");
 //        double catWeight = jsonObject.getDouble("category weight");
 //        double weightedMark = jsonObject.getDouble("weighted mark");
 //        boolean catStatus = jsonObject.getBoolean("category status");
 //
 //        Category category = new Category(name, catWeight, weightedMark, catStatus);
-//        sr.addCategory(course);
+//        sr.course
 //
 //    }
 

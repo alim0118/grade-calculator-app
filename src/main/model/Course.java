@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -158,17 +159,39 @@ public class Course implements Writable {
         return categoryList;
     }
 
+
+    // EFFECTS: returns courses in this student record as a JSON array
+    public JSONArray categoriesToJson(ArrayList<Category> categories) {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Category c : categoryList) {
+            jsonArray.put(c.toJson());
+        }
+        return jsonArray;
+    }
+
+//    private JSONArray mealsToJson(List<Meal> mealList) {
+//        JSONArray jsonArray = new JSONArray();
+//        for (Meal meal :  mealList) {
+//            jsonArray.put(meal.toJson());
+//        }
+//        return jsonArray;
+//    }
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("course name", name);
         json.put("credits", credits);
         json.put("desired final grade", desiredFinalGrade);
-        json.put("categories", categoryList);
+        json.put("categories", categoriesToJson());
         //json.put("current grade", currentGrade);
         //json.put("final grade", actualFinalGrade);
         //json.put("course status", isCompleted);
         return json;
 
     }
+
+
+
 }
