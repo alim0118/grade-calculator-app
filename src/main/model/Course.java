@@ -1,11 +1,14 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // Represents a course having a list of categories, name, credits, final weight (in percent),
 // current grade (in percent), actual final grade (in percent), desired final grade of course (in percent),
 // minimum final score needed to get desired grade (in percent), and status of being completed or not
-public class Course {
+public class Course implements Writable {
     private ArrayList<Category> categoryList; // list of categories that make up the course
     private String name; // name of the course
     private int credits; // number of credits of the course
@@ -155,4 +158,17 @@ public class Course {
         return categoryList;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("course name", name);
+        json.put("credits", credits);
+        json.put("desired final grade", desiredFinalGrade);
+        json.put("categories", categoryList);
+        //json.put("current grade", currentGrade);
+        //json.put("final grade", actualFinalGrade);
+        //json.put("course status", isCompleted);
+        return json;
+
+    }
 }

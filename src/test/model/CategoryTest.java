@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +32,20 @@ public class CategoryTest {
         assertEquals(changedMark, testCategory.getMark());
         testCategory.setWeightedMark(changedMark);
         assertEquals((5 * changedMark) / 100, testCategory.getWeightedMark());
+    }
+
+    @Test
+    void testToJson() {
+        JSONObject testJson = testCategory.toJson();
+        String nameTest = testJson.getString("category name");
+        double weightTest = testJson.getDouble("category weight");
+        double markTest = testJson.getDouble("weighted mark");
+        boolean statusTest = testJson.getBoolean("category status");
+
+        assertEquals("Homework", nameTest);
+        assertEquals(5, weightTest);
+        assertEquals((5 * 87.2) / 100, markTest);
+        assertEquals(true, statusTest);
     }
 
 }

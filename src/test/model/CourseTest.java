@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -194,6 +195,25 @@ public class CourseTest {
 
         testCourse.calculateMinFinalScore();
         assertEquals(testScore, testCourse.getMinFinalScore());
+    }
+
+    @Test
+    void testToJson() {
+        JSONObject testJson = testCourse.toJson();
+
+        String nameTest = testJson.getString("course name");
+        int creditTest = testJson.getInt("credits");
+        double desiredTest = testJson.getDouble("desired final grade");
+        ArrayList<Category> categoriesTest = (ArrayList<Category>) testJson.get("categories");
+
+        //double finalTest = testJson.getDouble("final grade");
+        //boolean statusTest = testJson.getBoolean("course status");
+
+        assertEquals("CPSC 210", nameTest);
+        assertEquals(4, creditTest);
+        assertEquals(89.5, desiredTest);
+        assertEquals(testCategoryList, categoriesTest);
+
     }
 
 }

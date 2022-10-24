@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a category having a category name, weight (in percent), mark (in percent), and weighted mark (in percent)
-public class Category {
+public class Category implements Writable {
     private String name; // category name
     private double weight; // weight of the category
     private double mark; // received mark of the category
@@ -55,6 +58,16 @@ public class Category {
 
     public boolean getCategoryStatus() {
         return marked;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("category name", name);
+        json.put("category weight", weight);
+        json.put("weighted mark", weightedMark);
+        json.put("category status", marked);
+        return json;
     }
 
 }
