@@ -15,5 +15,6 @@ public class JsonTest {
         assertEquals(credits, course.getCredits());
         assertEquals(desired, course.getDesiredFinalGrade());
         assertEquals(categories, course.getCategoryList());
+        //override equals method
     }
 }

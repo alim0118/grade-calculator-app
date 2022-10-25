@@ -3,6 +3,8 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.Objects;
+
 // Represents a category having a category name, weight (in percent), mark (in percent), and weighted mark (in percent)
 public class Category implements Writable {
     private String name; // category name
@@ -61,11 +63,26 @@ public class Category implements Writable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Double.compare(category.weight, weight) == 0 && Double.compare(category.mark, mark) == 0
+                && Double.compare(category.weightedMark, weightedMark) == 0 && marked == category.marked
+                && Objects.equals(name, category.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, weight, mark, weightedMark, marked);
+    }
+
+    @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("category name", name);
         json.put("category weight", weight);
-        json.put("weighted mark", weightedMark);
+        json.put("category mark", mark);
         json.put("category status", marked);
         return json;
     }

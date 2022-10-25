@@ -56,6 +56,8 @@ public class JsonWriterTest extends JsonTest {
                     true);
             Category testCategory3 = new Category("Final Exam", 60, 0,
                     true);
+
+
             Course testCourse = new Course("CPSC 210", 4, 89.5, testCategoryList);
 
             testCourse.addCategory(testCategory1);

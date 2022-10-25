@@ -68,31 +68,29 @@ public class JsonReader {
         double desired = jsonObject.getDouble("desired final grade");
         JSONArray jsonCategories = jsonObject.getJSONArray("categories");
 
-        List<Object> temp = jsonCategories.toList();
-        ArrayList<Category> categories = new ArrayList<>();
-        for (Object o : temp) {
-            categories.add((Category) o);
-        }
 
-
-        Course course = new Course(name, credits, desired, categories);
-        for (Object json : jsonCategories) {
-            JSONObject nextCategory = (JSONObject) json;
-            addCategory(course, nextCategory);
-        }
+        Course course = new Course(name, credits, desired);
+        categoryToJson(jsonCategories, course);
         sr.addCourse(course);
 
     }
 
+    private void categoryToJson(JSONArray jsonCategories, Course course) {
+        for (Object json : jsonCategories) {
+            JSONObject nextCategory = (JSONObject) json;
+            addCategory(nextCategory, course);
+        }
+    }
+
     // MODIFIES: course
     // EFFECTS: parses category from JSON object and adds them to student record
-    private void addCategory(Course course, JSONObject jsonObject) {
+    private void addCategory(JSONObject jsonObject, Course course) {
         String name = jsonObject.getString("category name");
         double catWeight = jsonObject.getDouble("category weight");
-        double weightedMark = jsonObject.getDouble("weighted mark");
+        double catMark = jsonObject.getDouble("category mark");
         boolean catStatus = jsonObject.getBoolean("category status");
 
-        Category category = new Category(name, catWeight, weightedMark, catStatus);
+        Category category = new Category(name, catWeight, catMark, catStatus);
         course.addCategory(category);
     }
 

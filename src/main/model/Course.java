@@ -32,6 +32,13 @@ public class Course implements Writable {
         categoryList = categories;
     }
 
+    public Course(String courseName, int courseCredits, double desiredGrade) {
+        name = courseName;
+        credits = courseCredits;
+        desiredFinalGrade = desiredGrade;
+        categoryList = new ArrayList<>();
+    }
+
     /*
      * MODIFIES: this
      * EFFECTS: adds category to category list (with no duplicates)
