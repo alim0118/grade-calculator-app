@@ -170,21 +170,13 @@ public class Course implements Writable {
         return jsonArray;
     }
 
-//    private JSONArray mealsToJson(List<Meal> mealList) {
-//        JSONArray jsonArray = new JSONArray();
-//        for (Meal meal :  mealList) {
-//            jsonArray.put(meal.toJson());
-//        }
-//        return jsonArray;
-//    }
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("course name", name);
         json.put("credits", credits);
         json.put("desired final grade", desiredFinalGrade);
-        json.put("categories", categoriesToJson());
+        json.put("categories", categoriesToJson(categoryList));
         //json.put("current grade", currentGrade);
         //json.put("final grade", actualFinalGrade);
         //json.put("course status", isCompleted);

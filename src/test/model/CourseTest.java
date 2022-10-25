@@ -1,10 +1,12 @@
 package model;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -204,7 +206,13 @@ public class CourseTest {
         String nameTest = testJson.getString("course name");
         int creditTest = testJson.getInt("credits");
         double desiredTest = testJson.getDouble("desired final grade");
-        ArrayList<Category> categoriesTest = (ArrayList<Category>) testJson.get("categories");
+        JSONArray jsonCategories = testJson.getJSONArray("categories");
+
+        List<Object> temp = jsonCategories.toList();
+        ArrayList<Category> categoriesTest = new ArrayList<>();
+        for (Object o : temp) {
+            categoriesTest.add((Category) o);
+        }
 
         //double finalTest = testJson.getDouble("final grade");
         //boolean statusTest = testJson.getBoolean("course status");
