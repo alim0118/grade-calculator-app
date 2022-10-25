@@ -2,8 +2,13 @@ package ui;
 
 import model.Category;
 import model.Course;
+import model.StudentRecord;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 //import model.Transcript;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,16 +16,24 @@ import java.util.Scanner;
 
 // Grade calculator application
 public class GradeCalculatorApp {
-    Scanner scan; // scanner
     private static int id = 1; // id number of user
+    private static final String JSON_STORE = "./data/studentRecord.json";
+    Scanner scan; // scanner
     private ArrayList<Course> allCourses = new ArrayList<>(); // all courses
     private Course curCourse; // current course getting input on
+    private StudentRecord studentRecord;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // NOTE: not used in phase 1 because it requires the transcript class
     //private Transcript curTranscript;  // transcript of student
 
     // EFFECTS: runs the grade calculator application
-    public GradeCalculatorApp() {
+    public GradeCalculatorApp() throws FileNotFoundException {
+        scan = new Scanner(System.in);
+        studentRecord = new StudentRecord(1);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runGradeCalculator();
     }
 
@@ -33,6 +46,12 @@ public class GradeCalculatorApp {
         String userType = init();
 
         if (userType.equals("1.")) {
+            String sel;
+            System.out.println("Select 1. to load student record from file");
+            sel = scan.nextLine();
+            if (userType.equals("1.")) {
+                loadWorkRoom();
+            }
             System.out.println("Hello, " + id);
             while (cont) {
                 cmd = displayReturn();
@@ -140,6 +159,7 @@ public class GradeCalculatorApp {
         System.out.println("\t3. -> view course outline & rubric");
         System.out.println("\t4. -> calculate what i need on the final exam");
         System.out.println("\t5. -> view all courses");
+        System.out.println("\t6. -> save student record to file");
         System.out.println("\t0. -> quit");
     }
 
@@ -200,6 +220,8 @@ public class GradeCalculatorApp {
         } else if (command.equals("5.")) {
             doViewAllCourses();
 
+        } else if (command.equals("6.")) {
+            saveWorkRoom();
         } else {
             System.out.println("Invalid selection. Please select again2");
         }
@@ -374,6 +396,30 @@ public class GradeCalculatorApp {
             c.calculateGrade();
         }
         c.calculateMinFinalScore();
+    }
+
+// change and call on
+    // EFFECTS: saves the workroom to file
+    private void saveWorkRoom() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(studentRecord);
+            jsonWriter.close();
+            System.out.println("Saved " + studentRecord.getId() + "'s student record to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadWorkRoom() {
+        try {
+            studentRecord = jsonReader.read();
+            System.out.println("Loaded " + studentRecord.getId() + "'s student record from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
 }
