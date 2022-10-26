@@ -46,7 +46,7 @@ public class JsonReaderTest extends JsonTest {
             List<Course> courses = sr.getCourseList();
             assertEquals(1, courses.size());
 
-            ArrayList<Category>  testCategoryList = new ArrayList<>();
+            ArrayList<Category> testCategoryList = new ArrayList<>();
             Category testCategory1 = new Category("Homework", 10, 100,
                     true);
             Category testCategory2 = new Category("Midterm", 30, 75,
@@ -59,7 +59,7 @@ public class JsonReaderTest extends JsonTest {
             testCourse.addCategory(testCategory2);
             testCourse.addCategory(testCategory3);
 
-            checkCourse("CPSC 210",4, 89.5, testCategoryList, courses.get(0)) ;
+            checkCourse("CPSC 210", 4, 89.5, testCategoryList, courses.get(0));
 
         } catch (IOException e) {
             fail("Couldn't read from file");

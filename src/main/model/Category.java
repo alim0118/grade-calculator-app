@@ -64,8 +64,12 @@ public class Category implements Writable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Category category = (Category) o;
         return Double.compare(category.weight, weight) == 0 && Double.compare(category.mark, mark) == 0
                 && Double.compare(category.weightedMark, weightedMark) == 0 && marked == category.marked
