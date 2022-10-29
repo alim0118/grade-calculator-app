@@ -48,7 +48,19 @@ public class CategoryTest {
     }
 
     @Test
+    void testEqualsObject() {
+        Category testCategory2 = new Category("Homework", 5, 87.2, true);
+        Object obj2 = new Category("Homework", 5, 87.2, true);
+        assertTrue(testCategory.equals(obj2));
+    }
+
+    @Test
     void testEquals() {
+        assertTrue(testCategory.equals(testCategory));
+    }
+
+    @Test
+    void testEqualsOther() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
         assertTrue(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
