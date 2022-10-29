@@ -167,6 +167,13 @@ public class CategoryTest {
     }
 
     @Test
+    void testEqualsNewInstance() {
+        assertTrue(testCategory.equals(
+                new Category("Homework", 5, 87.2, true)));
+    }
+
+
+    @Test
     void testHashCode() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
         assertTrue(testCategory.hashCode() == testCategory2.hashCode());
