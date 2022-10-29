@@ -130,6 +130,27 @@ public class Course implements Writable {
         desiredFinalGrade = newDesiredGrade;
     }
 
+    // EFFECTS: returns courses in this student record as a JSON array
+    public JSONArray categoriesToJson(ArrayList<Category> categories) {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Category c : categoryList) {
+            jsonArray.put(c.toJson());
+        }
+        return jsonArray;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("course name", name);
+        json.put("credits", credits);
+        json.put("desired final grade", desiredFinalGrade);
+        json.put("categories", categoriesToJson(categoryList));
+        return json;
+
+    }
+
     public String getCourseName() {
         return name;
     }
@@ -165,28 +186,5 @@ public class Course implements Writable {
     public ArrayList<Category> getCategoryList() {
         return categoryList;
     }
-
-
-    // EFFECTS: returns courses in this student record as a JSON array
-    public JSONArray categoriesToJson(ArrayList<Category> categories) {
-        JSONArray jsonArray = new JSONArray();
-
-        for (Category c : categoryList) {
-            jsonArray.put(c.toJson());
-        }
-        return jsonArray;
-    }
-
-    @Override
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("course name", name);
-        json.put("credits", credits);
-        json.put("desired final grade", desiredFinalGrade);
-        json.put("categories", categoriesToJson(categoryList));
-        return json;
-
-    }
-
 
 }

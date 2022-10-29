@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// represents a student record having a collection of courses
+// represents a student record having an id and collection of courses
 public class StudentRecord implements Writable {
     private int id;
     private List<Course> courseList;
@@ -55,6 +55,8 @@ public class StudentRecord implements Writable {
         return courseList.size();
     }
 
+    // method was taken from WorkRoom in:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: returns an unmodifiable list of courses in this student record
     public List<Course> getCourseList() {
         return Collections.unmodifiableList(courseList);

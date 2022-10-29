@@ -5,7 +5,6 @@ import model.Course;
 import model.StudentRecord;
 import persistence.JsonReader;
 import persistence.JsonWriter;
-//import model.Transcript;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// NOTE: any calls related to transcript will not be used in phase 1, therefore commented out
+// NOTE: any calls not used in phase 2 is commented out
 
 // Grade calculator application
 public class GradeCalculatorApp {
@@ -25,9 +24,6 @@ public class GradeCalculatorApp {
     private StudentRecord studentRecord;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-
-    // NOTE: not used in phase 1 because it requires the transcript class
-    //private Transcript curTranscript;  // transcript of student
 
     // EFFECTS: runs the grade calculator application
     public GradeCalculatorApp() throws FileNotFoundException {
@@ -260,7 +256,6 @@ public class GradeCalculatorApp {
     }
      */
 
-
     // REQUIRES: courseChoice to be non-zero length and included in allCourses, 100 <= desiredGrade <= 0
     // MODIFIES: this
     // EFFECTS: calculates minimum score needed on final to get desired grade for course
@@ -356,7 +351,6 @@ public class GradeCalculatorApp {
         studentRecord.addCourse(curCourse);
     }
 
-
     // MODIFIES: this
     // EFFECTS: conducts editing a category mark of a course
     private void doEditCourse() {
@@ -392,7 +386,6 @@ public class GradeCalculatorApp {
         }
     }
 
-
     // REQUIRES: c to not be null
     // EFFECTS: print course information of c
     private void printCourseOutline(Course c) {
@@ -417,6 +410,8 @@ public class GradeCalculatorApp {
         c.calculateMinFinalScore();
     }
 
+    // inspiration taken from WorkRoomApp in:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: saves the workroom to file
     private void saveWorkRoom() {
         try {
@@ -429,6 +424,8 @@ public class GradeCalculatorApp {
         }
     }
 
+    // inspiration taken from WorkRoomApp in:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // MODIFIES: this
     // EFFECTS: loads workroom from file
     private void loadWorkRoom() {
@@ -439,11 +436,5 @@ public class GradeCalculatorApp {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
-
-    // EFFECTS: returns number of courses in this student record
-    public int numCourses() {
-        return allCourses.size();
-    }
-
 
 }
