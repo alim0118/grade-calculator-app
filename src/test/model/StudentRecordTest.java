@@ -1,9 +1,12 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class StudentRecordTest {
     private int id;
     private StudentRecord testStudentRecord;
+    private ArrayList<Course> testCourseList;
     private Course testCourse1;
     private Category testCategory1;
     private Category testCategory2;
@@ -25,23 +29,20 @@ public class StudentRecordTest {
     void runBefore() {
         id = 1;
         testStudentRecord = new StudentRecord(id);
+        testCourseList = new ArrayList<>();
         testCategoryList1 = new ArrayList<>();
         testCategoryList2 = new ArrayList<>();
 
         testCategory1 = new Category("Project", 40, 100, true);
         testCategory2 = new Category("Final", 60, 75, true);
-        testCategoryList1.add(testCategory1);
-        testCategoryList1.add(testCategory2);
+
         testCourse1 = new Course("CPSC 210", 4, 89.5, testCategoryList1);
+
 
         testCategory3 = new Category("Homework", 30, 0, true);
         testCategory4 = new Category("Midterm", 70, 0, false);
-        testCategoryList2.add(testCategory3);
-        testCategoryList2.add(testCategory4);
-        testCourse2 = new Course("MATH 200", 3, 77, testCategoryList2);
 
-        //testStudentRecord.addCourse(testCourse1);
-        //testStudentRecord.addCourse(testCourse2);
+        testCourse2 = new Course("MATH 200", 3, 77, testCategoryList2);
 
     }
 
@@ -51,4 +52,65 @@ public class StudentRecordTest {
         assertEquals(0, testStudentRecord.numCourses());
         assertTrue(testStudentRecord.getCourseList().isEmpty());
     }
+
+    @Test
+    void testAddCourse() {
+        assertEquals(0, testStudentRecord.numCourses());
+        testCourse1.addCategory(testCategory1);
+        testCourse1.addCategory(testCategory2);
+        testStudentRecord.addCourse(testCourse1);
+        assertEquals(1, testStudentRecord.numCourses());
+        assertTrue(testStudentRecord.getCourseList().contains(testCourse1));
+    }
+
+    @Test
+    void testAddMultipleCourses() {
+        assertEquals(0, testStudentRecord.numCourses());
+
+        testCourse1.addCategory(testCategory1);
+        testCourse1.addCategory(testCategory2);
+        testStudentRecord.addCourse(testCourse1);
+
+        testCourse2.addCategory(testCategory3);
+        testCourse2.addCategory(testCategory4);
+        testStudentRecord.addCourse(testCourse2);
+
+
+        assertEquals(2, testStudentRecord.numCourses());
+        assertTrue(testStudentRecord.getCourseList().contains(testCourse1));
+        assertTrue(testStudentRecord.getCourseList().contains(testCourse2));
+    }
+
+    @Test
+    void testAddDuplicateCourse() {
+        assertEquals(0, testStudentRecord.numCourses());
+        testCourse1.addCategory(testCategory1);
+        testCourse1.addCategory(testCategory2);
+        testStudentRecord.addCourse(testCourse1);
+
+        testStudentRecord.addCourse(testCourse1);
+
+        assertEquals(1, testStudentRecord.numCourses());
+        assertTrue(testStudentRecord.getCourseList().contains(testCourse1));
+    }
+
+    @Test
+    void testToJson() {
+        JSONObject testJson = testStudentRecord.toJson();
+
+        int userId = testJson.getInt("id");
+        JSONArray jsonCourses = testJson.getJSONArray("courses");
+
+        List<Object> temp = jsonCourses.toList();
+        ArrayList<Course> coursesTest = new ArrayList<>();
+        for (Object o : temp) {
+            coursesTest.add((Course) o);
+        }
+
+        assertEquals(1, userId);
+        assertEquals(testStudentRecord.getCourseList(), coursesTest);
+
+    }
+
+
 }

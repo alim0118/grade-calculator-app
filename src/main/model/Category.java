@@ -42,6 +42,38 @@ public class Category implements Writable {
         weightedMark = (weight * newMark) / 100;
     }
 
+    // EFFECTS: returns true if this object is the same as the obj argument,
+    //          false otherwise
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Category category = (Category) o;
+        return Double.compare(category.weight, weight) == 0 && Double.compare(category.mark, mark) == 0
+                && Double.compare(category.weightedMark, weightedMark) == 0 && marked == category.marked
+                && Objects.equals(name, category.name);
+    }
+
+    // EFFECTS: returns a hash code value for the object
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, weight, mark, weightedMark, marked);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("category name", name);
+        json.put("category weight", weight);
+        json.put("category mark", mark);
+        json.put("category status", marked);
+        return json;
+    }
+
     public String getName() {
         return name;
     }
@@ -60,35 +92,6 @@ public class Category implements Writable {
 
     public boolean getCategoryStatus() {
         return marked;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Category category = (Category) o;
-        return Double.compare(category.weight, weight) == 0 && Double.compare(category.mark, mark) == 0
-                && Double.compare(category.weightedMark, weightedMark) == 0 && marked == category.marked
-                && Objects.equals(name, category.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, weight, mark, weightedMark, marked);
-    }
-
-    @Override
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("category name", name);
-        json.put("category weight", weight);
-        json.put("category mark", mark);
-        json.put("category status", marked);
-        return json;
     }
 
 }

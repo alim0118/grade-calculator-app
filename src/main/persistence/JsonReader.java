@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
 // Represents a reader that reads student record from JSON data stored in file
@@ -75,6 +73,8 @@ public class JsonReader {
 
     }
 
+    // MODIFIES: course
+    // EFFECTS: parses category from JSON object
     private void categoryToJson(JSONArray jsonCategories, Course course) {
         for (Object json : jsonCategories) {
             JSONObject nextCategory = (JSONObject) json;

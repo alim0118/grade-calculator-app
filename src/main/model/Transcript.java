@@ -2,7 +2,7 @@
 
 import java.util.ArrayList;
 
-// NOTE: this class will not be used for phase 1 as it requires referring to previous stored input data
+// NOTE: this class will not be used for phase 2
 
 // Represents a transcript having an id, courses (list of courses enrolled), total weights, total credits, average,
 // and letter grade

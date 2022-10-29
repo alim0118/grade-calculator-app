@@ -39,13 +39,27 @@ public class CategoryTest {
         JSONObject testJson = testCategory.toJson();
         String nameTest = testJson.getString("category name");
         double weightTest = testJson.getDouble("category weight");
-        double markTest = testJson.getDouble("weighted mark");
+        double markTest = testJson.getDouble("category mark");
         boolean statusTest = testJson.getBoolean("category status");
 
         assertEquals("Homework", nameTest);
         assertEquals(5, weightTest);
-        assertEquals((5 * 87.2) / 100, markTest);
+        assertEquals(87.2, markTest);
         assertEquals(true, statusTest);
     }
+
+    @Test
+    void testEquals() {
+        Category testCategory2 = new Category("Homework", 5, 87.2, true);
+        assertTrue(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+
+    }
+
+    @Test
+    void testHashCode() {
+        Category testCategory2 = new Category("Homework", 5, 87.2, true);
+        assertTrue(testCategory.hashCode() == testCategory2.hashCode());
+    }
+
 
 }

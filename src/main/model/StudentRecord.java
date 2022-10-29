@@ -13,7 +13,7 @@ public class StudentRecord implements Writable {
     private int id;
     private List<Course> courseList;
 
-    // EFFECTS: creates a student record with id and an empty list of courseS
+    // EFFECTS: creates a student record with id and an empty list of courses
     public StudentRecord(int id) {
         this.id = id;
         courseList = new ArrayList<>();
@@ -26,22 +26,6 @@ public class StudentRecord implements Writable {
             courseList.add(course);
         }
     }
-
-    //getters
-    public int getId() {
-        return id;
-    }
-
-    // EFFECTS: returns number of courses in course list
-    public int numCourses() {
-        return courseList.size();
-    }
-
-    // EFFECTS: returns an unmodifiable list of courses in this student record
-    public List<Course> getCourseList() {
-        return Collections.unmodifiableList(courseList);
-    }
-
 
     @Override
     public JSONObject toJson() {
@@ -59,5 +43,20 @@ public class StudentRecord implements Writable {
             jsonArray.put(c.toJson());
         }
         return jsonArray;
+    }
+
+    //getters
+    public int getId() {
+        return id;
+    }
+
+    // EFFECTS: returns number of courses in course list
+    public int numCourses() {
+        return courseList.size();
+    }
+
+    // EFFECTS: returns an unmodifiable list of courses in this student record
+    public List<Course> getCourseList() {
+        return Collections.unmodifiableList(courseList);
     }
 }

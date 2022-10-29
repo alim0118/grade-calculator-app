@@ -10,6 +10,7 @@ import persistence.JsonWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 // NOTE: any calls related to transcript will not be used in phase 1, therefore commented out
@@ -52,7 +53,7 @@ public class GradeCalculatorApp {
             if (userType.equals("1.")) {
                 loadWorkRoom();
             }
-            System.out.println("Hello, " + id);
+            System.out.println("Hello, " + studentRecord.getId());
             while (cont) {
                 cmd = displayReturn();
                 if (cmd.equals("0.")) {
@@ -132,6 +133,19 @@ public class GradeCalculatorApp {
     }
     */
 
+    // REQUIRES: id >= 1
+    // MODIFIES: this
+    // EFFECTS: creates a student record with id
+    private void createStudentRecord(int id, ArrayList<Course> courses) {
+        studentRecord = new StudentRecord(id);
+
+        for (Course c : courses) {
+            studentRecord.addCourse(c);
+        }
+
+
+    }
+
     // EFFECTS: displays login option for user
     private void userLogin() {
         System.out.println("\nWelcome! Please select from:");
@@ -167,12 +181,12 @@ public class GradeCalculatorApp {
     // EFFECTS: processes user command for returning user
     private void userCommandReturning(String command) {
         if (command.equals("1.")) {
-            // NOTE: not used in phase 1 because it requires the transcript class
+            // NOTE: not used in phase 2 because not added to user story yet
 
             //doCalculateOverallAverage();
 
         } else if (command.equals("2.")) {
-            // NOTE: not used in phase 1 because it requires the transcript class
+            // NOTE: not used in phase 2 because not added to user story yet
 
             //doConvertToLetterGrade();
 
@@ -181,6 +195,7 @@ public class GradeCalculatorApp {
             String choice = scan.nextLine();
             System.out.println("\nWhat is your desired final grade for " + choice + " ?");
             double desired = scan.nextDouble();
+            scan.nextLine();
             doCalculateMinFinalScore(choice, desired);
 
         } else if (command.equals("4.")) {
@@ -228,22 +243,23 @@ public class GradeCalculatorApp {
     }
 
     /*
-    // NOTE: not used in phase 1 because it requires the transcript class
-
+    // NOTE: not used in phase 2 because not added to user story yet
     // EFFECTS: prints overall average
     private void doCalculateOverallAverage() {
         System.out.println("Overall average: " + curTranscript.getAverage());
     }
      */
 
+
     /*
-    // NOTE: not used in phase 1 because it requires the transcript class
+    // NOTE: not used in phase 2 because not added to user story yet
 
     // EFFECTS: prints overall average as letter grade
     private void doConvertToLetterGrade() {
         System.out.println("Overall average as letter grade: " + curTranscript.getLetterGrade());
     }
      */
+
 
     // REQUIRES: courseChoice to be non-zero length and included in allCourses, 100 <= desiredGrade <= 0
     // MODIFIES: this
@@ -309,9 +325,7 @@ public class GradeCalculatorApp {
 
         doCreateCourse(allCategories);
 
-        // NOTE: not used in phase 1 because it requires the transcript class
-
-        //createTranscript(id, allCourses);
+        createStudentRecord(id, allCourses);
     }
 
     // MODIFIES: this
@@ -338,7 +352,10 @@ public class GradeCalculatorApp {
         setCourseUp(temp);
         allCourses.add(temp);
         System.out.println(curCourse.getCourseName() + " has been created");
+
+        studentRecord.addCourse(curCourse);
     }
+
 
     // MODIFIES: this
     // EFFECTS: conducts editing a category mark of a course
@@ -368,11 +385,13 @@ public class GradeCalculatorApp {
 
     // EFFECTS: prints all courses by name and credits
     private void printAllCourses() {
-        for (int i = 0; i <= allCourses.size() - 1; i++) {
-            System.out.println("\nCourse Name: " + allCourses.get(i).getCourseName());
-            System.out.println("\tCredits: " + allCourses.get(i).getCredits());
+        List<Course> courses = studentRecord.getCourseList();
+        for (Course c : courses) {
+            System.out.println("\nCourse Name: " + c.getCourseName());
+            System.out.println("\tCredits: " + c.getCredits());
         }
     }
+
 
     // REQUIRES: c to not be null
     // EFFECTS: print course information of c
@@ -398,7 +417,6 @@ public class GradeCalculatorApp {
         c.calculateMinFinalScore();
     }
 
-// change and call on
     // EFFECTS: saves the workroom to file
     private void saveWorkRoom() {
         try {
@@ -421,5 +439,11 @@ public class GradeCalculatorApp {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
+
+    // EFFECTS: returns number of courses in this student record
+    public int numCourses() {
+        return allCourses.size();
+    }
+
 
 }

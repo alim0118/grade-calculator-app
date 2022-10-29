@@ -214,8 +214,6 @@ public class CourseTest {
             categoriesTest.add((Category) o);
         }
 
-        //double finalTest = testJson.getDouble("final grade");
-        //boolean statusTest = testJson.getBoolean("course status");
 
         assertEquals("CPSC 210", nameTest);
         assertEquals(4, creditTest);

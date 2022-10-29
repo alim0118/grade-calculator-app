@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-// NOTE: this class will not be used for phase 1 as it requires referring to previous stored input data
+// NOTE: this class will not be used for phase 2
 class TranscriptTest {
     private Transcript testTranscript;
 

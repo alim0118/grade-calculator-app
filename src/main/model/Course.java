@@ -184,13 +184,9 @@ public class Course implements Writable {
         json.put("credits", credits);
         json.put("desired final grade", desiredFinalGrade);
         json.put("categories", categoriesToJson(categoryList));
-        //json.put("current grade", currentGrade);
-        //json.put("final grade", actualFinalGrade);
-        //json.put("course status", isCompleted);
         return json;
 
     }
-
 
 
 }
