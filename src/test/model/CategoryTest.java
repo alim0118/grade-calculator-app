@@ -101,9 +101,34 @@ public class CategoryTest {
     }
 
     @Test
-    void testEqualsWrongType() {
-        String wrongType = "Midterm";
-        assertFalse(testCategory.equals(wrongType));
+    void testEqualsTypeName() {
+        String type = "Homework";
+        assertFalse(testCategory.equals(type));
+    }
+
+    @Test
+    void testEqualstypeWeight() {
+        double type = 5;
+        assertFalse(testCategory.equals(type));
+
+        assertTrue(testCategory.getWeightedMark() == ((5 * 87.2) / 100));
+    }
+
+    @Test
+    void testEqualsTypeMark() {
+        double type = 87.2;
+        assertFalse(testCategory.equals(type));
+    }
+
+    @Test
+    void testEqualsTypeStatus() {
+        boolean type = true;
+        assertFalse(testCategory.equals(type));
+    }
+
+    @Test
+    void testEqualsStatus() {
+        assertTrue(testCategory.getCategoryStatus() == true);
     }
 
     @Test
