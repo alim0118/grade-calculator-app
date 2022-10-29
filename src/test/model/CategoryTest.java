@@ -89,6 +89,13 @@ public class CategoryTest {
     }
 
     @Test
+    void testEqualsFailsAllDifferent() {
+        Category testCategory2 = new Category("Midterm", 9, 52, false);
+        assertNotNull(testCategory.equals(testCategory2));
+        assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+    }
+
+    @Test
     void testEqualsFailsNull() {
         Category testCategory2 = null;
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
@@ -96,13 +103,14 @@ public class CategoryTest {
 
     @Test
     void testEqualsPassNullCheck() {
-        assertNotNull(testCategory);
+        Category testCategory2 = new Category("Homework", 5, 87.2, true);
+        assertNotNull(testCategory.equals(testCategory2));
     }
 
     @Test
     void testEqualsFailsNullCheck() {
         Category testCategory2 = null;
-        assertNull(testCategory2);
+        assertFalse(testCategory.equals(testCategory2));
     }
 
     @Test
@@ -122,6 +130,7 @@ public class CategoryTest {
 
         assertEquals(0, Double.compare(testCategory2.getWeight(), testCategory.getWeight()));
         assertEquals(0, Double.compare(testCategory2.getMark(), testCategory.getMark()));
+        assertEquals(testCategory2.getMark(), testCategory.getMark());
         assertEquals(0, Double.compare(testCategory2.getWeightedMark(), testCategory.getWeightedMark()));
         assertEquals(testCategory2.getName(), testCategory.getName());
 
