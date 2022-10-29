@@ -189,7 +189,7 @@ public class CategoryTest {
         boolean bool1 = (Double.compare(testCategory2.getWeight(), testCategory.getWeight()) == 0);
         boolean bool2 = (Double.compare(testCategory2.getMark(), testCategory.getMark()) == 0);
         boolean bool3 = (Double.compare(testCategory2.getWeightedMark(), testCategory.getWeightedMark()) == 0);
-        boolean bool4 = (testCategory.getMark() == testCategory2.getMark());
+        boolean bool4 = (testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
         boolean bool5 = (Objects.equals(testCategory.getName(), testCategory2.getName()));
 
 
