@@ -97,8 +97,13 @@ public class CategoryTest {
 
     @Test
     void testEqualsFailsNull() {
-        Category testCategory2 = null;
-        assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+        assertFalse(testCategory.equals(null));
+    }
+
+    @Test
+    void testEqualsWrongType() {
+        String wrongType = "Midterm";
+        assertFalse(testCategory.equals(wrongType));
     }
 
     @Test
