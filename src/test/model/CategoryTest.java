@@ -65,8 +65,26 @@ public class CategoryTest {
     }
 
     @Test
-    void testEqualsFailsDifferent() {
+    void testEqualsFailsDifferentName() {
         Category testCategory2 = new Category("Midterm", 5, 87.2, true);
+        assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+    }
+
+    @Test
+    void testEqualsFailsDifferentWeight() {
+        Category testCategory2 = new Category("Homework", 10, 87.2, true);
+        assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+    }
+
+    @Test
+    void testEqualsFailsDifferentMark() {
+        Category testCategory2 = new Category("Homework", 5, 60.1, true);
+        assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+    }
+
+    @Test
+    void testEqualsFailsDifferentStatus() {
+        Category testCategory2 = new Category("Homework", 5, 87.2, false);
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
@@ -89,6 +107,23 @@ public class CategoryTest {
 
     @Test
     void testEqualsReturns() {
+        Category testCategory2 = new Category("Homework", 5, 87.2, true);
+        boolean checkWeight = (testCategory.getWeight() == testCategory2.getWeight());
+        assertTrue(checkWeight);
+        boolean checkMark = (testCategory.getMark() == testCategory2.getMark());
+        assertTrue(checkMark);
+        boolean checkWeighted = (testCategory.getWeightedMark() == testCategory2.getWeightedMark());
+        assertTrue(checkWeighted);
+        boolean checkName = (testCategory.getName().equals(testCategory2.getName()));
+        assertTrue(checkName);
+
+        assertEquals(checkWeight && checkMark && checkWeighted && checkName,
+                testCategory.equals(testCategory2));
+
+        assertEquals(0, Double.compare(testCategory2.getWeight(), testCategory.getWeight()));
+        assertEquals(0, Double.compare(testCategory2.getMark(), testCategory.getMark()));
+        assertEquals(0, Double.compare(testCategory2.getWeightedMark(), testCategory.getWeightedMark()));
+        assertEquals(testCategory2.getName(), testCategory.getName());
 
     }
 
