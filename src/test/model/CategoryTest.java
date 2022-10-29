@@ -4,6 +4,8 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 // Unit tests for Category class
@@ -101,6 +103,12 @@ public class CategoryTest {
     }
 
     @Test
+    void testEqualsWrongtype() {
+        String wrongType = "Final";
+        assertFalse(testCategory.equals(wrongType));
+    }
+
+    @Test
     void testEqualsTypeName() {
         String type = "Homework";
         assertFalse(testCategory.equals(type));
@@ -128,7 +136,9 @@ public class CategoryTest {
 
     @Test
     void testEqualsStatus() {
+        Category testCategory2 = new Category("Homework", 5, 87.2, true);
         assertTrue(testCategory.getCategoryStatus() == true);
+        assertEquals(testCategory.getCategoryStatus(), testCategory2.getCategoryStatus());
     }
 
     @Test
@@ -170,6 +180,41 @@ public class CategoryTest {
     void testEqualsNewInstance() {
         assertTrue(testCategory.equals(
                 new Category("Homework", 5, 87.2, true)));
+    }
+
+    @Test
+    void testEqualsReturnTrue() {
+        Category testCategory2 = new Category("Homework", 5, 87.2, true);
+
+        boolean bool1 = (Double.compare(testCategory2.getWeight(), testCategory.getWeight()) == 0);
+        boolean bool2 = (Double.compare(testCategory2.getMark(), testCategory.getMark()) == 0);
+        boolean bool3 = (Double.compare(testCategory2.getWeightedMark(), testCategory.getWeightedMark()) == 0);
+        boolean bool4 = (testCategory.getMark() == testCategory2.getMark());
+        boolean bool5 = (Objects.equals(testCategory.getName(), testCategory2.getName()));
+
+
+        assertEquals(true, bool1 && bool2 && bool3 && bool4 && bool5);
+    }
+
+    @Test
+    void testEqualsReturnFalse() {
+        Category testCategory2 = new Category("Homework", 5, 87.2, false);
+
+        boolean bool1 = (Double.compare(testCategory2.getWeight(), testCategory.getWeight()) == 0);
+        boolean bool2 = (Double.compare(testCategory2.getMark(), testCategory.getMark()) == 0);
+        boolean bool3 = (Double.compare(testCategory2.getWeightedMark(), testCategory.getWeightedMark()) == 0);
+        boolean bool4 = (testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
+        boolean bool5 = (Objects.equals(testCategory.getName(), testCategory2.getName()));
+
+
+        assertEquals(false, bool1 && bool2 && bool3 && bool4 && bool5);
+    }
+
+    @Test
+    void testEqualsWeightedMark() {
+        Category testCategory2 = new Category("Homework", 5, 87.2, true);
+        assertEquals(testCategory.getWeightedMark(), testCategory2.getWeightedMark());
+        assertTrue(testCategory.getWeightedMark() == testCategory2.getWeightedMark());
     }
 
 
