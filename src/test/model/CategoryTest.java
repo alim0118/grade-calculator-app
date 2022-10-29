@@ -48,15 +48,14 @@ public class CategoryTest {
     }
 
     @Test
-    void testEqualsObject() {
-        Category testCategory2 = new Category("Homework", 5, 87.2, true);
-        Object obj2 = new Category("Homework", 5, 87.2, true);
-        assertTrue(testCategory.equals(obj2));
+    void testEquals() {
+        assertTrue(testCategory.equals(testCategory));
     }
 
     @Test
-    void testEquals() {
-        assertTrue(testCategory.equals(testCategory));
+    void testEqualsObject() {
+        Category testCategory2 = new Category("Homework", 5, 87.2, true);
+        assertTrue(testCategory.equals(testCategory2));
     }
 
     @Test
@@ -75,6 +74,22 @@ public class CategoryTest {
     void testEqualsFailsNull() {
         Category testCategory2 = null;
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+    }
+
+    @Test
+    void testEqualsPassNullCheck() {
+        assertNotNull(testCategory);
+    }
+
+    @Test
+    void testEqualsFailsNullCheck() {
+        Category testCategory2 = null;
+        assertNull(testCategory2);
+    }
+
+    @Test
+    void testEqualsReturns() {
+
     }
 
     @Test
