@@ -164,13 +164,16 @@ public class CategoryTest {
         assertTrue(checkWeighted);
         boolean checkName = (testCategory.getName().equals(testCategory2.getName()));
         assertTrue(checkName);
+        boolean checkStatus = (testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
+        assertTrue(checkStatus);
 
-        assertEquals(checkWeight && checkMark && checkWeighted && checkName,
+        assertEquals(checkWeight && checkMark && checkWeighted && checkName && checkStatus,
                 testCategory.equals(testCategory2));
 
         assertEquals(0, Double.compare(testCategory2.getWeight(), testCategory.getWeight()));
         assertEquals(0, Double.compare(testCategory2.getMark(), testCategory.getMark()));
         assertEquals(testCategory2.getMark(), testCategory.getMark());
+        assertEquals(testCategory.getCategoryStatus(), testCategory2.getCategoryStatus());
         assertEquals(0, Double.compare(testCategory2.getWeightedMark(), testCategory.getWeightedMark()));
         assertEquals(testCategory2.getName(), testCategory.getName());
 
