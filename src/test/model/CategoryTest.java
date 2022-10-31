@@ -49,11 +49,13 @@ public class CategoryTest {
         assertEquals(true, statusTest);
     }
 
+    // keep
     @Test
     void testEquals() {
         assertTrue(testCategory.equals(testCategory));
     }
 
+    // keep
     @Test
     void testEqualsObject() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
@@ -93,126 +95,39 @@ public class CategoryTest {
     @Test
     void testEqualsFailsAllDifferent() {
         Category testCategory2 = new Category("Midterm", 9, 52, false);
-        assertNotNull(testCategory.equals(testCategory2));
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
+    // keep
     @Test
     void testEqualsFailsNull() {
         assertFalse(testCategory.equals(null));
     }
 
+    // keep
     @Test
     void testEqualsWrongtype() {
-        String wrongType = "Final";
+        String wrongType = "Homework";
         assertFalse(testCategory.equals(wrongType));
     }
 
+    // keep
     @Test
-    void testEqualsTypeName() {
-        String type = "Homework";
-        assertFalse(testCategory.equals(type));
-    }
-
-    @Test
-    void testEqualstypeWeight() {
-        double type = 5;
-        assertFalse(testCategory.equals(type));
-
-        assertTrue(testCategory.getWeightedMark() == ((5 * 87.2) / 100));
-    }
-
-    @Test
-    void testEqualsTypeMark() {
-        double type = 87.2;
-        assertFalse(testCategory.equals(type));
-    }
-
-    @Test
-    void testEqualsTypeStatus() {
-        boolean type = true;
-        assertFalse(testCategory.equals(type));
-    }
-
-    @Test
-    void testEqualsStatus() {
+    void testEqualsWeight() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
-        assertTrue(testCategory.getCategoryStatus() == true);
-        assertEquals(testCategory.getCategoryStatus(), testCategory2.getCategoryStatus());
+        assertTrue(testCategory2.getWeight() == testCategory.getWeight());
+
     }
 
+    // keep
     @Test
-    void testEqualsPassNullCheck() {
+    void testEqualsMark() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
-        assertNotNull(testCategory.equals(testCategory2));
-    }
-
-    @Test
-    void testEqualsFailsNullCheck() {
-        Category testCategory2 = null;
-        assertFalse(testCategory.equals(testCategory2));
-    }
-
-    @Test
-    void testEqualsReturns() {
-        Category testCategory2 = new Category("Homework", 5, 87.2, true);
-        boolean checkWeight = (testCategory.getWeight() == testCategory2.getWeight());
-        assertTrue(checkWeight);
-        boolean checkMark = (testCategory.getMark() == testCategory2.getMark());
-        assertTrue(checkMark);
-        boolean checkWeighted = (testCategory.getWeightedMark() == testCategory2.getWeightedMark());
-        assertTrue(checkWeighted);
-        boolean checkName = (testCategory.getName().equals(testCategory2.getName()));
-        assertTrue(checkName);
-        boolean checkStatus = (testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
-        assertTrue(checkStatus);
-
-        assertEquals(checkWeight && checkMark && checkWeighted && checkName && checkStatus,
-                testCategory.equals(testCategory2));
-
-        assertEquals(0, Double.compare(testCategory2.getWeight(), testCategory.getWeight()));
-        assertEquals(0, Double.compare(testCategory2.getMark(), testCategory.getMark()));
-        assertEquals(testCategory2.getMark(), testCategory.getMark());
-        assertEquals(testCategory.getCategoryStatus(), testCategory2.getCategoryStatus());
-        assertEquals(0, Double.compare(testCategory2.getWeightedMark(), testCategory.getWeightedMark()));
-        assertEquals(testCategory2.getName(), testCategory.getName());
+        assertTrue(testCategory2.getMark() == testCategory.getMark());
 
     }
 
-    @Test
-    void testEqualsNewInstance() {
-        assertTrue(testCategory.equals(
-                new Category("Homework", 5, 87.2, true)));
-    }
-
-    @Test
-    void testEqualsReturnTrue() {
-        Category testCategory2 = new Category("Homework", 5, 87.2, true);
-
-        boolean bool1 = (Double.compare(testCategory2.getWeight(), testCategory.getWeight()) == 0);
-        boolean bool2 = (Double.compare(testCategory2.getMark(), testCategory.getMark()) == 0);
-        boolean bool3 = (Double.compare(testCategory2.getWeightedMark(), testCategory.getWeightedMark()) == 0);
-        boolean bool4 = (testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
-        boolean bool5 = (Objects.equals(testCategory.getName(), testCategory2.getName()));
-
-
-        assertEquals(true, bool1 && bool2 && bool3 && bool4 && bool5);
-    }
-
-    @Test
-    void testEqualsReturnFalse() {
-        Category testCategory2 = new Category("Homework", 5, 87.2, false);
-
-        boolean bool1 = (Double.compare(testCategory2.getWeight(), testCategory.getWeight()) == 0);
-        boolean bool2 = (Double.compare(testCategory2.getMark(), testCategory.getMark()) == 0);
-        boolean bool3 = (Double.compare(testCategory2.getWeightedMark(), testCategory.getWeightedMark()) == 0);
-        boolean bool4 = (testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
-        boolean bool5 = (Objects.equals(testCategory.getName(), testCategory2.getName()));
-
-
-        assertEquals(false, bool1 && bool2 && bool3 && bool4 && bool5);
-    }
-
+    // keep
     @Test
     void testEqualsWeightedMark() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
@@ -220,7 +135,23 @@ public class CategoryTest {
         assertTrue(testCategory.getWeightedMark() == testCategory2.getWeightedMark());
     }
 
+    // keep
+    @Test
+    void testEqualsStatus() {
+        Category testCategory2 = new Category("Homework", 5, 87.2, true);
+        assertTrue(testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
 
+    }
+
+    // keep
+    @Test
+    void testEqualsName() {
+        Category testCategory2 = new Category("Homework", 5, 87.2, true);
+        assertTrue(testCategory.getName().equals(testCategory2.getName()));
+
+    }
+
+    // keep
     @Test
     void testHashCode() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
