@@ -131,8 +131,7 @@ public class CategoryTest {
     @Test
     void testEqualsWeightedMark() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
-        assertEquals(testCategory.getWeightedMark(), testCategory2.getWeightedMark());
-        assertTrue(testCategory.getWeightedMark() == testCategory2.getWeightedMark());
+        assertTrue(testCategory2.getWeightedMark() == testCategory.getWeightedMark());
     }
 
     // keep
