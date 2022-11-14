@@ -93,14 +93,26 @@ public class CategoryTest {
     }
 
     @Test
-    void testEqualsFailsDifferentWeightedMark() {
-        Category testCategory2 = new Category("Homework", 2, 40, true);
+    void testEqualsFailsDifferentWeightedMarkMark() {
+        Category testCategory2 = new Category("Homework", 5, 40, true);
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
     @Test
-    void testEqualsFailsDifferentWeightedMarkStatus() {
-        Category testCategory2 = new Category("Homework", 2, 40, false);
+    void testEqualsFailsDifferentWeightedMarkWeight() {
+        Category testCategory2 = new Category("Homework", 2, 87.2, true);
+        assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+    }
+
+    @Test
+    void testEqualsFailsDifferentWeightedMarkMarkStatus() {
+        Category testCategory2 = new Category("Homework", 5, 40, false);
+        assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+    }
+
+    @Test
+    void testEqualsFailsDifferentWeightedMarkWeightStatus() {
+        Category testCategory2 = new Category("Homework", 2, 87.2, false);
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
