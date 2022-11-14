@@ -19,7 +19,7 @@ public class GradeCalculatorApp {
     private static int id = 1; // id number of user
     private static final String JSON_STORE = "./data/studentRecord.json";
     Scanner scan; // scanner
-    private ArrayList<Course> allCourses = new ArrayList<>(); // all courses
+    private List<Course> allCourses = new ArrayList<>(); // all courses
     private Course curCourse; // current course getting input on
     private StudentRecord studentRecord;
     private JsonWriter jsonWriter;
@@ -132,7 +132,7 @@ public class GradeCalculatorApp {
     // REQUIRES: id >= 1
     // MODIFIES: this
     // EFFECTS: creates a student record with id
-    private void createStudentRecord(int id, ArrayList<Course> courses) {
+    private void createStudentRecord(int id, List<Course> courses) {
         studentRecord = new StudentRecord(id);
 
         for (Course c : courses) {
@@ -156,7 +156,7 @@ public class GradeCalculatorApp {
         System.out.println("\t2. -> get overall average as a letter grade");
         System.out.println("\t3. -> calculate what i need on the final exam");
         System.out.println("\t4. -> view all courses");
-        System.out.println("\t5. -> view course outline & rubric view all courses");
+        System.out.println("\t5. -> view grading scheme for a course");
         System.out.println("\t0. -> quit");
     }
 
@@ -261,13 +261,23 @@ public class GradeCalculatorApp {
     // EFFECTS: calculates minimum score needed on final to get desired grade for course
     private void doCalculateMinFinalScore(String courseChoice, double desiredGrade) {
         double min;
+        allCourses = studentRecord.getCourseList();
         for (int i = 0; i <= allCourses.size() - 1; i++) {
             if (allCourses.get(i).getCourseName().equals(courseChoice)) {
-                allCourses.get(i).setDesiredFinalGrade(desiredGrade);
-                allCourses.get(i).calculateMinFinalScore();
-                min = allCourses.get(i).getMinFinalScore();
-                System.out.println("You need to score a minimum of " + min + "% on your final exam to get "
-                        + desiredGrade + "% as your final grade of course " + courseChoice);
+                allCourses.get(i).checkIsCompleted();
+                if (!allCourses.get(i).getIsCompleted()) {
+                    allCourses.get(i).setDesiredFinalGrade(desiredGrade);
+                    allCourses.get(i).calculateMinFinalScore();
+                    min = allCourses.get(i).getMinFinalScore();
+                    System.out.println("You need to score a minimum of " + String.format("%.2f", min)
+                            + "% on your final exam to get " + desiredGrade + "% as your final grade for the course: "
+                            + courseChoice);
+                } else {
+                    allCourses.get(i).calculateGrade();
+                    double current = allCourses.get(i).getActualFinalGrade();
+                    System.out.println("You have already completed " + courseChoice + " with an overall grade of "
+                            + current + "%. Please select an incomplete course.");
+                }
             }
         }
     }
@@ -277,11 +287,13 @@ public class GradeCalculatorApp {
         printAllCourses();
     }
 
+
     // MODIFIES: this
     // EFFECTS: prints chosen course information
     private void doViewCourse() {
         System.out.println("\nWhich course would you like to view?");
         String choice = scan.nextLine();
+        allCourses = studentRecord.getCourseList();
         for (int i = 0; i <= allCourses.size() - 1; i++) {
             if (allCourses.get(i).getCourseName().equals(choice)) {
                 printCourseOutline(allCourses.get(i));

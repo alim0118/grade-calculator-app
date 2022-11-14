@@ -114,7 +114,7 @@ public class Course implements Writable {
      */
     public void calculateMinFinalScore() {
         if (isCompleted) {
-            minFinalScore = actualFinalGrade;
+            minFinalScore = getActualFinalGrade();
         } else {
             findFinalWeight();
             minFinalScore = (desiredFinalGrade - ((1 - (finalWeight / 100)) * currentGrade)) / (finalWeight / 100);
