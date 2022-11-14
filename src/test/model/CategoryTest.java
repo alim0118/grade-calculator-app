@@ -72,7 +72,7 @@ public class CategoryTest {
     void testEqualsFailsDifferentName() {
         Category testCategory2 = new Category("Midterm", 5, 87.2, true);
         assertTrue(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
-                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
+                && testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
@@ -80,7 +80,7 @@ public class CategoryTest {
     void testEqualsFailsDifferentWeight() {
         Category testCategory2 = new Category("Homework", 10, 87.2, true);
         assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
-                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
+                && testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
@@ -88,7 +88,7 @@ public class CategoryTest {
     void testEqualsFailsDifferentMark() {
         Category testCategory2 = new Category("Homework", 5, 60.1, true);
         assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
-                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
+                && testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
@@ -96,7 +96,7 @@ public class CategoryTest {
     void testEqualsFailsDifferentStatus() {
         Category testCategory2 = new Category("Homework", 5, 87.2, false);
         assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
-                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
+                && testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
@@ -104,7 +104,7 @@ public class CategoryTest {
     void testEqualsFailsDifferentWeightedMarkMark() {
         Category testCategory2 = new Category("Homework", 5, 40, true);
         assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
-                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
+                && testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
@@ -112,7 +112,7 @@ public class CategoryTest {
     void testEqualsFailsDifferentWeightedMarkWeight() {
         Category testCategory2 = new Category("Homework", 2, 87.2, true);
         assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
-                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
+                && testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
@@ -120,7 +120,7 @@ public class CategoryTest {
     void testEqualsFailsDifferentWeightedMarkMarkStatus() {
         Category testCategory2 = new Category("Homework", 5, 40, false);
         assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
-                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
+                && testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
@@ -128,7 +128,7 @@ public class CategoryTest {
     void testEqualsFailsDifferentWeightedMarkWeightStatus() {
         Category testCategory2 = new Category("Homework", 2, 87.2, false);
         assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
-                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
+                && testCategory.getCategoryStatus() == testCategory2.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
