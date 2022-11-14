@@ -93,14 +93,14 @@ public class CategoryTest {
     }
 
     @Test
-    void testEqualsFailsDifferentWeightStatus() {
-        Category testCategory2 = new Category("Homework", 8, 87.2, false);
+    void testEqualsFailsDifferentWeightedMark() {
+        Category testCategory2 = new Category("Homework", 2, 40, true);
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
     @Test
-    void testEqualsFailsDifferentNameWeightStatus() {
-        Category testCategory2 = new Category("Midterm", 8, 87.2, false);
+    void testEqualsFailsDifferentWeightedMarkStatus() {
+        Category testCategory2 = new Category("Homework", 2, 40, false);
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
@@ -169,24 +169,5 @@ public class CategoryTest {
         assertTrue(testCategory.hashCode() == testCategory2.hashCode());
     }
 
-    /*
-    Double.compare(category.weight, weight) == 0 && Double.compare(category.mark, mark) == 0
-                && Double.compare(category.weightedMark, weightedMark) == 0 && marked == category.marked
-                && Objects.equals(name, category.name);
-      case 1: Double.compare(category.weight, weight) == 0
-      case 2: Double.compare(category.weight, weight) != 0
-      case 3: Double.compare(category.mark, mark) == 0
-      case 4: Double.compare(category.mark, mark) != 0
-      case 5: Double.compare(category.weightedMark, weightedMark) == 0
-      case 6: Double.compare(category.weightedMark, weightedMark) != 0
-      case 7: marked == category.marked
-      case 8: marked != category.marked
-      case 9: Objects.equals(name, category.name)
-      case 10: !Objects.equals(name, category.name)
-
-      missing branch: Double.compare(category.weightedMark, weightedMark) == 0 && marked == category.marked
-       TF FF
-
-     */
 
 }
