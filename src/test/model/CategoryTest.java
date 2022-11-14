@@ -71,54 +71,76 @@ public class CategoryTest {
     @Test
     void testEqualsFailsDifferentName() {
         Category testCategory2 = new Category("Midterm", 5, 87.2, true);
+        assertTrue(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
+                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
     @Test
     void testEqualsFailsDifferentWeight() {
         Category testCategory2 = new Category("Homework", 10, 87.2, true);
+        assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
+                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
     @Test
     void testEqualsFailsDifferentMark() {
         Category testCategory2 = new Category("Homework", 5, 60.1, true);
+        assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
+                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
     @Test
     void testEqualsFailsDifferentStatus() {
         Category testCategory2 = new Category("Homework", 5, 87.2, false);
+        assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
+                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
     @Test
     void testEqualsFailsDifferentWeightedMarkMark() {
         Category testCategory2 = new Category("Homework", 5, 40, true);
+        assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
+                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
     @Test
     void testEqualsFailsDifferentWeightedMarkWeight() {
         Category testCategory2 = new Category("Homework", 2, 87.2, true);
+        assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
+                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
     @Test
     void testEqualsFailsDifferentWeightedMarkMarkStatus() {
         Category testCategory2 = new Category("Homework", 5, 40, false);
+        assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
+                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
     @Test
     void testEqualsFailsDifferentWeightedMarkWeightStatus() {
         Category testCategory2 = new Category("Homework", 2, 87.2, false);
+        assertFalse(testCategory2.getWeightedMark() == testCategory.getWeightedMark()
+                && testCategory2.getCategoryStatus() == testCategory.getCategoryStatus());
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
     @Test
     void testEqualsFailsSwappedWeightedMark() {
         Category testCategory2 = new Category("Homework", 87.2, 5, true);
+        assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+    }
+
+    @Test
+    void testEqualsFailsSwappedWeightedMarkStatus() {
+        Category testCategory2 = new Category("Homework", 87.2, 5, false);
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
