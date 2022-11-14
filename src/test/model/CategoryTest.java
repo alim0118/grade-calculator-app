@@ -93,6 +93,18 @@ public class CategoryTest {
     }
 
     @Test
+    void testEqualsFailsDifferentWeightStatus() {
+        Category testCategory2 = new Category("Homework", 8, 87.2, false);
+        assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+    }
+
+    @Test
+    void testEqualsFailsDifferentNameWeightStatus() {
+        Category testCategory2 = new Category("Midterm", 8, 87.2, false);
+        assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+    }
+
+    @Test
     void testEqualsFailsAllDifferent() {
         Category testCategory2 = new Category("Midterm", 9, 52, false);
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
@@ -172,7 +184,8 @@ public class CategoryTest {
       case 9: Objects.equals(name, category.name)
       case 10: !Objects.equals(name, category.name)
 
-      case 11: T && T && T && T && T
+      missing branch: Double.compare(category.weightedMark, weightedMark) == 0 && marked == category.marked
+       TF FF
 
      */
 
