@@ -117,6 +117,12 @@ public class CategoryTest {
     }
 
     @Test
+    void testEqualsFailsSwappedWeightedMark() {
+        Category testCategory2 = new Category("Homework", 87.2, 5, true);
+        assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
+    }
+
+    @Test
     void testEqualsFailsAllDifferent() {
         Category testCategory2 = new Category("Midterm", 9, 52, false);
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
