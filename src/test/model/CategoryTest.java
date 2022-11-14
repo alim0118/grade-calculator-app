@@ -157,5 +157,23 @@ public class CategoryTest {
         assertTrue(testCategory.hashCode() == testCategory2.hashCode());
     }
 
+    /*
+    Double.compare(category.weight, weight) == 0 && Double.compare(category.mark, mark) == 0
+                && Double.compare(category.weightedMark, weightedMark) == 0 && marked == category.marked
+                && Objects.equals(name, category.name);
+      case 1: Double.compare(category.weight, weight) == 0
+      case 2: Double.compare(category.weight, weight) != 0
+      case 3: Double.compare(category.mark, mark) == 0
+      case 4: Double.compare(category.mark, mark) != 0
+      case 5: Double.compare(category.weightedMark, weightedMark) == 0
+      case 6: Double.compare(category.weightedMark, weightedMark) != 0
+      case 7: marked == category.marked
+      case 8: marked != category.marked
+      case 9: Objects.equals(name, category.name)
+      case 10: !Objects.equals(name, category.name)
+
+      case 11: T && T && T && T && T
+
+     */
 
 }
