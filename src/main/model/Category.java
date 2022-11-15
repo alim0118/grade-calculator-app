@@ -53,8 +53,10 @@ public class Category implements Writable {
             return false;
         }
         Category category = (Category) o;
-        return Double.compare(category.weight, weight) == 0 && Double.compare(category.mark, mark) == 0
-                && Double.compare(category.weightedMark, weightedMark) == 0 && marked == category.marked
+        return Double.compare(category.weight, weight) == 0
+                && Double.compare(category.mark, mark) == 0
+                && Double.compare(category.weightedMark, weightedMark) == 0
+                && marked == category.marked
                 && Objects.equals(name, category.name);
     }
 
