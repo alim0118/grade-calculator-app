@@ -1,49 +1,28 @@
 {
-    "courses": [
-        {
-            "course name": "CPSC 210",
-            "credits": 4,
-            "desired final grade": 70,
-            "categories": [
-                {
-                    "category name": "Homework",
-                    "category status": true,
-                    "category mark": 100,
-                    "category weight": 20
-                },
-                {
-                    "category name": "Midterm",
-                    "category status": true,
-                    "category mark": 87,
-                    "category weight": 30
-                },
-                {
-                    "category name": "Final",
-                    "category status": true,
-                    "category mark": 60,
-                    "category weight": 50
-                }
-            ]
-        },
-        {
-            "course name": "MATH 200",
-            "credits": 3,
-            "desired final grade": 70,
-            "categories": [
-                {
-                    "category name": "Midterm",
-                    "category status": true,
-                    "category mark": 55,
-                    "category weight": 40
-                },
-                {
-                    "category name": "Final",
-                    "category status": false,
-                    "category mark": 0,
-                    "category weight": 60
-                }
-            ]
-        }
-    ],
+    "courses": [{
+        "course name": "BIOL 121",
+        "credits": 3,
+        "desired final grade": 93,
+        "categories": [
+            {
+                "category name": "Homework",
+                "category status": true,
+                "category mark": 100,
+                "category weight": 10
+            },
+            {
+                "category name": "Project",
+                "category status": true,
+                "category mark": 88,
+                "category weight": 40
+            },
+            {
+                "category name": "Final",
+                "category status": false,
+                "category mark": 0,
+                "category weight": 50
+            }
+        ]
+    }],
     "id": 1
 }
