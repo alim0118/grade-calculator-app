@@ -18,6 +18,8 @@ public class StudentRecordPanel extends JPanel {
         courses = studentRecord.getCourseList();
 
         setLayout(new GridLayout(10, 10));
+
+
     }
 
 }

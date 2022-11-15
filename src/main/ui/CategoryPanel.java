@@ -33,12 +33,13 @@ public class CategoryPanel extends JPanel implements ActionListener {
         status.setEditable(true);
         add(status);
 
-        add(new Label("Category Mark: "));
+        add(new Label("Category status: "));
         mark = new TextField(10);
         mark.setEditable(true);
         add(mark);
 
         next = new JButton("Next");
+        next.setActionCommand("Next");
         add(next, BorderLayout.PAGE_END);
 
         JFrame frame = new JFrame();
@@ -53,7 +54,7 @@ public class CategoryPanel extends JPanel implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new CategoryPanel();
+        //new CategoryPanel();
     }
 
 

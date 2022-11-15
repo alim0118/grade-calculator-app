@@ -17,24 +17,33 @@ public class MainGUI extends JFrame implements ActionListener {
    private JLabel label;
    private JButton buttonNew;
    private JButton buttonOld;
+   private JButton buttonAdd;
 
 
     public MainGUI() {
         super("Grade Calculator App");
         this.setSize(600, 600);
-        this.setResizable(false);
+        //this.setResizable(false);
 
         studentRecord = new StudentRecord(1);
         studentRecordPanel = new StudentRecordPanel(studentRecord);
         coursePanel = new CoursePanel();
         categoryPanel = new CategoryPanel();
 
+        homePage();
+
+    }
+
+    public void homePage() {
         label = new JLabel("Welcome to the Grade Calculator App. Please select:");
 
         buttonNew = new JButton("New");
-        //buttonNew.addActionListener(this);
+        buttonNew.setActionCommand("New");
+        buttonNew.addActionListener(this);
+
         buttonOld = new JButton("Returning");
-        //buttonOld.addActionListener(this);
+        buttonOld.setActionCommand("Returning");
+        buttonOld.addActionListener(this);
 
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(100, 100));
@@ -44,6 +53,7 @@ public class MainGUI extends JFrame implements ActionListener {
         panel.add(buttonOld, BorderLayout.EAST);
 
         this.add(panel, BorderLayout.CENTER);
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
 
@@ -55,10 +65,21 @@ public class MainGUI extends JFrame implements ActionListener {
 
         if (button.equals("New")) {
             // go to "add course" panel (course panel)
-        } else {
+            // add somewhere -> to after new
+            dispose();
+            new MenuPanel();
+
+        }
+        if (button.equals("Returning")) {
             // go to student record panel
+        } else {
+            // have popup asking number of categories
+
+
         }
     }
+
+
 
     public static void main(String[] args) {
        new MainGUI();
