@@ -4,8 +4,6 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Objects;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 // Unit tests for Category class
@@ -49,13 +47,11 @@ public class CategoryTest {
         assertEquals(true, statusTest);
     }
 
-    // keep
     @Test
     void testEquals() {
         assertTrue(testCategory.equals(testCategory));
     }
 
-    // keep
     @Test
     void testEqualsObject() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
@@ -150,20 +146,17 @@ public class CategoryTest {
         assertFalse(testCategory.equals(testCategory2) && testCategory2.equals(testCategory));
     }
 
-    // keep
     @Test
     void testEqualsFailsNull() {
         assertFalse(testCategory.equals(null));
     }
 
-    // keep
     @Test
     void testEqualsWrongtype() {
         String wrongType = "Homework";
         assertFalse(testCategory.equals(wrongType));
     }
 
-    // keep
     @Test
     void testEqualsWeight() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
@@ -171,7 +164,6 @@ public class CategoryTest {
 
     }
 
-    // keep
     @Test
     void testEqualsMark() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
@@ -179,14 +171,12 @@ public class CategoryTest {
 
     }
 
-    // keep
     @Test
     void testEqualsWeightedMark() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
         assertTrue(testCategory2.getWeightedMark() == testCategory.getWeightedMark());
     }
 
-    // keep
     @Test
     void testEqualsStatus() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
@@ -194,7 +184,6 @@ public class CategoryTest {
 
     }
 
-    // keep
     @Test
     void testEqualsName() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
@@ -202,7 +191,6 @@ public class CategoryTest {
 
     }
 
-    // keep
     @Test
     void testHashCode() {
         Category testCategory2 = new Category("Homework", 5, 87.2, true);
