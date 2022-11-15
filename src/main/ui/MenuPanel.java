@@ -1,12 +1,14 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuPanel extends JFrame implements ActionListener {
     private JPanel panel;
+    private JLabel menuTitle;
     private JButton buttonAdd;
     private JButton buttonSubset;
     private JRadioButton buttonComplete;
@@ -18,6 +20,10 @@ public class MenuPanel extends JFrame implements ActionListener {
     public MenuPanel() {
         super("Menu");
         this.setSize(600, 600);
+
+        menuTitle = new JLabel();
+        menuTitle.setText("Menu");
+        menuTitle.setAlignmentX(CENTER_ALIGNMENT);
 
         buttonAdd = new JButton("Add Course");
         buttonAdd.setActionCommand("Add");
@@ -49,12 +55,22 @@ public class MenuPanel extends JFrame implements ActionListener {
         JPanel applyPanel = new JPanel();
         applyPanel.add(buttonSubset);
 
-        selectPanel.add(criteriaPanel);
 
-        add(addPanel, BorderLayout.PAGE_START);
-        add(selectPanel, BorderLayout.LINE_START);
-        add(criteriaPanel, BorderLayout.CENTER);
-        add(applyPanel, BorderLayout.PAGE_END);
+        panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(new EmptyBorder(new Insets(50, 50, 50, 50)));
+        panel.add(menuTitle);
+
+        panel.add(addPanel);
+        panel.add(selectPanel);
+        panel.add(criteriaPanel);
+        panel.add(applyPanel);
+
+        add(panel);
+//        add(addPanel, BorderLayout.PAGE_START);
+//        add(selectPanel, BorderLayout.LINE_START);
+//        add(criteriaPanel, BorderLayout.CENTER);
+//        add(applyPanel, BorderLayout.PAGE_END);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
