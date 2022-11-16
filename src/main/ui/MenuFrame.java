@@ -1,6 +1,7 @@
 package ui;
 
 import model.Category;
+import model.Course;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -27,8 +28,10 @@ public class MenuFrame extends JFrame implements ActionListener {
 
     private CategoryPanel catPanel;
     private CoursePanel coursePanel;
+    private StudentRecordPanel recordPanel;
 
     private ArrayList<Category> categories;
+    private ArrayList<Course> courses;
 
 
     // for new user
@@ -128,16 +131,24 @@ public class MenuFrame extends JFrame implements ActionListener {
         if (button.equals("Add")) {
             popUp();
             add(panel);
-        } else if (buttonAll.isSelected() && button.equals("View")) {
-            // conducts new StudentRecordPanel
-            // run do viewCourse for all courses
-
-        } else if (buttonComplete.isSelected() && button.equals("View")) {
-            // run do viewCourse of all completed courses
-
-        } else {
-            // run do viewCourse of all incomplete courses
+        } else if (button.equals("View")) {
+            courses = coursePanel.getCourses();
+            remove(panel);
+            recordPanel = new StudentRecordPanel(courses);
+            add(recordPanel);
+            if (buttonAll.isSelected()) {
+                recordPanel.viewAll();
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                setVisible(true);
+            } else if (buttonComplete.isSelected()) {
+                recordPanel.viewCompleted();
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                setVisible(true);
+            } else {
+                recordPanel.viewIncomplete();
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                setVisible(true);
+            }
         }
     }
-
 }

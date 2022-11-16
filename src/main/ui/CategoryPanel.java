@@ -2,6 +2,8 @@ package ui;
 
 import model.Category;
 import model.Course;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class CategoryPanel extends JPanel implements ActionListener {
+    private static final String JSON_STORE = "./data/studentRecord.json";
+
     private TextField name;
     private TextField weight;
     private TextField status;
@@ -20,9 +24,9 @@ public class CategoryPanel extends JPanel implements ActionListener {
     private ArrayList<Category> categories;
     private Course course;
 
-
     public CategoryPanel() {
         categories = new ArrayList<>();
+
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(100, 100));
 
@@ -41,7 +45,7 @@ public class CategoryPanel extends JPanel implements ActionListener {
         status.setEditable(true);
         add(status);
 
-        add(new Label("Category mark: "));
+        add(new Label("Category mark (0 if incomplete): "));
         mark = new TextField(10);
         mark.setEditable(true);
         add(mark);
@@ -56,6 +60,8 @@ public class CategoryPanel extends JPanel implements ActionListener {
     public void createCategory() {
         category = new Category(getName(), getWeight(), getMark(), getStatus());
         categories.add(category);
+
+
 
 
     }

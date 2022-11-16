@@ -25,7 +25,7 @@ public class MainGUI extends JFrame implements ActionListener {
         //this.setResizable(false);
 
         studentRecord = new StudentRecord(1);
-        studentRecordPanel = new StudentRecordPanel(studentRecord);
+        //studentRecordPanel = new StudentRecordPanel();
         //coursePanel = new CoursePanel();
         //categoryPanel = new CategoryPanel();
 
@@ -77,6 +77,8 @@ public class MainGUI extends JFrame implements ActionListener {
         }
         if (button.equals("Returning")) {
             // go to student record panel
+            dispose();
+            new ReturnFrame();
         } else {
             // have popup asking number of categories
 
