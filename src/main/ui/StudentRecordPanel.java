@@ -5,17 +5,19 @@ import model.StudentRecord;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 // shows course, credit, grade on screen
 // for returning user
-public class StudentRecordPanel extends JPanel {
+public class StudentRecordPanel extends JPanel implements ActionListener {
     private StudentRecord studentRecord;
-    private List<Course> courses;
 
-    public StudentRecordPanel(StudentRecord s) {
-        studentRecord = s;
-        courses = studentRecord.getCourseList();
+
+    public StudentRecordPanel() {
+
+
 
         setLayout(new GridLayout(10, 10));
 
@@ -24,8 +26,15 @@ public class StudentRecordPanel extends JPanel {
         // each course should be in flow layout (course name - credits)
         // "back" button
 
+        // want to create a student record here
+
+
+
     }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
+    }
 }

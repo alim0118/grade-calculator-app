@@ -2,7 +2,6 @@ package ui;
 
 import model.Category;
 import model.Course;
-import model.StudentRecord;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +22,7 @@ public class CategoryPanel extends JPanel implements ActionListener {
 
 
     public CategoryPanel() {
+        categories = new ArrayList<>();
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(100, 100));
 
@@ -53,17 +53,31 @@ public class CategoryPanel extends JPanel implements ActionListener {
 
     }
 
-    // fix
-    public void saveText() {
-
-        String catName = name.getText();
-        double catWeight = Double.parseDouble(weight.getText());
-        boolean catStatus = Boolean.parseBoolean(status.getText());
-        double catMark = Double.parseDouble(mark.getText());
-
-        category = new Category(catName, catWeight, catMark, catStatus);
+    public void createCategory() {
+        category = new Category(getName(), getWeight(), getMark(), getStatus());
         categories.add(category);
 
+
+    }
+
+    public String getName() {
+        return name.getText();
+    }
+
+    public double getWeight() {
+        return Double.parseDouble(weight.getText());
+    }
+
+    public boolean getStatus() {
+        return Boolean.parseBoolean(status.getText());
+    }
+
+    public double getMark() {
+        return Double.parseDouble(mark.getText());
+    }
+
+    public ArrayList<Category> getCategories() {
+        return categories;
     }
 
 
@@ -71,7 +85,7 @@ public class CategoryPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
         if (button.equals("Next")) {
-            saveText();
+            createCategory();
             setVisible(false);
 
 

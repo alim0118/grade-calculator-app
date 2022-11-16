@@ -1,10 +1,13 @@
 package ui;
 
+import model.Category;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class MenuFrame extends JFrame implements ActionListener {
     private JPanel panel;
@@ -24,6 +27,8 @@ public class MenuFrame extends JFrame implements ActionListener {
 
     private CategoryPanel catPanel;
     private CoursePanel coursePanel;
+
+    private ArrayList<Category> categories;
 
 
     // for new user
@@ -109,7 +114,8 @@ public class MenuFrame extends JFrame implements ActionListener {
             setVisible(true);
             catNum--;
         }
-        coursePanel = new CoursePanel();
+        categories = catPanel.getCategories();
+        coursePanel = new CoursePanel(categories);
         add(coursePanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

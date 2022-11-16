@@ -2,6 +2,7 @@ package ui;
 
 import model.Category;
 import model.Course;
+import model.StudentRecord;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,9 +19,15 @@ public class CoursePanel extends JPanel implements ActionListener {
 
     private Course course;
     private ArrayList<Category> categories;
+    private ArrayList<Course> courses;
+
+    private StudentRecord studentRecord;
 
     public CoursePanel(ArrayList<Category> categories) {
         this.categories = categories;
+        courses = new ArrayList<>();
+        studentRecord = new StudentRecord(1);
+
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(100, 100));
 
@@ -39,11 +46,6 @@ public class CoursePanel extends JPanel implements ActionListener {
         desiredGrade.setEditable(true);
         add(desiredGrade);
 
-//        add(new Label("Course Completed?: "));
-//        status = new TextField(10);
-//        status.setEditable(true);
-//        add(status);
-
         next = new JButton("Add");
         next.setActionCommand("Add");
         next.addActionListener(this);
@@ -53,16 +55,35 @@ public class CoursePanel extends JPanel implements ActionListener {
 
     }
 
-    // fix
-    public void saveText() {
-        String courseName = this.name.getText();
-        int courseCredit = Integer.parseInt(credits.getText());
-        double courseDesired = Double.parseDouble(desiredGrade.getText());
+    public void createCourse() {
+        course = new Course(getName(), getCredits(), getDesired(), categories);
+        for (Category cat : categories) {
+            course.addCategory(cat);
+        }
+        courses.add(course);
+        studentRecord.addCourse(course);
 
-        course = new Course(courseName, courseCredit, courseDesired, categories);
 
+    }
 
+    public String getName() {
+        return name.getText();
+    }
 
+    public int getCredits() {
+        return Integer.parseInt(credits.getText());
+    }
+
+    public double getDesired() {
+        return Double.parseDouble(desiredGrade.getText());
+    }
+
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    public StudentRecord getStudentRecord() {
+        return studentRecord;
     }
 
 
@@ -70,7 +91,7 @@ public class CoursePanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
         if (button.equals("Add")) {
-            saveText();
+            createCourse();
             setVisible(false);
         }
     }
