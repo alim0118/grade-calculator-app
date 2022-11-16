@@ -27,7 +27,7 @@ public class MainGUI extends JFrame implements ActionListener {
         studentRecord = new StudentRecord(1);
         studentRecordPanel = new StudentRecordPanel(studentRecord);
         //coursePanel = new CoursePanel();
-        categoryPanel = new CategoryPanel();
+        //categoryPanel = new CategoryPanel();
 
         homePage();
 

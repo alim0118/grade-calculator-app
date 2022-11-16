@@ -49,7 +49,7 @@ public class CoursePanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
         if (e.equals("Add")) {
-            // re run this page again
+            setVisible(false);
         }
     }
 }

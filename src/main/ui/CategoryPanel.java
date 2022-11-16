@@ -14,6 +14,7 @@ public class CategoryPanel extends JPanel implements ActionListener {
     private TextField mark;
     private JButton next;
 
+
     public CategoryPanel() {
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(100, 100));
@@ -51,6 +52,7 @@ public class CategoryPanel extends JPanel implements ActionListener {
         String button = e.getActionCommand();
         if (button.equals("Next")) {
             setVisible(false);
+
 
 
 
