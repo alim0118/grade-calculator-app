@@ -1,6 +1,5 @@
 package ui;
 
-import model.Category;
 import model.StudentRecord;
 
 import javax.swing.*;
@@ -11,7 +10,7 @@ import java.awt.event.ActionListener;
 public class MainGUI extends JFrame implements ActionListener {
    private StudentRecord studentRecord;
    private StudentRecordPanel studentRecordPanel;
-   private CoursePanel coursePanel;
+   //private CoursePanel coursePanel;
    private CategoryPanel categoryPanel;
    private JPanel panel;
    private JLabel label;
@@ -22,12 +21,12 @@ public class MainGUI extends JFrame implements ActionListener {
 
     public MainGUI() {
         super("Grade Calculator App");
-        this.setSize(600, 600);
+        this.setSize(500, 500);
         //this.setResizable(false);
 
         studentRecord = new StudentRecord(1);
         studentRecordPanel = new StudentRecordPanel(studentRecord);
-        coursePanel = new CoursePanel();
+        //coursePanel = new CoursePanel();
         categoryPanel = new CategoryPanel();
 
         homePage();
@@ -35,7 +34,11 @@ public class MainGUI extends JFrame implements ActionListener {
     }
 
     public void homePage() {
-        label = new JLabel("Welcome to the Grade Calculator App. Please select:");
+        label = new JLabel("Welcome to the Grade Calculator App. Please select: ");
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
+        buttonPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         buttonNew = new JButton("New");
         buttonNew.setActionCommand("New");
@@ -45,12 +48,14 @@ public class MainGUI extends JFrame implements ActionListener {
         buttonOld.setActionCommand("Returning");
         buttonOld.addActionListener(this);
 
+        buttonPanel.add(buttonNew);
+        buttonPanel.add(buttonOld);
+
         panel = new JPanel();
-        panel.setPreferredSize(new Dimension(100, 100));
-        panel.setBackground(Color.GRAY);
-        panel.add(label);
-        panel.add(buttonNew, BorderLayout.WEST);
-        panel.add(buttonOld, BorderLayout.EAST);
+        panel.setPreferredSize(new Dimension(200, 200));
+        panel.setBackground(Color.LIGHT_GRAY);
+        panel.add(label, BorderLayout.PAGE_START);
+        panel.add(buttonPanel, BorderLayout.CENTER);
 
         this.add(panel, BorderLayout.CENTER);
 
@@ -67,7 +72,7 @@ public class MainGUI extends JFrame implements ActionListener {
             // go to "add course" panel (course panel)
             // add somewhere -> to after new
             dispose();
-            new MenuPanel();
+            new MenuFrame();
 
         }
         if (button.equals("Returning")) {

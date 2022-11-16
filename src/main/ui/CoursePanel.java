@@ -36,29 +36,19 @@ public class CoursePanel extends JPanel implements ActionListener {
         status.setEditable(true);
         add(status);
 
-        next = new JButton("Next");
-        next.setActionCommand("Next");
+        next = new JButton("Add");
+        next.setActionCommand("Add");
         add(next, BorderLayout.PAGE_END);
 
-        JFrame frame = new JFrame();
-        frame.setSize(500, 500);
-        frame.setResizable(false);
-
-        frame.add(this);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
 
 
     }
 
-    public static void main(String[] args) {
-        //new CoursePanel();
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
-        if (e.equals("Next")) {
+        if (e.equals("Add")) {
             // re run this page again
         }
     }

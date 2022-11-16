@@ -33,36 +33,27 @@ public class CategoryPanel extends JPanel implements ActionListener {
         status.setEditable(true);
         add(status);
 
-        add(new Label("Category status: "));
+        add(new Label("Category mark: "));
         mark = new TextField(10);
         mark.setEditable(true);
         add(mark);
 
         next = new JButton("Next");
         next.setActionCommand("Next");
+        next.addActionListener(this);
         add(next, BorderLayout.PAGE_END);
 
-        JFrame frame = new JFrame();
-        frame.setSize(500, 500);
-        frame.setResizable(false);
-
-        frame.add(this);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
-
-    }
-
-    public static void main(String[] args) {
-        //new CategoryPanel();
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
-        if (e.equals("Next")) {
-            // re run this page again
+        if (button.equals("Next")) {
+            setVisible(false);
+
+
+
         }
     }
 }
