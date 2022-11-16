@@ -19,6 +19,10 @@ public class StudentRecordPanel extends JPanel {
 
         setLayout(new GridLayout(10, 10));
 
+        // title: student record - id:
+        // each course should be in flow layout (course name - credits)
+        // "back" button
+
 
     }
 

@@ -8,11 +8,18 @@ import java.awt.event.ActionListener;
 
 public class MenuFrame extends JFrame implements ActionListener {
     private JPanel panel;
-    private JLabel menuTitle;
+    private JPanel addPanel;
+    private JPanel selectPanel;
+    private JPanel criteriaPanel;
+    private JPanel applyPanel;
+
     private JButton buttonAdd;
     private JButton buttonSubset;
+    private JRadioButton buttonAll;
     private JRadioButton buttonComplete;
     private JRadioButton buttonIncomplete;
+    private ButtonGroup buttonGroup;
+
     private JLabel select;
 
     private CategoryPanel catPanel;
@@ -24,36 +31,62 @@ public class MenuFrame extends JFrame implements ActionListener {
         super("Menu");
         this.setSize(500, 500);
 
+        doAdd();
+
+        doButton();
+
+        doPanel();
+
+        add(panel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+
+    }
+
+    public void doAdd() {
         buttonAdd = new JButton("Add Course");
         buttonAdd.setActionCommand("Add");
         buttonAdd.addActionListener(this);
 
-        JPanel addPanel = new JPanel();
+        addPanel = new JPanel();
         addPanel.add(buttonAdd);
+    }
 
+    public void doButton() {
         select = new JLabel("Sort courses by: ");
-        JPanel selectPanel = new JPanel();
+        selectPanel = new JPanel();
         selectPanel.add(select);
 
+        buttonGroup = new ButtonGroup();
+
+        buttonAll = new JRadioButton("All Courses");
+        buttonGroup.add(buttonAll);
+        buttonAll.setActionCommand("All");
+        buttonAll.addActionListener(this);
+
         buttonComplete = new JRadioButton("Complete");
+        buttonGroup.add(buttonComplete);
         buttonComplete.setActionCommand("Complete");
         buttonComplete.addActionListener(this);
 
         buttonIncomplete = new JRadioButton("Incomplete");
+        buttonGroup.add(buttonIncomplete);
         buttonIncomplete.setActionCommand("Incomplete");
         buttonIncomplete.addActionListener(this);
 
-        JPanel criteriaPanel = new JPanel();
+        buttonSubset = new JButton("View");
+        buttonSubset.setActionCommand("View");
+        buttonSubset.addActionListener(this);
+        applyPanel = new JPanel();
+        applyPanel.add(buttonSubset);
+    }
+
+    public void doPanel() {
+        criteriaPanel = new JPanel();
         criteriaPanel.setLayout(new FlowLayout());
+        criteriaPanel.add(buttonAll);
         criteriaPanel.add(buttonComplete);
         criteriaPanel.add(buttonIncomplete);
-
-        buttonSubset = new JButton("Apply");
-        buttonSubset.setActionCommand("Apply");
-        buttonSubset.addActionListener(this);
-        JPanel applyPanel = new JPanel();
-        applyPanel.add(buttonSubset);
-
 
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -62,11 +95,6 @@ public class MenuFrame extends JFrame implements ActionListener {
         panel.add(selectPanel);
         panel.add(criteriaPanel);
         panel.add(applyPanel);
-
-        add(panel);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-
     }
 
     public void popUp() {
@@ -85,7 +113,6 @@ public class MenuFrame extends JFrame implements ActionListener {
         add(coursePanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        // then go back to main menu panel
     }
 
     @Override
@@ -94,12 +121,17 @@ public class MenuFrame extends JFrame implements ActionListener {
 
         if (button.equals("Add")) {
             popUp();
-        } else if (button.equals("Apply")) {
-            // check if complete or incomplete and call on viewCourse() then sort
+            add(panel);
+        } else if (buttonAll.isSelected() && button.equals("View")) {
+            // conducts new StudentRecordPanel
+            // run do viewCourse for all courses
+
+        } else if (buttonComplete.isSelected() && button.equals("View")) {
+            // run do viewCourse of all completed courses
+
+        } else {
+            // run do viewCourse of all incomplete courses
         }
     }
 
-//    public static void main(String[] args) {
-//        new MenuPanel();
-//    }
 }

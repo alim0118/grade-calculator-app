@@ -38,6 +38,7 @@ public class CoursePanel extends JPanel implements ActionListener {
 
         next = new JButton("Add");
         next.setActionCommand("Add");
+        next.addActionListener(this);
         add(next, BorderLayout.PAGE_END);
 
 
@@ -48,7 +49,7 @@ public class CoursePanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
-        if (e.equals("Add")) {
+        if (button.equals("Add")) {
             setVisible(false);
         }
     }
