@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuFrame extends JFrame implements ActionListener {
     private JPanel panel;
@@ -33,13 +34,16 @@ public class MenuFrame extends JFrame implements ActionListener {
     private StudentRecordPanel recordPanel;
 
     private ArrayList<Category> categories;
-    private ArrayList<Course> courses;
+    private List<Course> courses;
+
+    private List<Course> temp;
 
 
     // for new user
     public MenuFrame() {
         super("Menu");
         this.setSize(500, 500);
+        temp = new ArrayList<>();
 
         doAdd();
 
@@ -124,10 +128,22 @@ public class MenuFrame extends JFrame implements ActionListener {
         }
         categories = catPanel.getCategories();
         coursePanel = new CoursePanel(categories);
+
+
+        // this courses should carry into student record
+        courses = coursePanel.getCourses();
+
+//        // go through for loop and .add() to courses
+//        for (Course c : coursePanel.getCourses()) {
+//            courses.add(c);
+//        }
+
         add(coursePanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -136,10 +152,17 @@ public class MenuFrame extends JFrame implements ActionListener {
         if (button.equals("Add")) {
             popUp();
             add(panel);
+
+
         } else if (button.equals("View")) {
-            courses = coursePanel.getCourses();
+            // go through for loop and .add() to courses
+            // should be added the moment course panel is called
+//            for (Course c : coursePanel.getCourses()) {
+//                courses.add(c);
+//            }
+            //courses = coursePanel.getCourses();
             remove(panel);
-            recordPanel = new StudentRecordPanel(courses);
+            recordPanel = new StudentRecordPanel(temp);
             add(recordPanel);
             if (buttonAll.isSelected()) {
                 recordPanel.viewAll();
@@ -155,5 +178,9 @@ public class MenuFrame extends JFrame implements ActionListener {
                 setVisible(true);
             }
         }
+        if (!temp.contains(courses.get(0))) {
+            temp.add(courses.get(0));
+        }
+
     }
 }

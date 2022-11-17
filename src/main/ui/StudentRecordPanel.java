@@ -1,20 +1,15 @@
 package ui;
 
-import model.Category;
 import model.Course;
 import model.StudentRecord;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 
 
 // shows course, credit, grade on screen
@@ -34,7 +29,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
     private JPanel recordPanel;
     private JPanel headingPanel;
     private JLabel heading;
-    private JLabel name;
+    private JLabel courseName;
     private JLabel credits;
     private JButton exit;
 
@@ -61,23 +56,23 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         heading.setText("Student Record for id: " + studentRecord.getId());
         heading.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 
-        name = new JLabel();
-        name.setText("Course");
-        name.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        courseName = new JLabel();
+        courseName.setText("Course");
+        courseName.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         credits = new JLabel();
         credits.setText("Credits");
         credits.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         headingPanel = new JPanel();
         headingPanel.setLayout(new GridLayout(1, 2));
-        headingPanel.add(name);
-        name.setPreferredSize(new Dimension(50, 1));
-        name.setHorizontalAlignment(JLabel.CENTER);
+        headingPanel.add(courseName);
+        courseName.setPreferredSize(new Dimension(50, 1));
+        courseName.setHorizontalAlignment(JLabel.CENTER);
         headingPanel.add(credits);
         credits.setSize(new Dimension(50, 1));
         credits.setHorizontalAlignment(JLabel.CENTER);
 
-        exit = new JButton("Exit");
+        exit = new JButton("Save and Exit");
         exit.setActionCommand("Exit");
         exit.addActionListener(this);
 
@@ -188,7 +183,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
 
-        if (button.equals("Exit and Save")) {
+        if (button.equals("Exit")) {
             saveBeforeExit();
             setVisible(false);
         }

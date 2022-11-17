@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CoursePanel extends JPanel implements ActionListener {
     private TextField name;
@@ -19,12 +20,13 @@ public class CoursePanel extends JPanel implements ActionListener {
 
     private Course course;
     private ArrayList<Category> categories;
-    private ArrayList<Course> courses;
+    private List<Course> courses;
 
     private StudentRecord studentRecord;
 
     public CoursePanel(ArrayList<Category> categories) {
         this.categories = categories;
+        // resets courses each time
         courses = new ArrayList<>();
         studentRecord = new StudentRecord(1);
 
@@ -60,6 +62,7 @@ public class CoursePanel extends JPanel implements ActionListener {
         for (Category cat : categories) {
             course.addCategory(cat);
         }
+        // why does courses reset each time?
         courses.add(course);
         studentRecord.addCourse(course);
 
@@ -78,7 +81,12 @@ public class CoursePanel extends JPanel implements ActionListener {
         return Double.parseDouble(desiredGrade.getText());
     }
 
-    public ArrayList<Course> getCourses() {
+    public ArrayList<Category> getCategories() {
+        return categories;
+    }
+
+    // technically only returns one course
+    public List<Course> getCourses() {
         return courses;
     }
 

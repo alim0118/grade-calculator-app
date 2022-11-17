@@ -62,8 +62,6 @@ public class CategoryPanel extends JPanel implements ActionListener {
         categories.add(category);
 
 
-
-
     }
 
     public String getName() {
