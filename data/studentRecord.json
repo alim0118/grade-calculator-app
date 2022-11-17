@@ -1,14 +1,4 @@
 {
-    "courses": [{
-        "course name": "MATH 200",
-        "credits": 3,
-        "desired final grade": 78,
-        "categories": [{
-            "category name": "Exam",
-            "category status": true,
-            "category mark": 66,
-            "category weight": 60
-        }]
-    }],
+    "courses": [],
     "id": 1
 }

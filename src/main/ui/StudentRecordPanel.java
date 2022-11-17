@@ -41,7 +41,9 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
 
         this.courses = courses;
         //createStudentRecord();
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        // 3 is for heading title, course to credit heading, exit
+        setLayout(new GridLayout(3 + this.courses.size(), 1));
         setPreferredSize(new Dimension(100, 100));
 
         // overall panel should be in card layout
@@ -52,9 +54,9 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         // want to create a student record here
         heading = new JLabel();
         // fix heading to be centered
-        heading.setHorizontalAlignment(SwingConstants.CENTER);
         heading.setText("Student Record for id: " + studentRecord.getId());
         heading.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+        heading.setHorizontalAlignment(SwingConstants.CENTER);
 
         courseName = new JLabel();
         courseName.setText("Course");
@@ -76,13 +78,16 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         exit.setActionCommand("Exit");
         exit.addActionListener(this);
 
+        add(heading);
+        add(headingPanel);
+
         for (Course c : this.courses) {
             printCourse(c);
         }
 
+        add(exit);
 
-        add(heading);
-        add(headingPanel);
+
 
 
     }

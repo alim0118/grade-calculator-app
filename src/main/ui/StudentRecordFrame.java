@@ -154,6 +154,8 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         allCategories = categoryPanel.getCategories();
         doCreateCourse(allCategories);
 
+        createStudentRecord(id, allCourses);
+
         //createStudentRecord(id, allCourses);
 
 //        while (catNum >= 1) {
@@ -173,25 +175,25 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
 
     // start with adding category class
 
-    public void doCreateCategory() {
-        catPanel = new JPanel();
-        setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(100, 100));
-        panel.add(catHelper(catPanel));
-        add(panel);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-
-        //allCategories.add(createCategory(getCatName(), getCatWeight(), getCatMark(), getCatStatus()));
-
-        add(catPanel);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-
-        //doCreateCourse(allCategories);
-        //createStudentRecord(id, allCourses);
-
-    }
+//    public void doCreateCategory() {
+//        catPanel = new JPanel();
+//        setLayout(new FlowLayout());
+//        setPreferredSize(new Dimension(100, 100));
+//        panel.add(catHelper(catPanel));
+//        add(panel);
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        setVisible(true);
+//
+//        //allCategories.add(createCategory(getCatName(), getCatWeight(), getCatMark(), getCatStatus()));
+//
+//        add(catPanel);
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        setVisible(true);
+//
+//        //doCreateCourse(allCategories);
+//        createStudentRecord(id, allCourses);
+//
+//    }
 
     private void doCreateCourse(ArrayList<Category> categories) {
 
@@ -200,12 +202,12 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         coursePanel.setPreferredSize(new Dimension(100, 100));
         courseHelper(coursePanel);
 
-        Course temp = createCourse(getCourseName(), getCourseCredits(), getCourseDesired(), categories);
+        curCourse = createCourse(getCourseName(), getCourseCredits(), getCourseDesired(), categories);
         for (Category cat : categories) {
-            temp.addCategory(cat);
+            curCourse.addCategory(cat);
         }
-        allCourses.add(temp);
-        //createStudentRecord(id, allCourses);
+        allCourses.add(curCourse);
+
         studentRecord.addCourse(curCourse);
 
 //        panel.add(coursePanel);
@@ -228,12 +230,12 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     }
 
     private Course createCourse(String name, int credits, double desired, ArrayList<Category> categories) {
-        curCourse = new Course(name, credits, desired, categories);
-        return curCourse;
+        Course temp = new Course(name, credits, desired, categories);
+        return temp;
     }
 
     private void createStudentRecord(int id, List<Course> courses) {
-        studentRecord = new StudentRecord(id);
+        //studentRecord = new StudentRecord(id);
 
         for (Course c : courses) {
             studentRecord.addCourse(c);
@@ -302,6 +304,9 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     public void viewAll() {
         List<Course> courses = studentRecord.getCourseList();
         studentRecordPanel = new StudentRecordPanel(courses);
+        add(studentRecordPanel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
 
     }
 
@@ -315,6 +320,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
             }
         }
         studentRecordPanel = new StudentRecordPanel(tempCourses);
+        add(studentRecordPanel);
 
     }
 
@@ -328,6 +334,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
             }
         }
         studentRecordPanel = new StudentRecordPanel(tempCourses);
+        add(studentRecordPanel);
     }
 
 
@@ -389,15 +396,17 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
             // for panel
             //setVisible(false);
 
-            // after course is inputted
+            // after course is inputted -> trigger create course?
+            // problem is that course is not being created
         } else if (button.equals("Create")) {
-            createStudentRecord(id, allCourses);
+            //createStudentRecord(id, allCourses);
             coursePanel.setVisible(false);
             add(panel);
 
             // "prints" everything in all courses or student record course list
         } else if (button.equals("View")) {
             // calls on student record panel
+            remove(panel);
             if (buttonAll.isSelected()) {
                 viewAll();
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
