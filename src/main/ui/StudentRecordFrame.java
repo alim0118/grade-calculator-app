@@ -49,6 +49,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     private JPanel panel;
     private JPanel catPanel;
     private JPanel coursePanel;
+    private JPanel recordPanel;
     private JPanel addPanel;
     private JPanel selectPanel;
     private JPanel applyPanel;
@@ -57,6 +58,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     private JLabel select;
 
     private CategoryPanel categoryPanel;
+    private StudentRecordPanel studentRecordPanel;
 
 
     public StudentRecordFrame() {
@@ -213,6 +215,12 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
 
     }
 
+//    private void doCreateStudentRecord(List<Course> courses) {
+//        recordPanel = new JPanel();
+//        recordPanel.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+//        recordPanel.setPreferredSize(new Dimension(100, 100));
+//    }
+
 
     private Category createCategory(String name, double weight, double mark, boolean status) {
         Category newCategory = new Category(name, weight, mark, status);
@@ -290,6 +298,38 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    // creates a student record PANEL with given course list
+    public void viewAll() {
+        List<Course> courses = studentRecord.getCourseList();
+        studentRecordPanel = new StudentRecordPanel(courses);
+
+    }
+
+    public void viewCompleted() {
+        List<Course> courses = studentRecord.getCourseList();
+        List<Course> tempCourses = new ArrayList<>();
+        for (Course c : courses) {
+            c.checkIsCompleted();
+            if (c.getIsCompleted()) {
+                tempCourses.add(c);
+            }
+        }
+        studentRecordPanel = new StudentRecordPanel(tempCourses);
+
+    }
+
+    public void viewIncomplete() {
+        List<Course> courses = studentRecord.getCourseList();
+        List<Course> tempCourses = new ArrayList<>();
+        for (Course c : courses) {
+            c.checkIsCompleted();
+            if (!c.getIsCompleted()) {
+                tempCourses.add(c);
+            }
+        }
+        studentRecordPanel = new StudentRecordPanel(tempCourses);
+    }
+
 
     public void saveBeforeExit() {
         try {
@@ -355,7 +395,47 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
             coursePanel.setVisible(false);
             add(panel);
 
+            // "prints" everything in all courses or student record course list
+        } else if (button.equals("View")) {
+            // calls on student record panel
+            if (buttonAll.isSelected()) {
+                viewAll();
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                setVisible(true);
+            } else if (buttonComplete.isSelected()) {
+                viewCompleted();
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                setVisible(true);
+            } else {
+                viewIncomplete();
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                setVisible(true);
+            }
+
         }
+//            // go through for loop and .add() to courses
+//            // should be added the moment course panel is called
+////            for (Course c : coursePanel.getCourses()) {
+////                courses.add(c);
+////            }
+//            //courses = coursePanel.getCourses();
+//            remove(panel);
+//            recordPanel = new StudentRecordPanel(courses);
+//            add(recordPanel);
+//            if (buttonAll.isSelected()) {
+//                recordPanel.viewAll();
+//                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                setVisible(true);
+//            } else if (buttonComplete.isSelected()) {
+//                recordPanel.viewCompleted();
+//                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                setVisible(true);
+//            } else {
+//                recordPanel.viewIncomplete();
+//                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                setVisible(true);
+//            }
+//        }
 
     }
 }
