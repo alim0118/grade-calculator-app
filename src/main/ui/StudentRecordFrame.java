@@ -19,7 +19,6 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     private static int id = 1; // id number of user
     private static final String JSON_STORE = "./data/studentRecord.json";
 
-    private int catNum;
     private ArrayList<Category> allCategories = new ArrayList<>();
     private List<Course> allCourses = new ArrayList<>(); // all courses
     private Course curCourse; // current course getting input on
@@ -136,17 +135,14 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
 
     public void popUp() {
         String num = JOptionPane.showInputDialog(this, "How many categories are in your course?", null);
-        catNum = Integer.parseInt(num);
-        remove(panel);
-        doCreateCategory();
-        catNum--;
+        int catNum = Integer.parseInt(num);
 
-
-//        while (catNum >= 1) {
-//            remove(panel);
-//            doCreateCategory();
-//            catNum--;
-//        }
+        while (catNum >= 1) {
+            remove(panel);
+            doCreateCategory();
+            catNum--;
+        }
+        doCreateCourse(allCategories);
 
     }
 
@@ -161,7 +157,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-        allCategories.add(createCategory(getCatName(), getCatWeight(), getCatMark(), getCatStatus()));
+        //allCategories.add(createCategory(getCatName(), getCatWeight(), getCatMark(), getCatStatus()));
 
         add(catPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -304,18 +300,18 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
 
-        // triggers creating category
+        // triggers creating category -> pressed on add course
         if (button.equals("Add")) {
             popUp();
             //add(panel);
 
             // after category is inputted
             // doCreateCategory keeps adding when next is pressed -> FIX
+            // should trigger next category panel to be filled
         } else if (button.equals("Next")) {
-            if (catNum >= 1) {
-                doCreateCategory();
-                catNum--;
-            }
+            allCategories.add(createCategory(getCatName(), getCatWeight(), getCatMark(), getCatStatus()));
+            panel.setVisible(false);
+
 
             // for panel
             //setVisible(false);
