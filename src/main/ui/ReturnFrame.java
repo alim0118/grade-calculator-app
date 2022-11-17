@@ -12,7 +12,7 @@ public class ReturnFrame extends JFrame {
     private JsonReader jsonReader;
     private StudentRecord studentRecord;
 
-    private StudentRecordPanel studentRecordPanel;
+    //private StudentRecordPanel studentRecordPanel;
 
     // asks user if they want to reload then goes to student record panel?
     public ReturnFrame() {
@@ -23,7 +23,7 @@ public class ReturnFrame extends JFrame {
 
         reload();
 
-        new StudentRecordPanel(studentRecord.getCourseList());
+        //new StudentRecordPanel(studentRecord.getCourseList());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -38,14 +38,14 @@ public class ReturnFrame extends JFrame {
         if (result == JOptionPane.YES_OPTION) {
             try {
                 studentRecord = jsonReader.read();
-                new StudentRecordPanel(studentRecord.getCourseList());
+                //new StudentRecordPanel(studentRecord.getCourseList());
             } catch (IOException e) {
                 System.out.println("Unable to read from file: " + JSON_STORE);
             }
 
         } else {
             dispose();
-            new MenuFrame();
+            //new MenuFrame();
         }
     }
 }

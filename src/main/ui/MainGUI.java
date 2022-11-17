@@ -9,9 +9,9 @@ import java.awt.event.ActionListener;
 
 public class MainGUI extends JFrame implements ActionListener {
    private StudentRecord studentRecord;
-   private StudentRecordPanel studentRecordPanel;
+   //private StudentRecordPanel studentRecordPanel;
    //private CoursePanel coursePanel;
-   private CategoryPanel categoryPanel;
+   //private CategoryPanel categoryPanel;
    private JPanel panel;
    private JLabel label;
    private JButton buttonNew;
@@ -72,7 +72,8 @@ public class MainGUI extends JFrame implements ActionListener {
             // go to "add course" panel (course panel)
             // add somewhere -> to after new
             dispose();
-            new MenuFrame();
+            //new MenuFrame();
+            new StudentRecordFrame();
 
         }
         if (button.equals("Returning")) {

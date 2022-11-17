@@ -70,7 +70,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
 
         doPanel();
 
-        //add(panel);
+        add(panel);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -135,6 +135,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     public void popUp() {
         String num = JOptionPane.showInputDialog(this, "How many categories are in your course?", null);
         int catNum = Integer.parseInt(num);
+        remove(panel);
         doCreateCategory(catNum);
     }
 
@@ -147,7 +148,10 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
             JPanel catPanel = new JPanel();
             setLayout(new FlowLayout());
             setPreferredSize(new Dimension(100, 100));
-            catHelper(catPanel);
+            panel.add(catHelper(catPanel));
+            add(panel);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setVisible(true);
 
             allCategories.add(createCategory(getCatName(), getCatWeight(), getCatMark(), getCatStatus()));
             catNum--;
@@ -192,7 +196,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     }
 
 
-    public void catHelper(JPanel catPanel) {
+    public JPanel catHelper(JPanel catPanel) {
         catPanel.add(new Label("Category Name: "));
         catName = new TextField(10);
         catName.setEditable(true);
@@ -217,6 +221,8 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         next.setActionCommand("Next");
         next.addActionListener(this);
         catPanel.add(next, BorderLayout.PAGE_END);
+
+        return catPanel;
     }
 
     public void courseHelper(JPanel coursePanel) {
@@ -239,6 +245,8 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         create.setActionCommand("Create");
         create.addActionListener(this);
         add(create, BorderLayout.PAGE_END);
+
+        panel.add(coursePanel);
     }
 
 
