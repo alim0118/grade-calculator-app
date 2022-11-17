@@ -19,6 +19,8 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     private static int id = 1; // id number of user
     private static final String JSON_STORE = "./data/studentRecord.json";
 
+    private int catNum;
+    private ArrayList<Category> allCategories = new ArrayList<>();
     private List<Course> allCourses = new ArrayList<>(); // all courses
     private Course curCourse; // current course getting input on
     private StudentRecord studentRecord;
@@ -134,30 +136,39 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
 
     public void popUp() {
         String num = JOptionPane.showInputDialog(this, "How many categories are in your course?", null);
-        int catNum = Integer.parseInt(num);
+        catNum = Integer.parseInt(num);
         remove(panel);
-        doCreateCategory(catNum);
+        doCreateCategory();
+        catNum--;
+
+
+//        while (catNum >= 1) {
+//            remove(panel);
+//            doCreateCategory();
+//            catNum--;
+//        }
+
     }
 
     // start with adding category class
 
-    public void doCreateCategory(int catNum) {
-        ArrayList<Category> allCategories = new ArrayList<>();
+    public void doCreateCategory() {
+        JPanel catPanel = new JPanel();
+        setLayout(new FlowLayout());
+        setPreferredSize(new Dimension(100, 100));
+        panel.add(catHelper(catPanel));
+        add(panel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
 
-        while (catNum >= 1) {
-            JPanel catPanel = new JPanel();
-            setLayout(new FlowLayout());
-            setPreferredSize(new Dimension(100, 100));
-            panel.add(catHelper(catPanel));
-            add(panel);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setVisible(true);
+        allCategories.add(createCategory(getCatName(), getCatWeight(), getCatMark(), getCatStatus()));
 
-            allCategories.add(createCategory(getCatName(), getCatWeight(), getCatMark(), getCatStatus()));
-            catNum--;
-        }
-        doCreateCourse(allCategories);
-        createStudentRecord(id, allCourses);
+        add(catPanel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+
+        //doCreateCourse(allCategories);
+        //createStudentRecord(id, allCourses);
 
     }
 
@@ -172,6 +183,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
             temp.addCategory(cat);
         }
         allCourses.add(temp);
+        createStudentRecord(id, allCourses);
         studentRecord.addCourse(curCourse);
 
     }
@@ -250,9 +262,6 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     }
 
 
-
-
-
     public void saveBeforeExit() {
         try {
             jsonWriter.open();
@@ -301,13 +310,19 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
             //add(panel);
 
             // after category is inputted
+            // doCreateCategory keeps adding when next is pressed -> FIX
         } else if (button.equals("Next")) {
-            //createCategory();
+            if (catNum >= 1) {
+                doCreateCategory();
+                catNum--;
+            }
+
+            // for panel
             //setVisible(false);
 
             // after course is inputted
         } else if (button.equals("Create")) {
-            //createCourse();
+            doCreateCourse(allCategories);
             //setVisible(false);
         }
     }
