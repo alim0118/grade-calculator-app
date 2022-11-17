@@ -202,13 +202,13 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         coursePanel.setPreferredSize(new Dimension(100, 100));
         courseHelper(coursePanel);
 
-        curCourse = createCourse(getCourseName(), getCourseCredits(), getCourseDesired(), categories);
-        for (Category cat : categories) {
-            curCourse.addCategory(cat);
-        }
-        allCourses.add(curCourse);
-
-        studentRecord.addCourse(curCourse);
+//        curCourse = createCourse(getCourseName(), getCourseCredits(), getCourseDesired(), categories);
+//        for (Category cat : categories) {
+//            curCourse.addCategory(cat);
+//        }
+//        allCourses.add(curCourse);
+//
+//        studentRecord.addCourse(curCourse);
 
 //        panel.add(coursePanel);
 //        add(panel);
@@ -222,6 +222,16 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
 //        recordPanel.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 //        recordPanel.setPreferredSize(new Dimension(100, 100));
 //    }
+
+    private void doTemp() {
+        curCourse = createCourse(getCourseName(), getCourseCredits(), getCourseDesired(), allCategories);
+        for (Category cat : allCategories) {
+            curCourse.addCategory(cat);
+        }
+        allCourses.add(curCourse);
+
+        studentRecord.addCourse(curCourse);
+    }
 
 
     private Category createCategory(String name, double weight, double mark, boolean status) {
@@ -400,6 +410,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
             // problem is that course is not being created
         } else if (button.equals("Create")) {
             //createStudentRecord(id, allCourses);
+            doTemp();
             coursePanel.setVisible(false);
             add(panel);
 

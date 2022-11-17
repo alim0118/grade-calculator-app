@@ -153,7 +153,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         curCredits.setHorizontalAlignment(JLabel.CENTER);
 
         add(recordPanel);
-        add(new JSeparator());
+        //add(new JSeparator());
 
 
     }
