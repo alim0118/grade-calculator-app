@@ -12,12 +12,14 @@ import java.util.ArrayList;
 
 public class MenuFrame extends JFrame implements ActionListener {
     private JPanel panel;
+    private JPanel donePanel;
     private JPanel addPanel;
     private JPanel selectPanel;
     private JPanel criteriaPanel;
     private JPanel applyPanel;
 
     private JButton buttonAdd;
+    private JButton buttonDone;
     private JButton buttonSubset;
     private JRadioButton buttonAll;
     private JRadioButton buttonComplete;
@@ -99,11 +101,14 @@ public class MenuFrame extends JFrame implements ActionListener {
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(new EmptyBorder(new Insets(50, 50, 50, 50)));
+
         panel.add(addPanel);
+        // move to student record panel
         panel.add(selectPanel);
         panel.add(criteriaPanel);
         panel.add(applyPanel);
     }
+
 
     public void popUp() {
         String num = JOptionPane.showInputDialog(this, "How many categories are in your course?", null);

@@ -1,28 +1,14 @@
 {
     "courses": [{
-        "course name": "BIOL 121",
+        "course name": "MATH 200",
         "credits": 3,
-        "desired final grade": 93,
-        "categories": [
-            {
-                "category name": "Homework",
-                "category status": true,
-                "category mark": 100,
-                "category weight": 10
-            },
-            {
-                "category name": "Project",
-                "category status": true,
-                "category mark": 88,
-                "category weight": 40
-            },
-            {
-                "category name": "Final",
-                "category status": false,
-                "category mark": 0,
-                "category weight": 50
-            }
-        ]
+        "desired final grade": 78,
+        "categories": [{
+            "category name": "Exam",
+            "category status": true,
+            "category mark": 66,
+            "category weight": 60
+        }]
     }],
     "id": 1
 }

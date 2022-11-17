@@ -38,12 +38,14 @@ public class ReturnFrame extends JFrame {
         if (result == JOptionPane.YES_OPTION) {
             try {
                 studentRecord = jsonReader.read();
+                new StudentRecordPanel(studentRecord.getCourseList());
             } catch (IOException e) {
                 System.out.println("Unable to read from file: " + JSON_STORE);
             }
 
         } else {
             dispose();
+            new MenuFrame();
         }
     }
 }

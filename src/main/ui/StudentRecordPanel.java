@@ -7,6 +7,7 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
@@ -32,6 +33,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
 
     private JPanel recordPanel;
     private JPanel headingPanel;
+    private JLabel heading;
     private JLabel name;
     private JLabel credits;
     private JButton exit;
@@ -45,6 +47,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         this.courses = courses;
         createStudentRecord();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setPreferredSize(new Dimension(100, 100));
 
         // overall panel should be in card layout
         // title: student record - id:
@@ -52,6 +55,11 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         // "back" button
 
         // want to create a student record here
+        heading = new JLabel();
+        // fix heading to be centered
+        heading.setHorizontalAlignment(SwingConstants.CENTER);
+        heading.setText("Student Record for id: " + studentRecord.getId());
+        heading.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 
         name = new JLabel();
         name.setText("Course");
@@ -61,18 +69,21 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         credits.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         headingPanel = new JPanel();
-        headingPanel.setLayout(new BorderLayout());
-        headingPanel.add(name, BorderLayout.WEST);
-        headingPanel.add(credits, BorderLayout.EAST);
+        headingPanel.setLayout(new GridLayout(1, 2));
+        headingPanel.add(name);
+        name.setPreferredSize(new Dimension(50, 1));
+        name.setHorizontalAlignment(JLabel.CENTER);
+        headingPanel.add(credits);
+        credits.setSize(new Dimension(50, 1));
+        credits.setHorizontalAlignment(JLabel.CENTER);
 
         exit = new JButton("Exit");
         exit.setActionCommand("Exit");
         exit.addActionListener(this);
 
+
+        add(heading);
         add(headingPanel);
-        add(exit);
-
-
 
 
     }
@@ -92,26 +103,8 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
             printCourse(c);
 
         }
-    }
-
-    public void printCourse(Course c) {
-        recordPanel = new JPanel();
-        recordPanel.setLayout(new BorderLayout());
-
-
-        JLabel curName = new JLabel();
-        curName.setText(c.getCourseName());
-
-        JLabel curCredits = new JLabel();
-        curCredits.setText(Integer.toString(c.getCredits()));
-
-        recordPanel.add(curName, BorderLayout.WEST);
-        recordPanel.add(curCredits, BorderLayout.EAST);
-
-        add(recordPanel);
-        add(new JSeparator());
-
-
+        add(exit);
+        exit.setHorizontalAlignment(JButton.CENTER);
     }
 
     public void viewCompleted() {
@@ -122,6 +115,8 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
                 printCourse(c);
             }
         }
+        add(exit);
+        exit.setHorizontalAlignment(JButton.CENTER);
     }
 
     public void viewIncomplete() {
@@ -132,29 +127,68 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
                 printCourse(c);
             }
         }
+        add(exit);
+        exit.setHorizontalAlignment(JButton.CENTER);
     }
+
+    public void printCourse(Course c) {
+        recordPanel = new JPanel();
+        recordPanel.setLayout(new GridLayout(1, 2));
+
+
+        JLabel curName = new JLabel();
+        curName.setText(c.getCourseName());
+
+        JLabel curCredits = new JLabel();
+        curCredits.setText(Integer.toString(c.getCredits()));
+
+        recordPanel.add(curName);
+        curName.setPreferredSize(new Dimension(50, 1));
+        curName.setHorizontalAlignment(JLabel.CENTER);
+        recordPanel.add(curCredits);
+        curCredits.setPreferredSize(new Dimension(50, 1));
+        curCredits.setHorizontalAlignment(JLabel.CENTER);
+
+        add(recordPanel);
+        add(new JSeparator());
+
+
+    }
+
 
     // saves student record before exiting
-    public void saveBeforeExit() {
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                try {
-                    jsonWriter.open();
-                    jsonWriter.write(studentRecord);
-                    jsonWriter.close();
-                } catch (FileNotFoundException exception) {
-                    System.out.println("Unable to write to file: " + JSON_STORE);
-                }
-            }
-        });
+//    public void saveBeforeExit() {
+//        addWindowListener(new WindowAdapter() {
+//            public void windowClosing(WindowEvent e) {
+//                try {
+//                    jsonWriter.open();
+//                    jsonWriter.write(studentRecord);
+//                    jsonWriter.close();
+//                } catch (FileNotFoundException exception) {
+//                    System.out.println("Unable to write to file: " + JSON_STORE);
+//                }
+//            }
+//        });
+//
+//    }
 
+    public void saveBeforeExit() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(studentRecord);
+            jsonWriter.close();
+        } catch (FileNotFoundException exception) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
     }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
 
-        if (button.equals("Exit")) {
+        if (button.equals("Exit and Save")) {
             saveBeforeExit();
             setVisible(false);
         }
