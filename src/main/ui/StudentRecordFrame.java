@@ -47,6 +47,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     private ButtonGroup buttonGroup;
 
     private JPanel panel;
+    private JPanel catPanel;
     private JPanel addPanel;
     private JPanel selectPanel;
     private JPanel applyPanel;
@@ -138,8 +139,14 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         int catNum = Integer.parseInt(num);
 
         while (catNum >= 1) {
+//            remove(panel);
+//            doCreateCategory();
+//            catNum--;
             remove(panel);
-            doCreateCategory();
+            //catPanel = new CategoryPanel();
+            //add(catPanel);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setVisible(true);
             catNum--;
         }
         doCreateCourse(allCategories);
@@ -149,7 +156,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     // start with adding category class
 
     public void doCreateCategory() {
-        JPanel catPanel = new JPanel();
+        catPanel = new JPanel();
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(100, 100));
         panel.add(catHelper(catPanel));
