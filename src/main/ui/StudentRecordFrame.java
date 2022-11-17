@@ -55,6 +55,8 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
 
     private JLabel select;
 
+    private CategoryPanel categoryPanel;
+
 
     public StudentRecordFrame() {
         super("Student Record");
@@ -138,18 +140,31 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         String num = JOptionPane.showInputDialog(this, "How many categories are in your course?", null);
         int catNum = Integer.parseInt(num);
 
-        while (catNum >= 1) {
-//            remove(panel);
-//            doCreateCategory();
-//            catNum--;
+        while (catNum > 0) {
             remove(panel);
-            //catPanel = new CategoryPanel();
-            //add(catPanel);
+            categoryPanel = new CategoryPanel();
+            add(categoryPanel);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setVisible(true);
             catNum--;
         }
+        allCategories = categoryPanel.getCategories();
         doCreateCourse(allCategories);
+
+        createStudentRecord(id, allCourses);
+
+//        while (catNum >= 1) {
+////            remove(panel);
+////            doCreateCategory();
+////            catNum--;
+//            remove(panel);
+//            //catPanel = new CategoryPanel();
+//            //add(catPanel);
+//            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            setVisible(true);
+//            catNum--;
+//        }
+//        doCreateCourse(allCategories);
 
     }
 
@@ -176,6 +191,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     }
 
     private void doCreateCourse(ArrayList<Category> categories) {
+
         JPanel coursePanel = new JPanel();
         coursePanel.setLayout(new FlowLayout());
         coursePanel.setPreferredSize(new Dimension(100, 100));
@@ -186,8 +202,13 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
             temp.addCategory(cat);
         }
         allCourses.add(temp);
-        createStudentRecord(id, allCourses);
+        //createStudentRecord(id, allCourses);
         studentRecord.addCourse(curCourse);
+
+//        panel.add(coursePanel);
+//        add(panel);
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        setVisible(true);
 
     }
 
@@ -259,9 +280,12 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         create = new JButton("Create");
         create.setActionCommand("Create");
         create.addActionListener(this);
+
+        add(coursePanel);
         add(create, BorderLayout.PAGE_END);
 
-        panel.add(coursePanel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
 
@@ -315,18 +339,19 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
             // after category is inputted
             // doCreateCategory keeps adding when next is pressed -> FIX
             // should trigger next category panel to be filled
-        } else if (button.equals("Next")) {
-            allCategories.add(createCategory(getCatName(), getCatWeight(), getCatMark(), getCatStatus()));
-            panel.setVisible(false);
+//        } else if (button.equals("Next")) {
+//            allCategories.add(createCategory(getCatName(), getCatWeight(), getCatMark(), getCatStatus()));
+//            panel.setVisible(false);
 
 
             // for panel
             //setVisible(false);
 
             // after course is inputted
-        } else if (button.equals("Create")) {
-            doCreateCourse(allCategories);
-            //setVisible(false);
+//        } else if (button.equals("Create")) {
+//            doCreateCourse(allCategories);
+//            //setVisible(false);
+//        }
         }
     }
 }
