@@ -22,3 +22,10 @@ As a student, I constantly check my grades and calculate what I need to score on
 - As a user, I want to be able to be able to calculate my average
 - As a user, I want to be able to save my course list to file
 - As a user, when I start the application, I want to be given the option to reload my course list
+
+## Instructions for Grader
+- You can add a course to your student record by clicking on the "Add Course" button, then specifying the number of categories in your course in the pop-up window and clicking the "Okay" button, then filling out your category information and clicking the "Next" button, and then filling our your course information and clicking the "Create" button
+- You can view a subset of your student record consisting of either all, only complete, or only incomplete courses by selecting the criterion and clicking the "View" button
+- You can locate an image on the main screen when my application starts
+- You can save the state of my application by clicking the "Save and Exit" button
+- You can reload the state of my application by clicking the "Returning" button, then clicking the "Yes" button on the pop-up window
