@@ -21,6 +21,17 @@
                 "category mark": 77,
                 "category weight": 100
             }]
+        },
+        {
+            "course name": "ENGL 110",
+            "credits": 3,
+            "desired final grade": 75,
+            "categories": [{
+                "category name": "Essay",
+                "category status": true,
+                "category mark": 55,
+                "category weight": 100
+            }]
         }
     ],
     "id": 1

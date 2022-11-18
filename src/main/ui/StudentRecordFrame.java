@@ -69,6 +69,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 
+
         // call on other methods here
 
         doAdd();
