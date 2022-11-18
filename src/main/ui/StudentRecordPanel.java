@@ -33,13 +33,12 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
     private JButton exit;
 
 
-    public StudentRecordPanel(List<Course> courses) {
+    public StudentRecordPanel(List<Course> courses, StudentRecord record) {
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
-        studentRecord = new StudentRecord(id);
-
 
         this.courses = courses;
+        this.studentRecord = record;
         //createStudentRecord();
         //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         // 3 is for heading title, course to credit heading, exit
@@ -194,6 +193,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         if (button.equals("Exit")) {
             saveBeforeExit();
             setVisible(false);
+
         }
     }
 }

@@ -313,7 +313,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     // creates a student record PANEL with given course list
     public void viewAll() {
         List<Course> courses = studentRecord.getCourseList();
-        studentRecordPanel = new StudentRecordPanel(courses);
+        studentRecordPanel = new StudentRecordPanel(courses, studentRecord);
         add(studentRecordPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -329,7 +329,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
                 tempCourses.add(c);
             }
         }
-        studentRecordPanel = new StudentRecordPanel(tempCourses);
+        studentRecordPanel = new StudentRecordPanel(tempCourses, studentRecord);
         add(studentRecordPanel);
 
     }
@@ -343,11 +343,12 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
                 tempCourses.add(c);
             }
         }
-        studentRecordPanel = new StudentRecordPanel(tempCourses);
+        studentRecordPanel = new StudentRecordPanel(tempCourses, studentRecord);
         add(studentRecordPanel);
     }
 
 
+    // should run once exit is pressed on student record panel
     public void saveBeforeExit() {
         try {
             jsonWriter.open();
@@ -431,31 +432,9 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 setVisible(true);
             }
+            //saveBeforeExit();
 
         }
-//            // go through for loop and .add() to courses
-//            // should be added the moment course panel is called
-////            for (Course c : coursePanel.getCourses()) {
-////                courses.add(c);
-////            }
-//            //courses = coursePanel.getCourses();
-//            remove(panel);
-//            recordPanel = new StudentRecordPanel(courses);
-//            add(recordPanel);
-//            if (buttonAll.isSelected()) {
-//                recordPanel.viewAll();
-//                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                setVisible(true);
-//            } else if (buttonComplete.isSelected()) {
-//                recordPanel.viewCompleted();
-//                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                setVisible(true);
-//            } else {
-//                recordPanel.viewIncomplete();
-//                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                setVisible(true);
-//            }
-//        }
 
     }
 }

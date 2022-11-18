@@ -1,4 +1,27 @@
 {
-    "courses": [],
+    "courses": [
+        {
+            "course name": "MATH 200",
+            "credits": 3,
+            "desired final grade": 78,
+            "categories": [{
+                "category name": "Exam",
+                "category status": true,
+                "category mark": 66,
+                "category weight": 100
+            }]
+        },
+        {
+            "course name": "CPSC 210",
+            "credits": 4,
+            "desired final grade": 80,
+            "categories": [{
+                "category name": "Project",
+                "category status": true,
+                "category mark": 77,
+                "category weight": 100
+            }]
+        }
+    ],
     "id": 1
 }
