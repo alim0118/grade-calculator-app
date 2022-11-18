@@ -197,6 +197,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         if (button.equals("Exit")) {
             saveBeforeExit();
             setVisible(false);
+            System.exit(0);
 
         }
     }

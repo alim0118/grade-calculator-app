@@ -34,7 +34,13 @@ public class MainGUI extends JFrame implements ActionListener {
     }
 
     public void homePage() {
+        JPanel labelPanel = new JPanel();
+        labelPanel.setLayout(new FlowLayout());
+        labelPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 2, 20));
+        labelPanel.setOpaque(false);
+
         label = new JLabel("Welcome to the Grade Calculator App. Please select: ");
+        labelPanel.add(label);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
@@ -53,14 +59,44 @@ public class MainGUI extends JFrame implements ActionListener {
 
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(200, 200));
-        panel.setBackground(Color.LIGHT_GRAY);
-        panel.add(label, BorderLayout.PAGE_START);
+        panel.setBackground(Color.WHITE);
+        panel.add(labelPanel, BorderLayout.PAGE_START);
+
         panel.add(buttonPanel, BorderLayout.CENTER);
+
+        addVisual();
 
         this.add(panel, BorderLayout.CENTER);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+
+    }
+
+    public void addVisual() {
+        // already have frame
+        //JFrame f= new JFrame("Panel with image");
+
+        JPanel imagePanel = new JPanel();
+        imagePanel.setLayout(new FlowLayout());
+        imagePanel.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));
+        imagePanel.setOpaque(false);
+
+        ImageIcon imageIcon = new ImageIcon("data/calculatorImage.jpeg");
+        Image image = imageIcon.getImage();
+        Image resize = image.getScaledInstance(350, 350, Image.SCALE_SMOOTH);
+
+        imageIcon = new ImageIcon(resize);
+        JLabel imageLabel = new JLabel(imageIcon);
+
+        //imageLabel.setBorder(BorderFactory.createEmptyBorder(50, 20, 5, 20));
+        imageLabel.setPreferredSize(new Dimension(350, 350));
+        //does nothing
+        //imageLabel.setBorder(BorderFactory.createEmptyBorder(50, 20, 5, 20));
+        imagePanel.add(imageLabel);
+
+        panel.add(imagePanel, BorderLayout.PAGE_END);
+
 
     }
 
