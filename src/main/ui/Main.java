@@ -1,10 +1,9 @@
 package ui;
 
-//import javax.swing.*;
-//import java.io.FileNotFoundException;
-
 // new grade calculator app
 public class Main {
+
+    // EFFECTS: runs the GUI
     public static void main(String[] args) {
 
         // from phase 2: run ui

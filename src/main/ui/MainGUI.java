@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
+// represents the main GUI
 public class MainGUI extends JFrame implements ActionListener {
     private JPanel panel;
     private JLabel label;
@@ -13,6 +14,7 @@ public class MainGUI extends JFrame implements ActionListener {
     private JButton buttonOld;
 
 
+    // EFFECTS: creates and sets up main menu of application
     public MainGUI() {
         super("Grade Calculator App");
         this.setSize(500, 500);
@@ -21,6 +23,8 @@ public class MainGUI extends JFrame implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates and sets up main menu of application
     public void homePage() {
         JPanel labelPanel = new JPanel();
         labelPanel.setLayout(new FlowLayout());
@@ -46,6 +50,8 @@ public class MainGUI extends JFrame implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS:
     public JPanel addButton() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
@@ -70,7 +76,11 @@ public class MainGUI extends JFrame implements ActionListener {
         imagePanel.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));
         imagePanel.setOpaque(false);
 
+        // image taken from: https://www.vecteezy.com/vector-art/4557287-calculator-cartoon-vector-object
         ImageIcon imageIcon = new ImageIcon("data/calculatorImage.jpeg");
+
+        // inspiration for image resize taken from tutorial video:
+        // https://www.youtube.com/watch?v=eZrdU3BvI4E&t=222s&ab_channel=MaxO%27Didily
         Image image = imageIcon.getImage();
         Image resize = image.getScaledInstance(350, 350, Image.SCALE_SMOOTH);
 
@@ -84,6 +94,8 @@ public class MainGUI extends JFrame implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: identifies action and processes corresponding event for new or returning user
     @Override
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
@@ -97,7 +109,7 @@ public class MainGUI extends JFrame implements ActionListener {
             try {
                 new ReturnStudentRecordFrame();
             } catch (FileNotFoundException exc) {
-                System.out.println("Error occured: file not file");
+                System.out.println("Error occurred: file not file");
             }
 
         }

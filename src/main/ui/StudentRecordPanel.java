@@ -10,6 +10,7 @@ import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+// represents a student record panel
 public class StudentRecordPanel extends JPanel implements ActionListener {
     private static final String JSON_STORE = "./data/studentRecord.json";
 
@@ -27,6 +28,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
     private JButton exit;
 
 
+    // EFFECTS: sets up and creates a student record panel and save and exit
     public StudentRecordPanel(List<Course> courses, StudentRecord record) {
         jsonWriter = new JsonWriter(JSON_STORE);
 
@@ -55,6 +57,8 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         add(exit);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up heading labels for heading panel
     public void headingLabelHelper() {
         heading = new JLabel();
         heading.setText("Student Record for id: " + id);
@@ -71,6 +75,8 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         credits.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up panel with headings for student record
     public void headingPanelHelper() {
         headingPanel = new JPanel();
         headingPanel.setLayout(new GridLayout(1, 2));
@@ -83,6 +89,8 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         headingPanel.setBackground(new Color(196, 215, 246));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates and sets up course info panel
     public void printCourse(Course c) {
         recordPanel = new JPanel();
         recordPanel.setLayout(new GridLayout(1, 2));
@@ -104,6 +112,9 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
 
     }
 
+    // inspiration taken from WorkRoomApp in:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // EFFECTS: saves the student record to file
     public void saveBeforeExit() {
         try {
             jsonWriter.open();
@@ -114,6 +125,8 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: identifies action and saves student record and exits application
     @Override
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();

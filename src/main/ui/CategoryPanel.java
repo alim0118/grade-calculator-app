@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+// represents a category panel
 public class CategoryPanel extends JPanel implements ActionListener {
     private TextField name;
     private TextField weight;
@@ -18,6 +19,7 @@ public class CategoryPanel extends JPanel implements ActionListener {
     private Category category;
     private ArrayList<Category> categories;
 
+    // EFFECTS: sets up and creates a category panel
     public CategoryPanel() {
         categories = new ArrayList<>();
 
@@ -51,24 +53,31 @@ public class CategoryPanel extends JPanel implements ActionListener {
 
     }
 
+    // REQUIRES: name to be non-zero length; categoryWeight > 0; 100 >= categoryMark >= 0
+    // EFFECTS: creates a category with name, weight, mark, and status
     public void createCategory() {
         category = new Category(getName(), getWeight(), getMark(), getStatus());
         categories.add(category);
 
     }
 
+    // getters
+
     public String getName() {
         return name.getText();
     }
 
+    // EFFECTS: parses text into double and returns
     public double getWeight() {
         return Double.parseDouble(weight.getText());
     }
 
+    // EFFECTS: parses text into boolean and returns
     public boolean getStatus() {
         return Boolean.parseBoolean(status.getText());
     }
 
+    // EFFECTS: parses text into int and returns
     public double getMark() {
         return Double.parseDouble(mark.getText());
     }
@@ -77,6 +86,8 @@ public class CategoryPanel extends JPanel implements ActionListener {
         return categories;
     }
 
+    // MODIFIES: this
+    // EFFECTS: identifies action and creates a category
     @Override
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();

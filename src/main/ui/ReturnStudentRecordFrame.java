@@ -16,13 +16,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+// represents a student record frame for a returning user
 public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     private static final String JSON_STORE = "./data/studentRecord.json";
 
-    private int id; // id number of returning user
+    private int id;
     private ArrayList<Category> allCategories = new ArrayList<>();
-    private List<Course> allCourses = new ArrayList<>(); // all courses
-    private Course curCourse; // current course getting input on
+    private List<Course> allCourses = new ArrayList<>();
+    private Course curCourse;
     private StudentRecord studentRecord;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -53,7 +54,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     private CategoryPanel categoryPanel;
     private StudentRecordPanel studentRecordPanel;
 
-
+    // EFFECTS: sets up and creates a student record frame for returning user and student record is loaded from file
     public ReturnStudentRecordFrame() throws FileNotFoundException {
         super("Student Record: returning");
         this.setSize(500, 500);
@@ -76,6 +77,8 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: helper to set up add button, adds to add panel
     public void doAdd() {
         buttonAdd = new JButton("Add Course");
         buttonAdd.setActionCommand("Add");
@@ -85,6 +88,8 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         addPanel.add(buttonAdd);
     }
 
+    // MODIFIES: this
+    // EFFECTS: helper to set up buttons for sorting and viewing courses, adds to apply panel
     public void doButton() {
         select = new JLabel("Sort courses by: ");
         selectPanel = new JPanel();
@@ -114,6 +119,8 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         applyPanel.add(buttonSubset);
     }
 
+    // MODIFIES: this
+    // EFFECTS: helper to create panels for add and sort/view buttons, adds to panel
     public void doPanel() {
         criteriaPanel = new JPanel();
         criteriaPanel.setLayout(new FlowLayout());
@@ -131,6 +138,9 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         panel.add(applyPanel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates pop up window and creates category panels catNum times;
+    //          conducts creating course and adding to student record
     public void popUp() {
         String num = JOptionPane.showInputDialog(this, "How many categories are in your course?", null);
         int catNum = Integer.parseInt(num);
@@ -146,10 +156,12 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         allCategories = categoryPanel.getCategories();
         doCreateCourse();
 
-        createStudentRecord(allCourses);
+        addsToStudentRecord(allCourses);
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates and sets up course panel
     private void doCreateCourse() {
         coursePanel = new JPanel();
         coursePanel.setLayout(new FlowLayout());
@@ -158,6 +170,8 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: helper to create course and adds course to student record
     private void doTemp() {
         curCourse = createCourse(getCourseName(), getCourseCredits(), getCourseDesired(), allCategories);
         for (Category cat : allCategories) {
@@ -168,17 +182,25 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         studentRecord.addCourse(curCourse);
     }
 
+    // REQUIRES: name to be non-zero length, credits >=1, 100 >= desired >= 0, categories to not be empty
+    // MODIFIES: this
+    // EFFECTS: creates a course with name, credits, desired grade, and corresponding categories
     private Course createCourse(String name, int credits, double desired, ArrayList<Category> categories) {
         Course temp = new Course(name, credits, desired, categories);
         return temp;
     }
 
-    private void createStudentRecord(List<Course> courses) {
+    // REQUIRES: courses to be not empty
+    // MODIFIES: this
+    // EFFECTS: adds courses to student record
+    private void addsToStudentRecord(List<Course> courses) {
         for (Course c : courses) {
             studentRecord.addCourse(c);
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: helper set up course panel
     public void courseHelper(JPanel coursePanel) {
         coursePanel.add(new Label("Course Name: "));
         courseName = new TextField(10);
@@ -207,6 +229,8 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up student record panel with all courses
     public void viewAll() {
         List<Course> courses = studentRecord.getCourseList();
         studentRecordPanel = new StudentRecordPanel(courses, studentRecord);
@@ -216,6 +240,8 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up student record panel with completed courses
     public void viewCompleted() {
         List<Course> courses = studentRecord.getCourseList();
         List<Course> tempCourses = new ArrayList<>();
@@ -230,6 +256,8 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up student record panel with incomplete courses
     public void viewIncomplete() {
         List<Course> courses = studentRecord.getCourseList();
         List<Course> tempCourses = new ArrayList<>();
@@ -243,6 +271,12 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         add(studentRecordPanel);
     }
 
+    // inspiration taken from WorkRoomApp in:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // MODIFIES: this
+    // EFFECTS: creates dialog window to load student record from file;
+    //          if user chooses yes, then student record from file is loaded;
+    //          else, creates a student record frame for new user
     public void reload() {
         int result = JOptionPane.showConfirmDialog(this, "Would you like to reload your course list?", "Load File",
                 JOptionPane.YES_NO_OPTION);
@@ -260,18 +294,24 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         }
     }
 
+    // getters
+
     public String getCourseName() {
         return courseName.getText();
     }
 
+    // EFFECTS: parses text into int and returns
     public int getCourseCredits() {
         return Integer.parseInt(courseCredits.getText());
     }
 
+    // EFFECTS: parses text into double and returns
     public double getCourseDesired() {
         return Double.parseDouble(courseDesired.getText());
     }
 
+    // MODIFIES: this
+    // EFFECTS: identifies action and processes corresponding event
     @Override
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
