@@ -54,15 +54,17 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         heading = new JLabel();
         // fix heading to be centered
         heading.setText("Student Record for id: " + studentRecord.getId());
-        heading.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+        heading.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         heading.setHorizontalAlignment(SwingConstants.CENTER);
+        heading.setOpaque(true);
+        heading.setBackground(Color.white);
 
         courseName = new JLabel();
         courseName.setText("Course");
-        courseName.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        courseName.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         credits = new JLabel();
         credits.setText("Credits");
-        credits.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        credits.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         headingPanel = new JPanel();
         headingPanel.setLayout(new GridLayout(1, 2));
@@ -72,6 +74,8 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         headingPanel.add(credits);
         credits.setSize(new Dimension(50, 1));
         credits.setHorizontalAlignment(JLabel.CENTER);
+        headingPanel.setBackground(new Color(196, 215, 246));
+
 
         exit = new JButton("Save and Exit");
         exit.setActionCommand("Exit");

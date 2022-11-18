@@ -2,8 +2,6 @@ package ui;
 
 import model.Category;
 import model.Course;
-import persistence.JsonReader;
-import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;

@@ -4,10 +4,9 @@ import model.StudentRecord;
 import persistence.JsonReader;
 
 import javax.swing.*;
-import java.awt.event.WindowListener;
 import java.io.IOException;
 
-public class ReturnFrame extends JFrame {
+public class ReturnStudentRecordFrame extends JFrame {
     private static final String JSON_STORE = "./data/studentRecord.json";
     private JsonReader jsonReader;
     private StudentRecord studentRecord;
@@ -15,7 +14,7 @@ public class ReturnFrame extends JFrame {
     //private StudentRecordPanel studentRecordPanel;
 
     // asks user if they want to reload then goes to student record panel?
-    public ReturnFrame() {
+    public ReturnStudentRecordFrame() {
         super("Menu");
         this.setSize(500, 500);
 

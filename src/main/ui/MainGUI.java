@@ -79,7 +79,7 @@ public class MainGUI extends JFrame implements ActionListener {
         if (button.equals("Returning")) {
             // go to student record panel
             dispose();
-            new ReturnFrame();
+            new ReturnStudentRecordFrame();
         } else {
             // have popup asking number of categories
 
