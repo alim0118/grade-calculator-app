@@ -142,7 +142,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     // EFFECTS: creates pop up window and creates category panels catNum times;
     //          conducts creating course and adding to student record
     public void popUp() {
-        String num = JOptionPane.showInputDialog(this, "How many categories are in your course?", null);
+        String num = JOptionPane.showInputDialog(this, "How many categories are in your course?");
         int catNum = Integer.parseInt(num);
 
         while (catNum > 0) {
@@ -278,8 +278,9 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     //          if user chooses yes, then student record from file is loaded;
     //          else, creates a student record frame for new user
     public void reload() {
+        Icon icon = new ImageIcon("data/categoryIcon.png");
         int result = JOptionPane.showConfirmDialog(this, "Would you like to reload your course list?", "Load File",
-                JOptionPane.YES_NO_OPTION);
+                JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
 
         if (result == JOptionPane.YES_OPTION) {
             try {
