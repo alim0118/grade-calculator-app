@@ -1,7 +1,6 @@
 package ui;
 
 import model.Category;
-import model.Course;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,8 +9,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class CategoryPanel extends JPanel implements ActionListener {
-    private static final String JSON_STORE = "./data/studentRecord.json";
-
     private TextField name;
     private TextField weight;
     private TextField status;
@@ -20,7 +17,6 @@ public class CategoryPanel extends JPanel implements ActionListener {
 
     private Category category;
     private ArrayList<Category> categories;
-    private Course course;
 
     public CategoryPanel() {
         categories = new ArrayList<>();
@@ -59,7 +55,6 @@ public class CategoryPanel extends JPanel implements ActionListener {
         category = new Category(getName(), getWeight(), getMark(), getStatus());
         categories.add(category);
 
-
     }
 
     public String getName() {
@@ -82,16 +77,12 @@ public class CategoryPanel extends JPanel implements ActionListener {
         return categories;
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
         if (button.equals("Next")) {
             createCategory();
             setVisible(false);
-
-
-
 
         }
     }
