@@ -3,8 +3,6 @@ package ui;
 import model.Category;
 import model.Course;
 import model.StudentRecord;
-import persistence.JsonReader;
-import persistence.JsonWriter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
