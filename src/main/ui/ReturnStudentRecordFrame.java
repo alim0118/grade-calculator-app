@@ -32,8 +32,6 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     private TextField courseCredits;
     private TextField courseDesired;
 
-    private JButton buttonAdd;
-    private JButton buttonSubset;
     private JButton create;
 
     private JRadioButton buttonAll;
@@ -80,7 +78,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: helper to set up add button, adds to add panel
     public void doAdd() {
-        buttonAdd = new JButton("Add Course");
+        JButton buttonAdd = new JButton("Add Course");
         buttonAdd.setActionCommand("Add");
         buttonAdd.addActionListener(this);
 
@@ -112,7 +110,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         buttonIncomplete.setActionCommand("Incomplete");
         buttonIncomplete.addActionListener(this);
 
-        buttonSubset = new JButton("View");
+        JButton buttonSubset = new JButton("View");
         buttonSubset.setActionCommand("View");
         buttonSubset.addActionListener(this);
         applyPanel = new JPanel();
@@ -184,7 +182,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
 
     // REQUIRES: name to be non-zero length, credits >=1, 100 >= desired >= 0, categories to not be empty
     // MODIFIES: this
-    // EFFECTS: creates a course with name, credits, desired grade, and corresponding categories
+    // EFFECTS: creates a course with name, credits, desired grade, and corresponding categories and returns it
     private Course createCourse(String name, int credits, double desired, ArrayList<Category> categories) {
         Course temp = new Course(name, credits, desired, categories);
         return temp;
@@ -200,7 +198,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: helper set up course panel
+    // EFFECTS: helper to set up course panel
     public void courseHelper(JPanel coursePanel) {
         coursePanel.add(new Label("Course Name: "));
         courseName = new TextField(10);

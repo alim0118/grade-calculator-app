@@ -14,9 +14,7 @@ public class CategoryPanel extends JPanel implements ActionListener {
     private TextField weight;
     private TextField status;
     private TextField mark;
-    private JButton next;
 
-    private Category category;
     private ArrayList<Category> categories;
 
     // EFFECTS: sets up and creates a category panel
@@ -46,17 +44,16 @@ public class CategoryPanel extends JPanel implements ActionListener {
         mark.setEditable(true);
         add(mark);
 
-        next = new JButton("Next");
+        JButton next = new JButton("Next");
         next.setActionCommand("Next");
         next.addActionListener(this);
         add(next, BorderLayout.PAGE_END);
 
     }
 
-    // REQUIRES: name to be non-zero length; categoryWeight > 0; 100 >= categoryMark >= 0
-    // EFFECTS: creates a category with name, weight, mark, and status
+    // EFFECTS: creates a category with a name, weight, mark, and status and adds to list of categories
     public void createCategory() {
-        category = new Category(getName(), getWeight(), getMark(), getStatus());
+        Category category = new Category(getName(), getWeight(), getMark(), getStatus());
         categories.add(category);
 
     }

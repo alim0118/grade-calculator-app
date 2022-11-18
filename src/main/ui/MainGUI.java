@@ -9,10 +9,6 @@ import java.io.FileNotFoundException;
 // represents the main GUI
 public class MainGUI extends JFrame implements ActionListener {
     private JPanel panel;
-    private JLabel label;
-    private JButton buttonNew;
-    private JButton buttonOld;
-
 
     // EFFECTS: creates and sets up main menu of application
     public MainGUI() {
@@ -31,7 +27,7 @@ public class MainGUI extends JFrame implements ActionListener {
         labelPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 2, 20));
         labelPanel.setOpaque(false);
 
-        label = new JLabel("Welcome to the Grade Calculator App. Please select: ");
+        JLabel label = new JLabel("Welcome to the Grade Calculator App. Please select: ");
         labelPanel.add(label);
 
         panel = new JPanel();
@@ -51,17 +47,17 @@ public class MainGUI extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS:
+    // EFFECTS: helper to set up new and returning button, adds to button panel and returns it
     public JPanel addButton() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        buttonNew = new JButton("New");
+        JButton buttonNew = new JButton("New");
         buttonNew.setActionCommand("New");
         buttonNew.addActionListener(this);
 
-        buttonOld = new JButton("Returning");
+        JButton buttonOld = new JButton("Returning");
         buttonOld.setActionCommand("Returning");
         buttonOld.addActionListener(this);
 
@@ -70,6 +66,8 @@ public class MainGUI extends JFrame implements ActionListener {
         return buttonPanel;
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads image and creates and sets up image panel, adds to panel
     public void addVisual() {
         JPanel imagePanel = new JPanel();
         imagePanel.setLayout(new FlowLayout());
