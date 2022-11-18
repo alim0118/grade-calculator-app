@@ -1,7 +1,7 @@
 package ui;
 
-import javax.swing.*;
-import java.io.FileNotFoundException;
+//import javax.swing.*;
+//import java.io.FileNotFoundException;
 
 // new grade calculator app
 public class Main {
