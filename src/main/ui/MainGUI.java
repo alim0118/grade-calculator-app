@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 public class MainGUI extends JFrame implements ActionListener {
     private JPanel panel;
@@ -93,7 +94,12 @@ public class MainGUI extends JFrame implements ActionListener {
 
         } else {
             dispose();
-            new ReturnStudentRecordFrame();
+            try {
+                new ReturnStudentRecordFrame();
+            } catch (FileNotFoundException exc) {
+                System.out.println("Error occured: file not file");
+            }
+
         }
 
     }
