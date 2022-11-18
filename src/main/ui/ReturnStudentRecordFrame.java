@@ -276,6 +276,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     //          if user chooses yes, then student record from file is loaded;
     //          else, creates a student record frame for new user
     public void reload() {
+        // image taken from: https://www.veryicon.com/icons/miscellaneous/utility-development-icon/yy-xinxi.html
         Icon icon = new ImageIcon("data/categoryIcon.png");
         int result = JOptionPane.showConfirmDialog(this, "Would you like to reload your course list?", "Load File",
                 JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
