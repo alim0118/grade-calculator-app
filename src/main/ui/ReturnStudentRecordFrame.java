@@ -6,7 +6,6 @@ import model.Event;
 import model.EventLog;
 import model.StudentRecord;
 import persistence.JsonReader;
-import persistence.JsonWriter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -29,7 +28,6 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     private List<Course> allCourses = new ArrayList<>();
     private Course curCourse;
     private StudentRecord studentRecord;
-    private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
     private TextField courseName;
@@ -65,7 +63,6 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         super("Student Record: returning");
         this.setSize(500, 500);
 
-        jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 
         reload();

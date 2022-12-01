@@ -2,7 +2,6 @@ package ui;
 
 import model.Course;
 import model.StudentRecord;
-import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,9 +10,6 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class MinimumGradePanel extends JPanel implements ActionListener {
-
-    private static final String JSON_STORE = "./data/studentRecord.json";
-    private JsonWriter jsonWriter;
 
     private int id;
     private StudentRecord studentRecord;
@@ -34,7 +30,6 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
 
     // EFFECTS: sets up and creates a student record panel with back and save and exit
     public MinimumGradePanel(List<Course> courses, StudentRecord record) {
-        jsonWriter = new JsonWriter(JSON_STORE);
 
         this.courses = courses;
         this.studentRecord = record;
