@@ -1,6 +1,8 @@
 package ui;
 
 import model.Course;
+import model.EventLog;
+import model.Event;
 import model.StudentRecord;
 import persistence.JsonWriter;
 
@@ -159,8 +161,16 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         } else if (button.equals("Exit")) {
             saveBeforeExit();
             setVisible(false);
+            printLog(EventLog.getInstance());
             System.exit(0);
 
+
+        }
+    }
+
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString());
         }
     }
 }

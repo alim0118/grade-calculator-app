@@ -79,6 +79,50 @@
                     "category weight": 35
                 }
             ]
+        },
+        {
+            "course name": "ENGL 110",
+            "credits": 3,
+            "desired final grade": 79,
+            "categories": [
+                {
+                    "category name": "Essay1",
+                    "category status": true,
+                    "category mark": 75,
+                    "category weight": 30
+                },
+                {
+                    "category name": "Essay2",
+                    "category status": true,
+                    "category mark": 78,
+                    "category weight": 30
+                },
+                {
+                    "category name": "Final",
+                    "category status": true,
+                    "category mark": 83,
+                    "category weight": 40
+                }
+            ]
+        },
+        {
+            "course name": "WRDS 150",
+            "credits": 3,
+            "desired final grade": 81,
+            "categories": [
+                {
+                    "category name": "Quiz",
+                    "category status": true,
+                    "category mark": 100,
+                    "category weight": 30
+                },
+                {
+                    "category name": "Paper",
+                    "category status": true,
+                    "category mark": 74,
+                    "category weight": 70
+                }
+            ]
         }
     ],
     "id": 1

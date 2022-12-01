@@ -24,8 +24,7 @@ public class StudentRecord implements Writable {
     public void addCourse(Course course) {
         if (!courseList.contains(course)) {
 
-            // log course added to student record
-            EventLog.getInstance().logEvent(new Event(course.getCourseName() + " added to student record"));
+            EventLog.getInstance().logEvent(new Event(course.getCourseName() + " added to student record" + "\n\n"));
             courseList.add(course);
         }
     }
@@ -62,10 +61,11 @@ public class StudentRecord implements Writable {
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: returns an unmodifiable list of courses in this student record
     public List<Course> getCourseList() {
+        EventLog.getInstance().logEvent(new Event("Viewed all courses" + "\n\n"));
         return Collections.unmodifiableList(courseList);
     }
 
-    // have a get complete course list?
+    // EFFECTS: returns list of completed courses in this student record
     public List<Course> getCompleteCourseList() {
         List<Course> tempCourses = new ArrayList<>();
         for (Course c : Collections.unmodifiableList(courseList)) {
@@ -74,10 +74,11 @@ public class StudentRecord implements Writable {
                 tempCourses.add(c);
             }
         }
+        EventLog.getInstance().logEvent(new Event("Viewed completed courses" + "\n\n"));
         return tempCourses;
     }
 
-    // have a get incomplete course list?
+    // EFFECTS: returns list of completed courses in this student record
     public List<Course> getIncompleteCourseList() {
         List<Course> tempCourses = new ArrayList<>();
         for (Course c : Collections.unmodifiableList(courseList)) {
@@ -86,6 +87,7 @@ public class StudentRecord implements Writable {
                 tempCourses.add(c);
             }
         }
+        EventLog.getInstance().logEvent(new Event("Viewed incomplete courses" + "\n\n"));
         return tempCourses;
     }
 
