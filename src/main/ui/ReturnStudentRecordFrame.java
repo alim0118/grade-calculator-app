@@ -33,6 +33,8 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     private TextField courseDesired;
 
     private JButton create;
+    private JButton buttonAdd;
+    private JButton buttonSubset;
 
     private JRadioButton buttonAll;
     private JRadioButton buttonComplete;
@@ -78,7 +80,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: helper to set up add button, adds to add panel
     public void doAdd() {
-        JButton buttonAdd = new JButton("Add Course");
+        buttonAdd = new JButton("Add Course");
         buttonAdd.setActionCommand("Add");
         buttonAdd.addActionListener(this);
 
@@ -110,7 +112,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         buttonIncomplete.setActionCommand("Incomplete");
         buttonIncomplete.addActionListener(this);
 
-        JButton buttonSubset = new JButton("View");
+        buttonSubset = new JButton("View");
         buttonSubset.setActionCommand("View");
         buttonSubset.addActionListener(this);
         applyPanel = new JPanel();
@@ -231,11 +233,10 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     // EFFECTS: sets up student record panel with all courses
     public void viewAll() {
         List<Course> courses = studentRecord.getCourseList();
-        studentRecordPanel = new StudentRecordPanel(courses, studentRecord);
+        studentRecordPanel = new StudentRecordPanel(courses, studentRecord, this);
         add(studentRecordPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-
     }
 
     // MODIFIES: this
@@ -252,6 +253,8 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         studentRecordPanel = new StudentRecordPanel(tempCourses, studentRecord);
         add(studentRecordPanel);
 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     // MODIFIES: this
@@ -267,6 +270,9 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         }
         studentRecordPanel = new StudentRecordPanel(tempCourses, studentRecord);
         add(studentRecordPanel);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     // inspiration taken from WorkRoomApp in:
@@ -325,22 +331,30 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
             add(panel);
 
         } else if (button.equals("View")) {
-            remove(panel);
 
             if (buttonAll.isSelected()) {
+                panel.setVisible(false);
+                remove(panel);
                 viewAll();
-                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                setVisible(true);
+                add(panel);
+                panel.setVisible(true);
+
 
             } else if (buttonComplete.isSelected()) {
+                panel.setVisible(false);
+                remove(panel);
                 viewCompleted();
-                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                setVisible(true);
+                add(panel);
+                panel.setVisible(true);
+
 
             } else {
+                panel.setVisible(false);
+                remove(panel);
                 viewIncomplete();
-                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                setVisible(true);
+                add(panel);
+                panel.setVisible(true);
+
             }
 
         }
