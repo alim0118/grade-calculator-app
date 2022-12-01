@@ -285,12 +285,18 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         panel.setVisible(true);
     }
 
+    // inspiration taken from ScreenPrinter in:
+    // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git
+
     // EFFECTS: prints event log
     public void printLog(EventLog el) {
         for (Event next : el) {
             System.out.println(next.toString());
         }
     }
+
+    // inspiration taken from:
+    // https://stackoverflow.com/questions/60516720/java-how-to-print-message-when-a-jframe-is-closed
 
     // EFFECTS: helper to add window listener and process corresponding action
     public void windowListenerHelper() {

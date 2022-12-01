@@ -29,3 +29,35 @@ As a student, I constantly check my grades and calculate what I need to score on
 - You can locate an image on the main screen when my application starts or an image as an icon for the reload option pop-up window
 - You can save the state of my application by clicking the "Save and Exit" button
 - You can reload the state of my application by clicking the "Returning" button, then clicking the "Yes" button on the pop-up window
+
+## Phase 4: Task 2
+- The loaded courses from json is added to the log as my persistence code for loading StudentRecord calls on the addCourse method, which has been instructed to generate the course added event in the log. Therefore, you will see a bunch of added course events added to the log.
+Thu Dec 01 01:39:40 PST 2022</br>
+MATH 200 added to student record
+
+Thu Dec 01 01:39:40 PST 2022</br>
+CPSC 210 added to student record
+
+Thu Dec 01 01:39:40 PST 2022</br>
+ENGL 110 added to student record
+
+Thu Dec 01 01:39:40 PST 2022</br>
+WRDS 150 added to student record
+
+Thu Dec 01 01:39:43 PST 2022</br>
+Viewed all courses
+
+Thu Dec 01 01:39:46 PST 2022</br>
+Viewed completed courses
+
+Thu Dec 01 01:39:48 PST 2022</br>
+Viewed incomplete courses
+
+Thu Dec 01 01:41:19 PST 2022</br>
+PSYC 102 added to student record
+
+Thu Dec 01 01:41:25 PST 2022</br>
+Viewed all courses
+
+
+Process finished with exit code 0

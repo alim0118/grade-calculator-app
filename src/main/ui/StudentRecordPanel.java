@@ -139,6 +139,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
 
     // inspiration taken from WorkRoomApp in:
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
     // EFFECTS: saves the student record to file
     public void saveBeforeExit() {
         try {
@@ -168,6 +169,9 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
 
         }
     }
+
+    // inspiration taken from ScreenPrinter in:
+    // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git
 
     // EFFECTS: prints event log
     public void printLog(EventLog el) {
