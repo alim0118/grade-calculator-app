@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.List;
 
 public class MinimumGradePanel extends JPanel implements ActionListener {
@@ -57,7 +56,6 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
         add(heading);
         add(headingPanel);
 
-        // call method that prints mark
         for (Course c : this.courses) {
             if (c.getCourseName().equals(choiceCourse)) {
                 printCourse(c);
@@ -67,10 +65,9 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
         add(buttons);
     }
 
-    // create popup that asks for what course
     // MODIFIES: this
-    // EFFECTS: creates pop up window and creates category panels catNum times;
-    //          conducts creating course and add to student record
+    // EFFECTS: creates pop up window, asks for course name and desired grade for calculating;
+    //          conducts calculating min final score
     public void popUp() {
         choiceCourse = JOptionPane.showInputDialog(this,
                 "What course would like to calculate what you need on the final exam?"
@@ -89,22 +86,16 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
     // MODIFIES: this
     // EFFECTS: calculates minimum score needed on final to get desired grade for course
     private void doCalculateMinFinalScore(String courseChoice, double desiredGrade) {
-        //allCourses = studentRecord.getCourseList();
         for (int i = 0; i <= courses.size() - 1; i++) {
             if (courses.get(i).getCourseName().equals(courseChoice)) {
                 courses.get(i).checkIsCompleted();
                 if (!courses.get(i).getIsCompleted()) {
+                    courses.get(i).calculateGrade();
+                    courses.get(i).findFinalWeight();
                     courses.get(i).setDesiredFinalGrade(desiredGrade);
                     courses.get(i).calculateMinFinalScore();
                     minimum = courses.get(i).getMinFinalScore();
-                    System.out.println("You need to score a minimum of " + String.format("%.2f", minimum)
-                            + "% on your final exam to get " + desiredGrade + "% as your final grade for the course: "
-                            + courseChoice);
-                } else {
-                    courses.get(i).calculateGrade();
-                    double current = courses.get(i).getActualFinalGrade();
-                    System.out.println("You have already completed " + courseChoice + " with an overall grade of "
-                            + current + "%. Please select an incomplete course.");
+
                 }
             }
         }
@@ -143,7 +134,7 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates and sets up course info panel
+    // EFFECTS: creates and sets up info for minimum mark needed
     public void printCourse(Course c) {
         recordPanel = new JPanel();
         recordPanel.setLayout(new GridLayout(1, 2));
@@ -152,15 +143,8 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
         curName.setText(c.getCourseName());
 
         JLabel curMark = new JLabel();
-//        c.checkIsCompleted();
-//        c.calculateGrade();
-//        if (c.getIsCompleted()) {
-//            curMark.setText(Double.toString(c.getActualFinalGrade()));
-//        } else {
-//            curMark.setText(Double.toString(c.getCurrentGrade()));
-//        }
 
-        curMark.setText(Double.toString(Math.round(minimum * 100.0) / 100.0) + "%");
+        curMark.setText((Math.round(minimum * 100.0) / 100.0) + "%");
 
         recordPanel.add(curName);
         curName.setPreferredSize(new Dimension(50, 1));
@@ -173,7 +157,6 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
 
     }
 
-
     // MODIFIES: this
     // EFFECTS: sets up back button and adds to button panel
     public void backHelper() {
@@ -183,7 +166,6 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
         buttons.add(back);
 
     }
-
 
     // MODIFIES: this
     // EFFECTS: identifies action and goes back to add/view page

@@ -148,7 +148,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: identifies action and and processes corresponding event
+    // EFFECTS: identifies action and processes corresponding event
     @Override
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();

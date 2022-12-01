@@ -16,7 +16,7 @@ import java.util.List;
 public class StudentRecordFrame extends JFrame implements ActionListener {
     private static int id = 1;
 
-    private ArrayList<Category> allCategories = new ArrayList<>();
+    private ArrayList<Category> allCategories;
     private List<Course> allCourses = new ArrayList<>();
     private Course curCourse;
     private StudentRecord studentRecord;
@@ -26,6 +26,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     private TextField courseDesired;
 
     private JButton create;
+    private JButton calculate;
 
     private JRadioButton buttonAll;
     private JRadioButton buttonComplete;
@@ -44,6 +45,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
 
     private CategoryPanel categoryPanel;
     private StudentRecordPanel studentRecordPanel;
+    private MinimumGradePanel minimumGradePanel;
 
 
     // EFFECTS: sets up and creates a student record frame for new user
@@ -72,8 +74,13 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         buttonAdd.setActionCommand("Add");
         buttonAdd.addActionListener(this);
 
+        calculate = new JButton("Calculate Minimum Grade");
+        calculate.setActionCommand("Calculate");
+        calculate.addActionListener(this);
+
         addPanel = new JPanel();
         addPanel.add(buttonAdd);
+        addPanel.add(calculate);
     }
 
     // MODIFIES: this
@@ -130,6 +137,7 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
     // EFFECTS: creates pop up window and creates category panels catNum times;
     //          conducts creating course and add to student record
     public void popUp() {
+        allCategories = new ArrayList<>();
         String num = JOptionPane.showInputDialog(this, "How many categories are in your course?", null);
         int catNum = Integer.parseInt(num);
 
@@ -264,6 +272,21 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up minimum grade panel
+    public void viewCalculated() {
+        List<Course> courses = studentRecord.getCourseList();
+        minimumGradePanel = new MinimumGradePanel(courses, studentRecord);
+        add(minimumGradePanel);
+        panel.setVisible(false);
+        remove(panel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+
+        add(panel);
+        panel.setVisible(true);
+    }
+
     // getters
 
     public String getCourseName() {
@@ -293,6 +316,9 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
             doTemp();
             coursePanel.setVisible(false);
             add(panel);
+
+        } else if (button.equals("Calculate")) {
+            viewCalculated();
 
         } else if (button.equals("View")) {
             panel.setVisible(false);

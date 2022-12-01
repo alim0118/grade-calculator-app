@@ -1,22 +1,85 @@
 {
-    "courses": [{
-        "course name": "MATH 200",
-        "credits": 3,
-        "desired final grade": 76,
-        "categories": [
-            {
-                "category name": "M",
-                "category status": true,
-                "category mark": 88,
-                "category weight": 40
-            },
-            {
-                "category name": "F",
-                "category status": false,
-                "category mark": 0,
-                "category weight": 60
-            }
-        ]
-    }],
+    "courses": [
+        {
+            "course name": "MATH 200",
+            "credits": 3,
+            "desired final grade": 80,
+            "categories": [
+                {
+                    "category name": "Homework",
+                    "category status": true,
+                    "category mark": 100,
+                    "category weight": 10
+                },
+                {
+                    "category name": "M1",
+                    "category status": true,
+                    "category mark": 76.47,
+                    "category weight": 10
+                },
+                {
+                    "category name": "M2",
+                    "category status": true,
+                    "category mark": 66.67,
+                    "category weight": 10
+                },
+                {
+                    "category name": "M3",
+                    "category status": true,
+                    "category mark": 100,
+                    "category weight": 10
+                },
+                {
+                    "category name": "Final",
+                    "category status": false,
+                    "category mark": 0,
+                    "category weight": 60
+                }
+            ]
+        },
+        {
+            "course name": "CPSC 210",
+            "credits": 4,
+            "desired final grade": 82,
+            "categories": [
+                {
+                    "category name": "Ticket",
+                    "category status": true,
+                    "category mark": 100,
+                    "category weight": 5
+                },
+                {
+                    "category name": "Lab",
+                    "category status": true,
+                    "category mark": 100,
+                    "category weight": 10
+                },
+                {
+                    "category name": "Project",
+                    "category status": true,
+                    "category mark": 88,
+                    "category weight": 20
+                },
+                {
+                    "category name": "M1",
+                    "category status": true,
+                    "category mark": 80,
+                    "category weight": 15
+                },
+                {
+                    "category name": "M2",
+                    "category status": true,
+                    "category mark": 72.91,
+                    "category weight": 15
+                },
+                {
+                    "category name": "Final",
+                    "category status": false,
+                    "category mark": 0,
+                    "category weight": 35
+                }
+            ]
+        }
+    ],
     "id": 1
 }

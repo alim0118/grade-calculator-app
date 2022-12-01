@@ -21,7 +21,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     private static final String JSON_STORE = "./data/studentRecord.json";
 
     private int id;
-    private ArrayList<Category> allCategories = new ArrayList<>();
+    private ArrayList<Category> allCategories;
     private List<Course> allCourses = new ArrayList<>();
     private Course curCourse;
     private StudentRecord studentRecord;
@@ -149,6 +149,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     // EFFECTS: creates pop up window and creates category panels catNum times;
     //          conducts creating course and adding to student record
     public void popUp() {
+        allCategories = new ArrayList<>();
         String num = JOptionPane.showInputDialog(this, "How many categories are in your course?");
         int catNum = Integer.parseInt(num);
 
@@ -161,7 +162,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
             catNum--;
 
         }
-        allCategories.addAll(categoryPanel.getCategories());
+        allCategories = categoryPanel.getCategories();
         doCreateCourse();
 
         addsToStudentRecord(allCourses);
@@ -283,7 +284,8 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    // helper method
+    // MODIFIES: this
+    // EFFECTS: sets up minimum grade panel
     public void viewCalculated() {
         List<Course> courses = studentRecord.getCourseList();
         minimumGradePanel = new MinimumGradePanel(courses, studentRecord);
