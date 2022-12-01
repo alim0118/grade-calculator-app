@@ -19,8 +19,6 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
     private int id;
     private StudentRecord studentRecord;
     private List<Course> courses;
-    private StudentRecordFrame studentRecordFrame;
-    private ReturnStudentRecordFrame returnStudentRecordFrame;
 
     private JPanel recordPanel;
     private JPanel headingPanel;
@@ -39,38 +37,6 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         this.courses = courses;
         this.studentRecord = record;
         id = studentRecord.getId();
-
-        setLayout(new GridLayout(3 + this.courses.size(), 1));
-        setPreferredSize(new Dimension(100, 100));
-
-        buttons = new JPanel();
-
-        headingLabelHelper();
-
-        headingPanelHelper();
-
-        backHelper();
-
-        exitHelper();
-
-        add(heading);
-        add(headingPanel);
-
-        for (Course c : this.courses) {
-            printCourse(c);
-        }
-
-        add(buttons);
-    }
-
-    // EFFECTS: sets up and creates a student record panel with back and save and exit for returning
-    public StudentRecordPanel(List<Course> courses, StudentRecord record, ReturnStudentRecordFrame returnFrame) {
-        jsonWriter = new JsonWriter(JSON_STORE);
-
-        this.courses = courses;
-        this.studentRecord = record;
-        id = studentRecord.getId();
-        this.returnStudentRecordFrame = returnFrame;
 
         setLayout(new GridLayout(3 + this.courses.size(), 1));
         setPreferredSize(new Dimension(100, 100));
@@ -189,14 +155,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         String button = e.getActionCommand();
 
         if (button.equals("Back")) {
-
-            // go back to add course view course -> student record frame?
-            // need to go back to previous student record frame and not create new one
-            // try passing the same frame as a parameter?
-            //returnStudentRecordFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            //returnStudentRecordFrame.setVisible(true);
             setVisible(false);
-            //returnStudentRecordFrame.setVisible(true);
 
         } else if (button.equals("Exit")) {
             saveBeforeExit();

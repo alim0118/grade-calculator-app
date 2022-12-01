@@ -233,7 +233,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     // EFFECTS: sets up student record panel with all courses
     public void viewAll() {
         List<Course> courses = studentRecord.getCourseList();
-        studentRecordPanel = new StudentRecordPanel(courses, studentRecord, this);
+        studentRecordPanel = new StudentRecordPanel(courses, studentRecord);
         add(studentRecordPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -331,31 +331,24 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
             add(panel);
 
         } else if (button.equals("View")) {
+            panel.setVisible(false);
+            remove(panel);
 
             if (buttonAll.isSelected()) {
-                panel.setVisible(false);
-                remove(panel);
                 viewAll();
-                add(panel);
-                panel.setVisible(true);
 
 
             } else if (buttonComplete.isSelected()) {
-                panel.setVisible(false);
-                remove(panel);
                 viewCompleted();
-                add(panel);
-                panel.setVisible(true);
 
 
             } else {
-                panel.setVisible(false);
-                remove(panel);
                 viewIncomplete();
-                add(panel);
-                panel.setVisible(true);
 
             }
+
+            add(panel);
+            panel.setVisible(true);
 
         }
 
