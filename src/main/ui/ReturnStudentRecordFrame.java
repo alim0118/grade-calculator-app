@@ -35,6 +35,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     private JButton create;
     private JButton buttonAdd;
     private JButton buttonSubset;
+    private JButton calculate;
 
     private JRadioButton buttonAll;
     private JRadioButton buttonComplete;
@@ -53,6 +54,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
 
     private CategoryPanel categoryPanel;
     private StudentRecordPanel studentRecordPanel;
+    private MinimumGradePanel minimumGradePanel;
 
     // EFFECTS: sets up and creates a student record frame for returning user and student record is loaded from file
     public ReturnStudentRecordFrame() throws FileNotFoundException {
@@ -84,8 +86,13 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         buttonAdd.setActionCommand("Add");
         buttonAdd.addActionListener(this);
 
+        calculate = new JButton("Calculate Minimum Grade");
+        calculate.setActionCommand("Calculate");
+        calculate.addActionListener(this);
+
         addPanel = new JPanel();
         addPanel.add(buttonAdd);
+        addPanel.add(calculate);
     }
 
     // MODIFIES: this
@@ -275,6 +282,20 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    // helper method
+    public void viewCalculated() {
+        List<Course> courses = studentRecord.getCourseList();
+        minimumGradePanel = new MinimumGradePanel(courses, studentRecord);
+        add(minimumGradePanel);
+        panel.setVisible(false);
+        remove(panel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+
+        add(panel);
+        panel.setVisible(true);
+    }
+
     // inspiration taken from WorkRoomApp in:
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // MODIFIES: this
@@ -329,6 +350,9 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
             doTemp();
             coursePanel.setVisible(false);
             add(panel);
+
+        } else if (button.equals("Calculate")) {
+            viewCalculated();
 
         } else if (button.equals("View")) {
             panel.setVisible(false);
