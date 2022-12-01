@@ -154,13 +154,14 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
 
         while (catNum > 0) {
             remove(panel);
-            categoryPanel = new CategoryPanel();
+            categoryPanel = new CategoryPanel(allCategories);
             add(categoryPanel);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setVisible(true);
             catNum--;
+
         }
-        allCategories = categoryPanel.getCategories();
+        allCategories.addAll(categoryPanel.getCategories());
         doCreateCourse();
 
         addsToStudentRecord(allCourses);

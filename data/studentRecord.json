@@ -1,27 +1,22 @@
 {
-    "courses": [
-        {
-            "course name": "MATH 200",
-            "credits": 3,
-            "desired final grade": 87,
-            "categories": [{
-                "category name": "Exam",
+    "courses": [{
+        "course name": "MATH 200",
+        "credits": 3,
+        "desired final grade": 76,
+        "categories": [
+            {
+                "category name": "M",
                 "category status": true,
-                "category mark": 80,
-                "category weight": 60
-            }]
-        },
-        {
-            "course name": "CPSC 210",
-            "credits": 4,
-            "desired final grade": 81,
-            "categories": [{
-                "category name": "Final",
+                "category mark": 88,
+                "category weight": 40
+            },
+            {
+                "category name": "F",
                 "category status": false,
                 "category mark": 0,
-                "category weight": 50
-            }]
-        }
-    ],
+                "category weight": 60
+            }
+        ]
+    }],
     "id": 1
 }

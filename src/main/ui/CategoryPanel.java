@@ -18,8 +18,8 @@ public class CategoryPanel extends JPanel implements ActionListener {
     private ArrayList<Category> categories;
 
     // EFFECTS: sets up and creates a category panel
-    public CategoryPanel() {
-        categories = new ArrayList<>();
+    public CategoryPanel(ArrayList<Category> allCategories) {
+        categories = allCategories;
 
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(100, 100));

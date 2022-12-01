@@ -159,7 +159,8 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
 //        } else {
 //            curMark.setText(Double.toString(c.getCurrentGrade()));
 //        }
-        curMark.setText(Double.toString(minimum));
+
+        curMark.setText(Double.toString(Math.round(minimum * 100.0) / 100.0) + "%");
 
         recordPanel.add(curName);
         curName.setPreferredSize(new Dimension(50, 1));
