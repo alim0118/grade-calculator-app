@@ -2,6 +2,8 @@ package ui;
 
 import model.Category;
 import model.Course;
+import model.Event;
+import model.EventLog;
 import model.StudentRecord;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -11,6 +13,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -77,6 +81,14 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                printLog(EventLog.getInstance());
+                System.exit(0); //calling the method is a must
+            }
+        });
     }
 
     // MODIFIES: this
@@ -310,6 +322,14 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         }
     }
 
+    // EFFECTS: prints event log
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString());
+        }
+    }
+
+
     // getters
 
     public String getCourseName() {
@@ -366,5 +386,6 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         }
 
     }
+
 }
 
