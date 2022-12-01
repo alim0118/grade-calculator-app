@@ -82,13 +82,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                printLog(EventLog.getInstance());
-                System.exit(0);
-            }
-        });
+        windowListenerHelper();
     }
 
     // MODIFIES: this
@@ -259,6 +253,10 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         add(studentRecordPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+        windowListenerHelper();
+
+
     }
 
     // MODIFIES: this
@@ -270,6 +268,8 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+        windowListenerHelper();
     }
 
     // MODIFIES: this
@@ -281,6 +281,8 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+        windowListenerHelper();
     }
 
     // MODIFIES: this
@@ -328,6 +330,17 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         for (Event next : el) {
             System.out.println(next.toString());
         }
+    }
+
+    // EFFECTS: helper to add window listener and process corresponding action
+    public void windowListenerHelper() {
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                printLog(EventLog.getInstance());
+                System.exit(0);
+            }
+        });
     }
 
 
