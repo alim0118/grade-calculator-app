@@ -251,14 +251,15 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: sets up student record panel with completed courses
     public void viewCompleted() {
-        List<Course> courses = studentRecord.getCourseList();
-        List<Course> tempCourses = new ArrayList<>();
-        for (Course c : courses) {
-            c.checkIsCompleted();
-            if (c.getIsCompleted()) {
-                tempCourses.add(c);
-            }
-        }
+//        List<Course> courses = studentRecord.getCourseList();
+        List<Course> tempCourses = studentRecord.getCompleteCourseList();
+//        List<Course> tempCourses = new ArrayList<>();
+//        for (Course c : courses) {
+//            c.checkIsCompleted();
+//            if (c.getIsCompleted()) {
+//                tempCourses.add(c);
+//            }
+//        }
         studentRecordPanel = new StudentRecordPanel(tempCourses, studentRecord);
         add(studentRecordPanel);
 
@@ -269,14 +270,15 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: sets up student record panel with incomplete courses
     public void viewIncomplete() {
-        List<Course> courses = studentRecord.getCourseList();
-        List<Course> tempCourses = new ArrayList<>();
-        for (Course c : courses) {
-            c.checkIsCompleted();
-            if (!c.getIsCompleted()) {
-                tempCourses.add(c);
-            }
-        }
+//        List<Course> courses = studentRecord.getCourseList();
+        List<Course> tempCourses = studentRecord.getIncompleteCourseList();
+//        List<Course> tempCourses = new ArrayList<>();
+//        for (Course c : courses) {
+//            c.checkIsCompleted();
+//            if (!c.getIsCompleted()) {
+//                tempCourses.add(c);
+//            }
+//        }
         studentRecordPanel = new StudentRecordPanel(tempCourses, studentRecord);
         add(studentRecordPanel);
 

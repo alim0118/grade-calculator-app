@@ -23,6 +23,9 @@ public class StudentRecord implements Writable {
     // EFFECTS: adds course to course list (with no duplicates)
     public void addCourse(Course course) {
         if (!courseList.contains(course)) {
+
+            // log course added to student record
+            EventLog.getInstance().logEvent(new Event(course.getCourseName() + " added to student record"));
             courseList.add(course);
         }
     }
@@ -62,5 +65,28 @@ public class StudentRecord implements Writable {
         return Collections.unmodifiableList(courseList);
     }
 
+    // have a get complete course list?
+    public List<Course> getCompleteCourseList() {
+        List<Course> tempCourses = new ArrayList<>();
+        for (Course c : Collections.unmodifiableList(courseList)) {
+            c.checkIsCompleted();
+            if (c.getIsCompleted()) {
+                tempCourses.add(c);
+            }
+        }
+        return tempCourses;
+    }
+
+    // have a get incomplete course list?
+    public List<Course> getIncompleteCourseList() {
+        List<Course> tempCourses = new ArrayList<>();
+        for (Course c : Collections.unmodifiableList(courseList)) {
+            c.checkIsCompleted();
+            if (!c.getIsCompleted()) {
+                tempCourses.add(c);
+            }
+        }
+        return tempCourses;
+    }
 
 }
