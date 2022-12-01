@@ -173,7 +173,7 @@ public class CourseTest {
         double desired = testCourse.getDesiredFinalGrade();
         double current = testCourse.getCurrentGrade();
         double weight = testCourse.getFinalWeight();
-        double testScore = (desired - ((1 - (weight / 100)) * current)) / (weight / 100);
+        double testScore = ((desired / 100) - ((1 - (weight / 100)) * current)) / (weight / 100);
 
         testCourse.calculateMinFinalScore();
         assertEquals(testScore, testCourse.getMinFinalScore());
@@ -193,7 +193,7 @@ public class CourseTest {
         double desired = testCourse.getDesiredFinalGrade();
         double current = testCourse.getCurrentGrade();
         double weight = testCourse.getFinalWeight();
-        double testScore = (desired - ((1 - (weight / 100)) * current)) / (weight / 100);
+        double testScore = ((desired / 100) - ((1 - (weight / 100)) * current)) / (weight / 100);
 
         testCourse.calculateMinFinalScore();
         assertEquals(testScore, testCourse.getMinFinalScore());

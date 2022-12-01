@@ -97,13 +97,17 @@ public class Course implements Writable {
             for (int i = 0; i <= categoryList.size() - 1; i++) {
                 actualFinalGrade += categoryList.get(i).getWeightedMark();
             }
+
         } else {
             for (int i = 0; i <= categoryList.size() - 1; i++) {
                 if (categoryList.get(i).getCategoryStatus()) {
                     currentGrade += categoryList.get(i).getWeightedMark();
                 }
             }
+            findFinalWeight();
+            currentGrade = currentGrade / (100 - getFinalWeight());
         }
+
     }
 
     /*
@@ -117,7 +121,9 @@ public class Course implements Writable {
             minFinalScore = getActualFinalGrade();
         } else {
             findFinalWeight();
-            minFinalScore = (desiredFinalGrade - ((1 - (finalWeight / 100)) * currentGrade)) / (finalWeight / 100);
+            minFinalScore = ((desiredFinalGrade / 100) - ((1 - (finalWeight / 100)) * currentGrade))
+                    / (finalWeight / 100);
+
         }
     }
 

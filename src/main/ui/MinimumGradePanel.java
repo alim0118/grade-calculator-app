@@ -93,6 +93,7 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
                     courses.get(i).calculateGrade();
                     courses.get(i).findFinalWeight();
                     courses.get(i).setDesiredFinalGrade(desiredGrade);
+
                     courses.get(i).calculateMinFinalScore();
                     minimum = courses.get(i).getMinFinalScore();
 
@@ -144,7 +145,7 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
 
         JLabel curMark = new JLabel();
 
-        curMark.setText((Math.round(minimum * 100.0) / 100.0) + "%");
+        curMark.setText((Math.round(minimum * 100.0) / 100.0) * 100 + "%");
 
         recordPanel.add(curName);
         curName.setPreferredSize(new Dimension(50, 1));
