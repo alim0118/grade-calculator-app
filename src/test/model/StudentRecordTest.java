@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ui.CategoryPanel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,46 @@ public class StudentRecordTest {
 
         assertEquals(1, userId);
         assertEquals(testStudentRecord.getCourseList(), coursesTest);
+
+    }
+
+    @Test
+    void testGetCompleteCourseList() {
+        List<Course> temp;
+        assertEquals(0, testStudentRecord.numCourses());
+
+        testCourse1.addCategory(testCategory1);
+        testCourse1.addCategory(testCategory2);
+        testStudentRecord.addCourse(testCourse1);
+
+        testCourse2.addCategory(testCategory3);
+        testCourse2.addCategory(testCategory4);
+        testStudentRecord.addCourse(testCourse2);
+
+        temp = testStudentRecord.getCompleteCourseList();
+        assertEquals(1, temp.size());
+        assertTrue(temp.contains(testCourse1));
+        assertTrue(!temp.contains(testCourse2));
+
+    }
+
+    @Test
+    void testGetIncompleteCourseList() {
+        List<Course> temp;
+        assertEquals(0, testStudentRecord.numCourses());
+
+        testCourse1.addCategory(testCategory1);
+        testCourse1.addCategory(testCategory2);
+        testStudentRecord.addCourse(testCourse1);
+
+        testCourse2.addCategory(testCategory3);
+        testCourse2.addCategory(testCategory4);
+        testStudentRecord.addCourse(testCourse2);
+
+        temp = testStudentRecord.getIncompleteCourseList();
+        assertEquals(1, temp.size());
+        assertTrue(temp.contains(testCourse2));
+        assertTrue(!temp.contains(testCourse1));
 
     }
 
