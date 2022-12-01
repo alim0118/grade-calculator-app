@@ -86,7 +86,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 printLog(EventLog.getInstance());
-                System.exit(0); //calling the method is a must
+                System.exit(0);
             }
         });
     }
@@ -178,6 +178,7 @@ public class ReturnStudentRecordFrame extends JFrame implements ActionListener {
         doCreateCourse();
 
         addsToStudentRecord(allCourses);
+
 
     }
 

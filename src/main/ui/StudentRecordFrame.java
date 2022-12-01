@@ -2,6 +2,8 @@ package ui;
 
 import model.Category;
 import model.Course;
+import model.Event;
+import model.EventLog;
 import model.StudentRecord;
 
 import javax.swing.*;
@@ -9,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +69,14 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                printLog(EventLog.getInstance());
+                System.exit(0);
+            }
+        });
     }
 
     // MODIFIES: this
@@ -271,6 +283,13 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
 
         add(panel);
         panel.setVisible(true);
+    }
+
+    // EFFECTS: prints event log
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString());
+        }
     }
 
     // getters

@@ -59,6 +59,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
             printCourse(c);
         }
         add(buttons);
+
     }
 
     // MODIFIES: this
