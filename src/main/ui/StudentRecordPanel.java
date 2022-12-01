@@ -13,7 +13,6 @@ import java.util.List;
 // represents a student record panel
 public class StudentRecordPanel extends JPanel implements ActionListener {
     private static final String JSON_STORE = "./data/studentRecord.json";
-
     private JsonWriter jsonWriter;
 
     private int id;
@@ -57,7 +56,6 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         for (Course c : this.courses) {
             printCourse(c);
         }
-
         add(buttons);
     }
 
@@ -134,6 +132,7 @@ public class StudentRecordPanel extends JPanel implements ActionListener {
         exit.addActionListener(this);
         buttons.add(exit);
     }
+
 
     // inspiration taken from WorkRoomApp in:
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo

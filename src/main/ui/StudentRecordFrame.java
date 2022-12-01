@@ -241,6 +241,8 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         studentRecordPanel = new StudentRecordPanel(tempCourses, studentRecord);
         add(studentRecordPanel);
 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     // MODIFIES: this
@@ -256,6 +258,9 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
         }
         studentRecordPanel = new StudentRecordPanel(tempCourses, studentRecord);
         add(studentRecordPanel);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     // getters
@@ -289,24 +294,20 @@ public class StudentRecordFrame extends JFrame implements ActionListener {
             add(panel);
 
         } else if (button.equals("View")) {
+            panel.setVisible(false);
             remove(panel);
 
             if (buttonAll.isSelected()) {
                 viewAll();
-                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                setVisible(true);
 
             } else if (buttonComplete.isSelected()) {
                 viewCompleted();
-                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                setVisible(true);
 
             } else {
                 viewIncomplete();
-                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                setVisible(true);
             }
-
+            add(panel);
+            panel.setVisible(true);
         }
 
     }

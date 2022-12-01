@@ -61,4 +61,6 @@ public class StudentRecord implements Writable {
     public List<Course> getCourseList() {
         return Collections.unmodifiableList(courseList);
     }
+
+
 }
