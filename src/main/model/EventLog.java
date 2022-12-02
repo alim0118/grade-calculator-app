@@ -7,7 +7,7 @@ import java.util.Iterator;
 // taken from EventLog in:
 // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git
 
-// represents a lof of grade calculator events
+// represents a log of grade calculator events
 public class EventLog implements Iterable<Event> {
     private static EventLog theLog;
     private Collection<Event> events;

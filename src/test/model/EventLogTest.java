@@ -9,7 +9,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 // Unit tests for EventLog class
 public class EventLogTest {
     private Event e1;
