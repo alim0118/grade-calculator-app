@@ -117,6 +117,8 @@ public class CourseTest {
         sumGrade += testCategoryList.get(1).getWeightedMark();
         testCourse.addCategory(testCategory3);
         sumGrade += testCategoryList.get(2).getWeightedMark();
+        testCourse.findFinalWeight();
+        sumGrade = sumGrade / (100 - testCourse.getFinalWeight());
 
         testCourse.checkIsCompleted();
         assertFalse(testCourse.getIsCompleted());

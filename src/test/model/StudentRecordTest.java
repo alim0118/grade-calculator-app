@@ -63,6 +63,7 @@ public class StudentRecordTest {
         testStudentRecord.addCourse(testCourse1);
         assertEquals(1, testStudentRecord.numCourses());
         assertTrue(testStudentRecord.getCourseList().contains(testCourse1));
+
     }
 
     @Test
