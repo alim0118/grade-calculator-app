@@ -63,4 +63,11 @@ Viewed all courses
 Process finished with exit code 0
 
 ## Phase 4: Task 3
-- 
+- Improve coupling by abstracting the duplication of code within the StudentRecordFrame class and the ReturnStudentRecordFrame (both classes have same behaviour except that one loads previously saved data, a student record, while the other doesn’t)
+  - Provides better flexibility when applying changes and decreases duplication of code
+- Improve coupling by abstracting the duplication of code, related to creating a button and panel, in classes in the ui package
+  - Decreases duplication of code
+- Improve cohesion by separating the responsibilities related to Course and StudentRecord in the StudentRecordFrame class (same applies for the ReturnStudentRecordFrame class)
+  - Each class will now be focused on what it should be doing (eg. constructing and setting up only a Course and its panel compared to constructing and setting up both a Course and StudentRecord and its panels)
+- Improve cohesion by reducing the number of fields (eg. JPanel, JButton, etc) in my classes in the ui package (eg. StudentRecordFrame, ReturnStudentRecordframe) by grouping the ones used by the same functions into one new field
+  - Makes the class more focused 
