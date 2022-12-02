@@ -97,6 +97,7 @@ public class Course implements Writable {
             for (int i = 0; i <= categoryList.size() - 1; i++) {
                 actualFinalGrade += categoryList.get(i).getWeightedMark();
             }
+            actualFinalGrade = actualFinalGrade / 100;
 
         } else {
             for (int i = 0; i <= categoryList.size() - 1; i++) {

@@ -140,6 +140,7 @@ public class CourseTest {
         sumGrade += testCategoryList.get(1).getWeightedMark();
         testCourse.addCategory(testCategory4);
         sumGrade += testCategoryList.get(2).getWeightedMark();
+        sumGrade = sumGrade / 100;
 
         testCourse.checkIsCompleted();
         assertTrue(testCourse.getIsCompleted());

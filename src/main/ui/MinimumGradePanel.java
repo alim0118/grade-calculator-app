@@ -66,7 +66,7 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
     public void popUp() {
         choiceCourse = JOptionPane.showInputDialog(this,
                 "What course would like to calculate what you need on the final exam?"
-                        + "\n(Chosen course must be incomplete, or default mark calculated will be 0%)", null);
+                        + "\n(if course is complete, actual final grade will be calculated)", null);
 
         String optionGrade = JOptionPane.showInputDialog(this,
                 "What is your desired final grade for " + choiceCourse + "?", null);
@@ -79,7 +79,8 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
 
     // REQUIRES: courseChoice to be non-zero length and included in allCourses, 100 <= desiredGrade <= 0
     // MODIFIES: this
-    // EFFECTS: calculates minimum score needed on final to get desired grade for course
+    // EFFECTS: if incomplete, calculates minimum score needed on final to get desired grade for course;
+    //          otherwise, calculates actual final grade of course
     private void doCalculateMinFinalScore(String courseChoice, double desiredGrade) {
         for (int i = 0; i <= courses.size() - 1; i++) {
             if (courses.get(i).getCourseName().equals(courseChoice)) {
@@ -92,6 +93,9 @@ public class MinimumGradePanel extends JPanel implements ActionListener {
                     courses.get(i).calculateMinFinalScore();
                     minimum = courses.get(i).getMinFinalScore();
 
+                } else {
+                    courses.get(i).calculateGrade();
+                    minimum = courses.get(i).getActualFinalGrade();
                 }
             }
         }
