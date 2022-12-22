@@ -1,0 +1,28 @@
+{
+    "courses": [{
+        "course name": "CPSC 210",
+        "credits": 4,
+        "desired final grade": 89.5,
+        "categories": [
+            {
+                "category name": "Homework",
+                "category status": true,
+                "category mark": 100,
+                "category weight": 10
+            },
+            {
+                "category name": "Midterm",
+                "category status": true,
+                "category mark": 75,
+                "category weight": 30
+            },
+            {
+                "category name": "Final Exam",
+                "category status": true,
+                "category mark": 0,
+                "category weight": 60
+            }
+        ]
+    }],
+    "id": 1
+}
